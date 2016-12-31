@@ -25,7 +25,7 @@
 \fancyhf{} %alle Kopf- und Fußzeilenfelder bereinigen
 \fancyhead[L]{Labor Elektrische Antriebe\\UE 370.042} %Kopfzeile links
 \fancyhead[C]{Lösungen zu Test Beispielen} %zentrierte Kopfzeile
-\fancyhead[R]{v1.3\\www.fet.at} %Kopfzeile rechts
+\fancyhead[R]{v1.4\\www.fet.at} %Kopfzeile rechts
 \renewcommand{\headrulewidth}{0.4pt} %obere Trennlinie
 \fancyfoot[C]{\thepage} %Seitennummer
 \renewcommand{\footrulewidth}{0.4pt} %untere Trennlinie
@@ -1352,7 +1352,7 @@ P_2=S_N u_2 i \cz=\SI{450}{\mega\volt\ampere}\cdot\num{1}\cdot\num{1}\cdot\mybr{
 U_{Bez}&=\sqrt{2}U_{N,Str}=\sqrt{2}\frac{\SI{400}{\volt}}{\sqrt{3}}=\SI{326.6}{\volt}\\
 I_{Bez}&=\sqrt{2}I_{N_Str}=\sqrt{2}\SI{25}\ampere=\SI{35.36}{\ampere}\\
 \omega_{Bez}&=2\pi f_N=2 \pi \SI{75}{\hertz}=\SI{471.2}{\per\second}\\
-\Psi_{Bez}&=\frac{U_Bez}{\omega_Bez}=\frac{\SI{326.6}{\volt}}{\SI{471.2}{\per\second}}=\SI{0.6931}{\volt\second}\\
+\Psi_{Bez}&=\frac{U_{Bez}}{\omega_{Bez}}=\frac{\SI{326.6}{\volt}}{\SI{471.2}{\per\second}}=\SI{0.6931}{\volt\second}\\
 t_{Bez}&=\frac{1}{\omega_{Bez}}=\frac{1}{\SI{471.2}{\per\second}}=\SI{0.002122}{\second}\\
 Z_{Bez}&=\frac{U_{Bez}}{I_{Bez}}=\frac{\SI{326.6}{\volt}}{\SI{35.36}{\ampere}}=\SI{9.236}{\ohm}\\
 P_{Bez}&=3U_{N,Str}I_{N,Str}=3\cdot\frac{\SI{400}{\volt}}{\sqrt{3}}\cdot\SI{25}{\ampere}=\SI{17.32}{\kilo\watt}\\
@@ -1775,15 +1775,15 @@ Die erste Brücke ist in Betrieb, da es sich um Motorbetrieb und Rechtslauf hand
 \section{}
 \begin{align}
 P_V&=I_{A,N}^2 R_A=\num{0.8}\mybr{S_N-P_N}\\
-R_A&=\frac{\num{0.8}\mybr{U_{A,N}I_{A,N}-P_N}}{I_{A,N}^2}=\frac{\num{0.8}\mybr{\SI{400}{\volt}\cdot\SI{156}{\ampere}-\SI{55}{\kilo\watt}}}{\mybr{\SI{156}{\ampere}}^2}=\SI{0.2433}{\ohm}\\
-U_{A,N}&=k_1\phi n_0\\
-n_0&=\frac{U_{A,N}}{k_1\phi}=\frac{\SI{400}{\volt}}{\SI{14.48}{\volt\second}}\SI{60}{\second\per\minute}=\SI{1657}{\rounds\per\minute}
+R_A&=\frac{\num{0.8}\mybr{U_{A,N}I_{A,N}-P_N}}{I_{A,N}^2}=\frac{\num{0.8}\mybr{\SI{400}{\volt}\cdot\SI{156}{\ampere}-\SI{55}{\kilo\watt}}}{\mybr{\SI{156}{\ampere}}^2}=\SI{0.2433}{\ohm}
 \end{align}
 
 \section{}
 \begin{align}
 U_{A,N}&=R_A I_{A,N} + k_1 \phi n_N\\
 k_1\phi&=\frac{U_{A,N}-R_A I_{A,N}}{n_N}=\frac{\SI{400}{\volt}-\SI{0.2433}{\ohm}\cdot\SI{156}{\ampere}}{\frac{\SI{1500}{\rounds\per\minute}}{\SI{60}{\second\per\minute}}}=\SI{14.48}{\volt\second}
+U_{A,N}&=k_1\phi n_0\\
+n_0&=\frac{U_{A,N}}{k_1\phi}=\frac{\SI{400}{\volt}}{\SI{14.48}{\volt\second}}\SI{60}{\second\per\minute}=\SI{1657}{\rounds\per\minute}
 \end{align}
 
 \section{}
@@ -2301,7 +2301,126 @@ u_L&=L_A\frac{\d i_A}{\d t}=U_i-U_{Netz}\\
 \end{tikzpicture}
 \end{figure*}
 
-%\fi
+\clearpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\part{2009 APSM}
+\section{}
+\begin{align}
+I_{Bez}&=\sqrt{2}I_{N,Str}=\sqrt{2}\cdot\SI{5}{\ampere}=\SI{7.071}{\ampere}\\
+\i_S&=\frac{2}{3I_{Bez}}\mybr{I_1+I_2\e^{\j\SI{120}{\degree}}+I_3\e^{\j\SI{240}{\degree}}}\\
+&=\frac{2}{3\cdot\SI{7.071}{\ampere}}\mybr{\SI{-2.12}{\ampere}+\SI{4.24}{\ampere}\e^{\j\SI{120}{\degree}}-\SI{2.12}{\ampere}\e^{\j\SI{240}{\degree}}}\\
+&=\num{0.2998}+\j\num{0.5193}\\
+\isdq&=\isab\e^{-\j\gamma_m}=\mybr{\num{0.2998}+\j\num{0.5193}}\e^{-\j\SI{25}{\degree}}\\
+&=\num{-0.05225}+\j\num{0.5973}\\
+m&=\Psi_M i_q=1\cdot\num{0.5973}=\num{0.5973}
+\end{align}
+
+\section{}
+\begin{align}
+m&=\Psi_M i_q\\
+i_q&=\frac{m}{\Psi_M}=\frac{\num{0.7}}{1}=\num{0.7}\\
+i_d&=0\quad\quad\text{um Kupferverluste zu minimieren}\\
+\isab&=\isdq\e^{\j\gamma_m}=\j\num{0.7}\e^{\j\SI{25}{\degree}}=\num{0.7}\e^{\j\SI{115}{\degree}}=\num{-0.2958}+\j\num{0.6344}
+\end{align}
+
+\section{}
+\begin{align}
+\gamma&=\gamma_0+\omega_m\Delta\tau=\SI{25}{\degree}+\num{0.3}\cdot\num{0.1}\frac{\SI{180}{\degree}}{\pi}=\SI{26.72}{\degree}\\
+\u_S&=r_S\i_S+\frac{\d\PPsi_S}{\d\tau}+\j\omega_K\PPsi_S\\
+\omega_K&=0\\
+r_S&=0\\
+\PPsi_S&=\Psi_M\e^{\j\omega_m\tau}+l_S\i_S\\
+\u_S&=\j\omega_m\Psi_M\e^{\j\omega_m\tau}+l_S\frac{\d\i_S}{\d\tau}\\
+&\rotatebox[origin=c]{270}{\laplace}\nonumber\\
+-\frac{1}{s}&=\j\omega_m\Psi_M\frac{1}{s-\j\omega_m}+l_S\I_S\mybr{s}s-l_S\i_S\mybr{\tau_0}\\
+\I_S&=-\frac{1}{l_S s^2}-\frac{\j\omega_m\Psi_M}{l_S s\mybr{s-\j\omega_m}}+\frac{\i_S\mybr{\tau_0}}{s}\\
+&=-\frac{1}{l_S s^2}-\frac{\j\omega_m\Psi_M}{l_S}\mybr{-\frac{1}{\j\omega_m s}+\frac{1}{\j\omega_m\mybr{s-\j\omega_m}}}+\frac{\i_S\mybr{\tau_0}}{s}\\
+&=-\frac{1}{l_S s^2}+\frac{\Psi_M}{l_S s}-\frac{\Psi_M}{l_S\mybr{s-\j\omega_m}}+\frac{\i_S\mybr{\tau_0}}{s}\\
+&\rotatebox[origin=c]{270}{\Laplace}\nonumber\\
+\i_S\mybr{\Delta\tau}&=-\frac{1}{l_S}\Delta\tau\sigma\mybr{\Delta\tau}+\frac{\Psi_M}{l_S}\sigma\mybr{\Delta\tau}-\frac{\Psi_M}{l_S}\e^{\j\omega_m\Delta\tau}\sigma\mybr{\Delta\tau}+\i_S\mybr{\tau_0}\sigma\mybr{\Delta\tau}\\
+&=-\frac{\num{0.1}}{\num{0.3}}+\frac{1}{\num{0.3}}-\frac{1}{\num{0.3}}\e^{\j\SI{26.72}{\degree}}-\num{0.2998}+\j\num{0.5193}\\
+&=\num{-0.2772}-\j\num{0.9795}
+\end{align}
+
+\clearpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\part{2010 APSM}
+\section{}
+\begin{align}
+m_{R,ist}&=\Psi_M i_q=1\cdot\Im\mybr{\num{0.65}\e^{\j\SI{50}{\degree}}}=1\cdot\num{0.65}\sin\mybr{\SI{50}{\degree}}=\num{0.4979}
+\end{align}
+\section{}
+\begin{align}
+\isab&=\isdq\e^{\j\gamma_m}=\num{0.65}\e^{\j\SI{50}{\degree}}\e^{-\j\SI{30}{\degree}}=\num{0.65}\e{\j\SI{20}{\degree}}\\
+I_{Bez}&=\sqrt{2}I_{Nenn,Str}=\sqrt{2}\SI{5}{\ampere}=\SI{7.071}{\ampere}\\
+I_1&=I_{Bez}\Re\mybr{\isab}=\SI{7.071}{\ampere}\cdot\Re\mybr{\num{0.65}\e^{\j\SI{20}{\degree}}}=\SI{4.319}{\ampere}\\
+I_2&=I_{Bez}\Re\mybr{\isab\e^{-\j\SI{120}{\degree}}}=\SI{7.071}{\ampere}\cdot\Re\mybr{\num{0.65}\e^{\j\SI{20}{\degree}}\e^{-\j\SI{120}{\degree}}}=\SI{-0.7981}{\ampere}\\
+I_3&=I_{Bez}\Re\mybr{\isab\e^{-\j\SI{240}{\degree}}}=\SI{7.071}{\ampere}\cdot\Re\mybr{\num{0.65}\e^{\j\SI{20}{\degree}}\e^{-\j\SI{240}{\degree}}}=\SI{-3.521}{\ampere}
+\end{align}
+
+\section{}
+\begin{align}
+i_d&=0\quad\quad\text{um Kupferverluste zu minimieren}\\
+m_{R,soll}&=\Psi_M i_q\\
+i_q&=\frac{m_{R,soll}}{\Psi_M}=\frac{\num{0.5}}{1}=\num{0.5}\\
+\i_{S,opt,\alpha\beta}&=\i_{S,opt,dq}\e^{\j\gamma_m}=\j\num{0.5}\e^{-\j\SI{30}{\degree}}=\num{0.5}\e^{\j\SI{60}{\degree}}=\num{0.2500}+\j\num{0.4330}
+\end{align}
+
+\section{}
+\begin{align}
+\u_S&=r_S\i_S+\frac{\d\PPsi_S}{\d\tau}+\j\omega_K\PPsi_S\\
+\psab&=\Psi_M\e^{\j\gamma_m}+l_S\isab\\
+\frac{\d\psab}{\d\tau}&=0+l_S\frac{\d\isab}{\d\tau}\\
+\omega_K&=0\\
+\u_S&=r_S\i_S+l_S\frac{\d\isab}{\d\tau}\\
+&\rotatebox[origin=c]{270}{\laplace}\nonumber\\
+\frac{\u{S0}}{s}&=r_S\I_S\mybr{s}+s l_S\I_S\mybr{s}-l_S \i_{S0}\\
+\I_S\mybr{s}&=\frac{\u_{S0}}{s\mybr{r_S+l_S s}}+\frac{l_S \i_{S0}}{r_S+l_S s}\\
+&=\u_{S0}\mybr{\frac{1}{r_S s}-\frac{l_S}{r_S\mybr{r_S+l_S s}}}+\frac{l_S \i_{S0}}{r_S+l_S s}\\
+&=\frac{\u_{S0}}{r_S}\mybr{\frac{1}{s}-\frac{1}{\mybr{\frac{r_S}{l_S}+ s}}}+\frac{\i_{S0}}{\frac{r_S}{l_S}+ s}\\
+&\rotatebox[origin=c]{270}{\Laplace}\nonumber\\
+\i_S\mybr{\tau}&=\mybr{\frac{\u_{S0}}{r_S}\mybr{1-\e^{-\frac{r_S}{l_S}\tau}}+\i_{S0}\e^{-\frac{r_S}{l_S}\tau}}\sigma\mybr{\tau}
+\end{align}
+
+\section{}
+\begin{align}
+n_N&=\frac{f_{Nenn}\SI{60}{\second\per\minute}}{p}\\
+f_{Nenn}&=\frac{p n_N}{\SI{60}{\second\per\minute}}=\frac{2\cdot\SI{3000}{\rounds\per\minute}}{\SI{60}{\second\per\minute}}=\SI{100}{\hertz}\\
+T_{Bez}&=\frac{1}{2\pi f_{Nenn}}=\frac{1}{2\pi\SI{100}{\hertz}}=\SI{1.592}{\milli\second}\\
+I_3\mybr{t}&=I_{Bez}\Re\mybr{\i_S\mybr{\frac{t}{T_{Bez}}}\e^{-\j\SI{240}{\degree}}}\\
+&=\SI{7.071}{\ampere}\cdot\Re\mybr{\mybr{\frac{\num{0.1}\e^{\j\SI{240}{\degree}}}{r_S}\mybr{1-\e^{-\frac{r_S}{l_S}\frac{t}{T_{Bez}}}}+\num{0.65}\e^{\j\SI{20}{\degree}}\e^{-\frac{r_S}{l_S}\frac{t}{T_{Bez}}}}\sigma\mybr{\frac{t}{T_{Bez}}}\e^{-\j\SI{240}{\degree}}}\\
+&=\SI{7.071}{\ampere}\cdot\Re\mybr{\mybr{\frac{\num{0.1}}{r_S}\mybr{1-\e^{-\frac{r_S}{l_S}\frac{t}{T_{Bez}}}}+\num{0.65}\e^{-\j\SI{220}{\degree}}\e^{-\frac{r_S}{l_S}\frac{t}{T_{Bez}}}}\sigma\mybr{t}}\\
+&=\SI{7.071}{\ampere}\mybr{\frac{\num{0.1}}{r_S}\mybr{1-\e^{-\frac{r_S}{l_S}\frac{t}{T_{Bez}}}}-\num{0.4979}\e^{-\frac{r_S}{l_S}\frac{t}{T_{Bez}}}}\sigma\mybr{t}\\
+\end{align}
+Aus der Messkurve kann man $I_3\mybr{t\rightarrow\infty}=\SI{15}{\ampere}$ und $\tau_{mess}=\SI{10}{\milli\second}$ ablesen.
+\begin{figure*}[!hp]
+	\centering
+	\begin{tikzpicture}
+	\begin{axis}[
+	xlabel=$t$ in \si{\milli\second},
+	ylabel=$I_3$ in \si{\ampere},
+	grid,
+	ymin=-5,
+	xmin=-5,
+	ymax=20,
+	xmax=70,]
+	\addplot[domain=-5:0, blue] {-0.4979*7.071};
+	\addplot[domain=0:70, blue] {7.071*(0.1/0.04714*(1-e^(-x/10))-0.4979*e^(-x/10))};
+	\addplot[domain=0:10, black] {7.071*(0.1/0.04714/10+0.4979/10)*x-0.4979*7.071};
+	\draw [decorate,decoration={brace,amplitude=5pt},xshift=0pt,yshift=4pt]
+	(axis cs:0,15) -- (axis cs:10,15) node [black,midway,yshift=10pt] 
+	{\footnotesize $\tau_{mess}$};
+	\end{axis}
+	\end{tikzpicture}
+\end{figure*}
+\begin{align}
+I_3\mybr{t\rightarrow\infty}&=\SI{7.071}{\ampere}\frac{\num{0.1}}{r_S}\\
+r_S&=\frac{\SI{7.071}{\ampere}\cdot\num{0.1}}{\SI{15}{\ampere}}=\num{0.04714}\\
+\tau_{mess}&=T_{Bez}\frac{l_S}{r_S}\\
+l_S&=\frac{\tau_{mess}r_S}{T_{Bez}}=\frac{\SI{10}{\milli\second}\cdot\num{0.04714}}{\SI{1.592}{\milli\second}}=\num{0.2961}
+\end{align}
 
 \clearpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -2322,8 +2441,8 @@ L_{Bez}&=\frac{U_{Bez}T_{Bez}}{I_{Bez}}=\frac{\SI{97.98}{\volt}\cdot\SI{1.061}{\
 \section{}
 \begin{align}
 \isab&=\frac{2}{3I_{Bez}}\mybr{I_1+I_2 \e^{\j\SI{120}{\degree}}+I_3\e^{\j\SI{240}{\degree}}}\\
-	&=\frac{2}{3\cdot\SI{7.071}{\ampere}}\mybr{\SI{-2.828}{\ampere}+\SI{5.657}{\ampere} \e^{\j\SI{120}{\degree}}+\SI{-2.828}{\ampere}\e^{\j\SI{240}{\degree}}}\\
-			&=\num{-0.4000}+\j\num{0.6928}\\
+&=\frac{2}{3\cdot\SI{7.071}{\ampere}}\mybr{\SI{-2.828}{\ampere}+\SI{5.657}{\ampere} \e^{\j\SI{120}{\degree}}+\SI{-2.828}{\ampere}\e^{\j\SI{240}{\degree}}}\\
+&=\num{-0.4000}+\j\num{0.6928}\\
 \isdq&=\isab\e^{-\j\gamma_m}=\mybr{\num{-0.4000}+\j\num{0.6928}}\e^{-\j\SI{10}{\degree}}=\num{-0.2736}+\j\num{0.7517}\\
 m_R&=\Psi_M i_q +\mybr{l_d-l_q}i_d i_q = \num{1}\cdot\num{0.7517}+\mybr{\num{0.5}-\num{0.9}}\cdot\mybr{\num{-0.2736}}\cdot\num{0.7517}=\num{0.8340}
 \end{align}
@@ -2453,7 +2572,5 @@ m_R&=\Psi_M i_q+\mybr{l_d-l_q}i_d i_q\\
 
 
 
-
-
-
+%\fi
 \end{document}
