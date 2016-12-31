@@ -25,7 +25,7 @@
 \fancyhf{} %alle Kopf- und Fußzeilenfelder bereinigen
 \fancyhead[L]{Labor Elektrische Antriebe\\UE 370.042} %Kopfzeile links
 \fancyhead[C]{Lösungen zu Test Beispielen} %zentrierte Kopfzeile
-\fancyhead[R]{v1.2\\www.fet.at} %Kopfzeile rechts
+\fancyhead[R]{v1.3\\www.fet.at} %Kopfzeile rechts
 \renewcommand{\headrulewidth}{0.4pt} %obere Trennlinie
 \fancyfoot[C]{\thepage} %Seitennummer
 \renewcommand{\footrulewidth}{0.4pt} %untere Trennlinie
@@ -1961,7 +1961,7 @@ I_{A,N}&=\frac{P_N}{\eta_N U_{A,N}}=\frac{\SI{22}{\kilo\watt}}{\num{0.78}\cdot\S
 
 \subsection{}
 \begin{align}
-P_V&=I_{A,N}^2=\mybr{1-\eta_N}S_N\\
+P_V&=I_{A,N}^2 R_A=\mybr{1-\eta_N}S_N\\
 R_A&=\frac{\mybr{1-\eta_N} U_{A,N} I_{A,N}}{I_{A,N}^2}=\frac{\mybr{1-\num{0.78}}\SI{440}{\volt}}{\SI{64.10}{\ampere}}=\SI{1.510}{\ohm}
 \end{align}
 
@@ -1972,6 +1972,12 @@ M_N&=\frac{P_N}{2\pi n_N}=\frac{\SI{22}{\kilo\watt}}{2\pi\frac{\SI{1400}{\rounds
 \end{align}
 
 \subsection{}
+\begin{align}
+M_N&=\frac{k_1\phi_N}{2\pi}I_{A,N}\\
+k_1\phi_N&=\frac{2\pi M_N}{I_{A,N}}=\frac{2\pi \SI{150.1}{\newton\metre}}{\SI{64.10}{\ampere}}=\SI{14.71}{\volt\second}
+\end{align}
+
+\section{}
 \begin{align}
 \num{0.5}P_N&=S-P_V=U_A I_A - I_A^2 R_A\\
 0&=I_A^2 R_A - I_A U_A + \num{0.5}P_N\\
@@ -2189,7 +2195,7 @@ R_B&=R_{Ges}-R_A=\SI{3.766}{\ohm}-\SI{1}{\ohm}=\SI{2.766}{\ohm}
 
 \subsection{}
 \begin{align}
-\frac{M}{M_N}&=\frac{k_1\phi{I_A}I_A}{2\pi M_N}=\frac{k_1\phi_N\frac{I_A^{\num{1.6}}}{I_{A,N}^{\num{0.6}}}}{2\pi M_N}=\frac{\SI{10.47}{\volt\second}\frac{I_A^{\num{1.6}}}{\mybr{\SI{60}{\ampere}}^{\num{0.6}}}}{2\pi\SI{100}{\newton\metre}}\\
+\frac{M}{M_N}&=\frac{k_1\phi\mybr{I_A}I_A}{2\pi M_N}=\frac{k_1\phi_N\frac{I_A^{\num{1.6}}}{I_{A,N}^{\num{0.6}}}}{2\pi M_N}=\frac{\SI{10.47}{\volt\second}\frac{I_A^{\num{1.6}}}{\mybr{\SI{60}{\ampere}}^{\num{0.6}}}}{2\pi\SI{100}{\newton\metre}}\\
 U_A&=R_A I_A + k_1 \phi\mybr{I_A} n\\
 n_N&=\frac{U_{A,N}-R_A I_{A,N}}{k\phi_N}\\
 \frac{n}{n_N}&=\frac{\frac{U_{A,N}-R_A I_A}{k\phi\mybr{I_A}}}{\frac{U_{A,N}-R_A I_{A,N}}{k\phi_N}}\\
