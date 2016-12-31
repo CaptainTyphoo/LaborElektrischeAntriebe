@@ -25,7 +25,7 @@
 \fancyhf{} %alle Kopf- und Fußzeilenfelder bereinigen
 \fancyhead[L]{Labor Elektrische Antriebe\\UE 370.042} %Kopfzeile links
 \fancyhead[C]{Lösungen zu Test Beispielen} %zentrierte Kopfzeile
-\fancyhead[R]{v1.5\\www.fet.at} %Kopfzeile rechts
+\fancyhead[R]{v1.6\\www.fet.at} %Kopfzeile rechts
 \renewcommand{\headrulewidth}{0.4pt} %obere Trennlinie
 \fancyfoot[C]{\thepage} %Seitennummer
 \renewcommand{\footrulewidth}{0.4pt} %untere Trennlinie
@@ -2239,7 +2239,7 @@ n_N&=\frac{U_{A,N}-R_A I_{A,N}}{k\phi_N}\\
 
 \section{}
 \begin{align}
-U_Netz&=U_0+R_i I_A = \SI{180}{\volt} + \SI{4}{\ohm}I_A\\
+U_{Netz}&=U_0+R_i I_A = \SI{180}{\volt} + \SI{4}{\ohm}I_A\\
 u_L&=L_A\frac{\d i_A}{\d t}=U_i-U_{Netz}\\
 \frac{\partial u_L}{\partial i_A}&<0\\
 \frac{\partial U_i}{\partial i_A}&<\frac{\partial U_{Netz}}{\partial i_A}
@@ -2311,8 +2311,8 @@ u_L&=L_A\frac{\d i_A}{\d t}=U_i-U_{Netz}\\
 I_{Bez}&=\sqrt{2}I_{N,Str}=\sqrt{2}\cdot\SI{5}{\ampere}=\SI{7.071}{\ampere}\\
 \i_S&=\frac{2}{3I_{Bez}}\mybr{I_1+I_2\e^{\j\SI{120}{\degree}}+I_3\e^{\j\SI{240}{\degree}}}\\
 &=\frac{2}{3\cdot\SI{7.071}{\ampere}}\mybr{\SI{-2.12}{\ampere}+\SI{4.24}{\ampere}\e^{\j\SI{120}{\degree}}-\SI{2.12}{\ampere}\e^{\j\SI{240}{\degree}}}\\
-&=\num{0.2998}+\j\num{0.5193}\\
-\isdq&=\isab\e^{-\j\gamma_m}=\mybr{\num{0.2998}+\j\num{0.5193}}\e^{-\j\SI{25}{\degree}}\\
+&=\num{-0.2998}+\j\num{0.5193}\\
+\isdq&=\isab\e^{-\j\gamma_m}=\mybr{\num{-0.2998}+\j\num{0.5193}}\e^{-\j\SI{25}{\degree}}\\
 &=\num{-0.05225}+\j\num{0.5973}\\
 m&=\Psi_M i_q=1\cdot\num{0.5973}=\num{0.5973}
 \end{align}
@@ -2326,22 +2326,27 @@ i_d&=0\quad\quad\text{um Kupferverluste zu minimieren}\\
 \end{align}
 
 \section{}
+\subsection{}
+\begin{equation}
+\gamma=\gamma_0+\omega_m\Delta\tau=\SI{25}{\degree}+\num{0.3}\cdot\num{0.1}\frac{\SI{180}{\degree}}{\pi}=\SI{26.72}{\degree}
+\end{equation}
+\subsection{}
 \begin{align}
-\gamma&=\gamma_0+\omega_m\Delta\tau=\SI{25}{\degree}+\num{0.3}\cdot\num{0.1}\frac{\SI{180}{\degree}}{\pi}=\SI{26.72}{\degree}\\
-\u_S&=r_S\i_S+\frac{\d\PPsi_S}{\d\tau}+\j\omega_K\PPsi_S\\
+\usab&=r_S\isab+\frac{\d\psab}{\d\tau}+\j\omega_K\psab\\
 \omega_K&=0\\
 r_S&=0\\
-\PPsi_S&=\Psi_M\e^{\j\omega_m\tau}+l_S\i_S\\
-\u_S&=\j\omega_m\Psi_M\e^{\j\omega_m\tau}+l_S\frac{\d\i_S}{\d\tau}\\
+\psab&=\Psi_M\e^{\j\gamma_m}+l_S\isab\\
+\frac{\d\psab}{\d\tau}&=\j\omega_m\Psi_M\e^{\j\mybr{\gamma_m\Delta\tau+\gamma_0}}+l_S\frac{\d\isab}{\d\tau}\\
+\usab&=\j\omega_m\Psi_M\e^{\j\mybr{\gamma_m\Delta\tau+\gamma_0}}+l_S\frac{\d\isab}{\d\tau}\\
 &\rotatebox[origin=c]{270}{\laplace}\nonumber\\
--\frac{1}{s}&=\j\omega_m\Psi_M\frac{1}{s-\j\omega_m}+l_S\I_S\mybr{s}s-l_S\i_S\mybr{\tau_0}\\
-\I_S&=-\frac{1}{l_S s^2}-\frac{\j\omega_m\Psi_M}{l_S s\mybr{s-\j\omega_m}}+\frac{\i_S\mybr{\tau_0}}{s}\\
-&=-\frac{1}{l_S s^2}-\frac{\j\omega_m\Psi_M}{l_S}\mybr{-\frac{1}{\j\omega_m s}+\frac{1}{\j\omega_m\mybr{s-\j\omega_m}}}+\frac{\i_S\mybr{\tau_0}}{s}\\
-&=-\frac{1}{l_S s^2}+\frac{\Psi_M}{l_S s}-\frac{\Psi_M}{l_S\mybr{s-\j\omega_m}}+\frac{\i_S\mybr{\tau_0}}{s}\\
+-\frac{1}{s}&=\j\omega_m\Psi_M\e^{\j\gamma_0}\frac{1}{s-\j\omega_m}+l_S\I_S\mybr{s}s-l_S\i_S\mybr{\tau_0}\\
+\I_S\mybr{s}&=-\frac{1}{l_S s^2}-\frac{\j\omega_m\Psi_M\e^{\j\gamma_0}}{l_S s\mybr{s-\j\omega_m}}+\frac{\i_S\mybr{\tau_0}}{s}\\
+&=-\frac{1}{l_S s^2}-\frac{\j\omega_m\Psi_M\e^{\j\gamma_0}}{l_S}\mybr{-\frac{1}{\j\omega_m s}+\frac{1}{\j\omega_m\mybr{s-\j\omega_m}}}+\frac{\i_S\mybr{\tau_0}}{s}\\
+&=-\frac{1}{l_S s^2}+\frac{\Psi_M\e^{\j\gamma_0}}{l_S s}-\frac{\Psi_M\e^{\j\gamma_0}}{l_S\mybr{s-\j\omega_m}}+\frac{\i_S\mybr{\tau_0}}{s}\\
 &\rotatebox[origin=c]{270}{\Laplace}\nonumber\\
-\i_S\mybr{\Delta\tau}&=-\frac{1}{l_S}\Delta\tau\sigma\mybr{\Delta\tau}+\frac{\Psi_M}{l_S}\sigma\mybr{\Delta\tau}-\frac{\Psi_M}{l_S}\e^{\j\omega_m\Delta\tau}\sigma\mybr{\Delta\tau}+\i_S\mybr{\tau_0}\sigma\mybr{\Delta\tau}\\
-&=-\frac{\num{0.1}}{\num{0.3}}+\frac{1}{\num{0.3}}-\frac{1}{\num{0.3}}\e^{\j\SI{26.72}{\degree}}-\num{0.2998}+\j\num{0.5193}\\
-&=\num{-0.2772}-\j\num{0.9795}
+\i_S\mybr{\Delta\tau}&=\mybr{-\frac{1}{l_S}\Delta\tau+\frac{\Psi_M\e^{\j\gamma_0}}{l_S}\mybr{1-\e^{\j\omega_m\Delta\tau}}+\i_S\mybr{\tau_0}}\sigma\mybr{\Delta\tau}\\
+\i_S\mybr{\num{0.1}}&=-\frac{\num{0.1}}{\num{0.3}}+\frac{1\cdot\e^{\j\SI{25}{\degree}}}{\num{0.3}}\mybr{1-\e^{\j\num{0.3}\cdot\num{0.1}\cdot\frac{\SI{180}{\degree}}{\pi}}}-\num{0.2998}+\j\num{0.5193}\\
+&=\num{-0.5895}+\j\num{0.4293}
 \end{align}
 
 \clearpage
@@ -2426,12 +2431,12 @@ l_S&=\frac{\tau_{mess}r_S}{T_{Bez}}=\frac{\SI{10}{\milli\second}\cdot\num{0.0471
 \clearpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\part{2013 PSM}
+\part{2011 PSM}
 \section{}
 \begin{align}
 I_{Bez}&=\sqrt{2}I_{Nenn,Str}=\sqrt{2}I_N=\sqrt{2}\cdot\SI{10}{\ampere}=\SI{14.14}{\ampere}\\
 \isab&=\frac{2}{3I_{Bez}}\mybr{I_1+I_2\e^{\j\SI{120}{\degree}}+I_3\e^{\j\SI{240}{\degree}}}\\
-&=\frac{2}{3\cdot\SI{14.14}{\ampere}}\mybr{\SI{-14.95}{\ampere}+\SI{9.09}{\ampere}\e^{\j\SI{120}{\degree}}+\SI{4.84}{\ampere}\e^{\j\SI{240}{\degree}}}\\
+&=\frac{2}{3\cdot\SI{14.14}{\ampere}}\mybr{\SI{-13.95}{\ampere}+\SI{9.09}{\ampere}\e^{\j\SI{120}{\degree}}+\SI{4.84}{\ampere}\e^{\j\SI{240}{\degree}}}\\
 &=\num{-0.9861}+\j\num{0.1735}\\
 \isdq&=\isab\e^{-\j\gamma_m}=\mybr{\num{-0.9861}+\j\num{0.1735}}\e^{-\SI{60}{\degree}}=\num{-0.3428}+\j\num{0.9407}
 \end{align}
@@ -2469,10 +2474,13 @@ i_q&=\frac{m_{R,soll}}{\Psi_M}=\frac{1}{1}=1\\
 \isab\mybr{\tau_0+\Delta\tau}&=\isab\mybr{\tau_0}+\frac{\d\isab}{\d\tau}\Delta\tau\\
 &=\num{-0.9861}+\j\num{0.1735}+\mybr{\num{2.821}+\j\num{2.220}}\num{0.05}\\
 &=\num{-0.8451}+\j\num{0.2845}\\
+\gamma_m\mybr{\tau_0+\Delta\tau}&=\gamma_m\mybr{\tau_0}+\omega_m\Delta\tau\\
+&=\SI{60}{\degree}+\num{0.4}\cdot\num{0.05}\frac{\SI{180}{\degree}}{\pi}\\
+&=\SI{61.15}{\degree}\\
 \isdq\mybr{\tau_0+\Delta\tau}&=\isab\mybr{\tau_0+\Delta\tau}\e^{-\j\gamma_m}\\
-&=\mybr{\num{-0.8451}+\j\num{0.2845}}\e^{-\j\SI{60}{\degree}}\\
-&=\num{-0.1762}+\j\num{0.8741}\\
-m_{R,ist}\mybr{\tau_0+\Delta\tau}&=\Psi_M i_q\mybr{\tau_0+\Delta\tau}=1\cdot\num{0.8741}=\num{0.8741}
+&=\mybr{\num{-0.8451}+\j\num{0.2845}}\e^{-\j\SI{61.15}{\degree}}\\
+&=\num{-0.1586}+\j\num{0.8775}\\
+m_{R,ist}\mybr{\tau_0+\Delta\tau}&=\Psi_M i_q\mybr{\tau_0+\Delta\tau}=1\cdot\num{0.8775}=\num{0.8775}
 \end{align}
 
 \clearpage
@@ -2538,8 +2546,8 @@ Der Strom $\i_{S,BLDC}$ muss wenn man ihn auf die Richtung von $i_q$ projiziert,
 i_{S,BLDC}&=\frac{i_q}{\cos\mybr{\SI{10}{\degree}}}=\frac{\num{0.7}}{\cos\mybr{\SI{10}{\degree}}}=\num{0.7108}\\
 \i_{S,BLDC}&=\num{0.7108}\e^{\j\SI{90}{\degree}}\\
 I_1&=I_{Bez}\Re\mybr{\i_{S,BLDC}\e^{\j\SI{0}{\degree}}}=\SI{7.071}{\ampere}\cdot\Re\mybr{\num{0.7108}\e^{\j\SI{90}{\degree}}}=\SI{0}{\ampere}\\
-I_2&=I_{Bez}\Re\mybr{\i_{S,BLDC}\e^{\j\SI{120}{\degree}}}=\SI{7.071}{\ampere}\cdot\Re\mybr{\num{0.7108}\e^{\j\SI{90}{\degree}}\e^{\j\SI{120}{\degree}}}=\SI{4.353}{\ampere}\\	
-I_3&=I_{Bez}\Re\mybr{\i_{S,BLDC}\e^{\j\SI{240}{\degree}}}=\SI{7.071}{\ampere}\cdot\Re\mybr{\num{0.7108}\e^{\j\SI{90}{\degree}}\e^{\j\SI{240}{\degree}}}=\SI{-4.353}{\ampere}
+I_2&=I_{Bez}\Re\mybr{\i_{S,BLDC}\e^{-\j\SI{120}{\degree}}}=\SI{7.071}{\ampere}\cdot\Re\mybr{\num{0.7108}\e^{\j\SI{90}{\degree}}\e^{-\j\SI{120}{\degree}}}=\SI{4.353}{\ampere}\\	
+I_3&=I_{Bez}\Re\mybr{\i_{S,BLDC}\e^{-\j\SI{240}{\degree}}}=\SI{7.071}{\ampere}\cdot\Re\mybr{\num{0.7108}\e^{\j\SI{90}{\degree}}\e^{-\j\SI{240}{\degree}}}=\SI{-4.353}{\ampere}
 \end{align}
 
 \section{}
