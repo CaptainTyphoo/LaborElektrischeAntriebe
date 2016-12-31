@@ -27,7 +27,7 @@
 \fancyhf{} %alle Kopf- und Fußzeilenfelder bereinigen
 \fancyhead[L]{Labor Elektrische Antriebe\\UE 370.042} %Kopfzeile links
 \fancyhead[C]{Lösungen zu Test Beispielen} %zentrierte Kopfzeile
-\fancyhead[R]{v2.2\\www.fet.at} %Kopfzeile rechts
+\fancyhead[R]{v2.3\\www.fet.at} %Kopfzeile rechts
 \renewcommand{\headrulewidth}{0.4pt} %obere Trennlinie
 \fancyfoot[C]{\thepage} %Seitennummer
 \renewcommand{\footrulewidth}{0.4pt} %untere Trennlinie
@@ -1582,7 +1582,7 @@ M_{Bez}&=\frac{P_{Bez}p}{\omega_{Bez}}=\frac{\SI{17.32}{\kilo\watt}\cdot 3}{\SI{
 
 \subsection{}
 \begin{equation}
-n=\frac{f_N\cdot\SI{60}{\second\per\minute}}{p}=\frac{\SI{75}{\hertz}\cdot\SI{60}{\second\per\minute}}{3}=\SI{1850}{\per\minute}
+n=\frac{f_N\cdot\SI{60}{\second\per\minute}}{p}=\frac{\SI{75}{\hertz}\cdot\SI{60}{\second\per\minute}}{3}=\SI{1500}{\per\minute}
 \end{equation}
 
 \subsection{}
@@ -1591,7 +1591,7 @@ I_0&=\frac{U_{LL,Str}}{\left|R_{S,Str}+\j X_{S,Str,60}\right|}\\
 R_{S,Str}&=\frac{U_{LL,Str}}{I_{0,\mybr{\SI{266}{\volt},\SI{50}{\hertz}}}}\cos\mybr{\varphi_0}=\frac{\frac{\SI{266}{\volt}}{\sqrt{3}}}{\SI{7.136}{\ampere}}\cdot\num{0.00857}=\SI{0.1845}{\ohm}\\
 X_{S,Str,50}&=\sqrt{\mybr{\frac{U_{LL,Str}}{I_{0,\mybr{\SI{266}{\volt},\SI{50}{\hertz}}}}}^2-R_{S,Str}^2}=\sqrt{\mybr{\frac{\frac{\SI{266}{\volt}}{\sqrt{3}}}{\SI{7.136}{\ampere}}}^2-\mybr{\SI{0.1845}{\ohm}}^2}\\
 &=\SI{21.52}{\ohm}\\
-X_{S,Str,75}=&\frac{\SI{75}{\hertz}}{\SI{50}{\hertz}}X_{S,Str,50}=\frac{\SI{60}{\hertz}}{\SI{50}{\hertz}}\SI{21.52}{\ohm}=\SI{32.28}{\ohm}\\
+X_{S,Str,75}=&\frac{\SI{75}{\hertz}}{\SI{50}{\hertz}}X_{S,Str,50}=\frac{\SI{75}{\hertz}}{\SI{50}{\hertz}}\SI{21.52}{\ohm}=\SI{32.28}{\ohm}\\
 X_R&=\mybr{1-\sigma}X_S=\mybr{1-\num{0.08}}\SI{32.28}=\SI{29.70}{\ohm}\\
 X_\sigma&=\sigma X_S=\num{0.08}\SI{32.28}=\SI{2.582}{\ohm}\\
 r_S&=\frac{R_S}{Z_{Bez}}=\frac{\SI{0.1845}{\ohm}}{\SI{9.236}{\ohm}}=\num{0.01998}\\
