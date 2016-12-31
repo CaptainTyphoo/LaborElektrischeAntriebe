@@ -27,7 +27,7 @@
 \fancyhf{} %alle Kopf- und Fußzeilenfelder bereinigen
 \fancyhead[L]{Labor Elektrische Antriebe\\UE 370.042} %Kopfzeile links
 \fancyhead[C]{Lösungen zu Test Beispielen} %zentrierte Kopfzeile
-\fancyhead[R]{v2.1\\www.fet.at} %Kopfzeile rechts
+\fancyhead[R]{v2.2\\www.fet.at} %Kopfzeile rechts
 \renewcommand{\headrulewidth}{0.4pt} %obere Trennlinie
 \fancyfoot[C]{\thepage} %Seitennummer
 \renewcommand{\footrulewidth}{0.4pt} %untere Trennlinie
@@ -1820,7 +1820,7 @@ J\frac{\partial}{\partial\omega}\mybr{\frac{\d\omega}{\d t}}&<0\\
 Der Aufzug ist nur für 4 Personen geeignet.
 
 \subsection{}
-Dauerbelastung: thermische Belastbarkeit durch Erwärmung von Kupfer und eisen zufoilge von Verlusten.
+Dauerbelastung: thermische Belastbarkeit durch Erwärmung von Kupfer und Eisen zufoilge von Verlusten.
 
 Kurzzeitbelastbarkeit: Diese ist durch die Kommutierung begrenzt. Überlastung durch Überstrom kann zu Kommutierungsproblemen (Wendefeld kann nicht mehr folgen) führen. Überlastung durch Überdrehzahl ist ebenfalls durch die Kommutierungsrestspannung begrenzt.
 
@@ -2001,7 +2001,7 @@ U_A=-R_A I_A + k_1\phi n=-\SI{0.03124}{\ohm}\cdot I_A+\SI{18}{\volt\second}\frac
 U_A&=-R_A I_A + k_1\phi\mybr{I_A} n=-R_A I_A + k_1\phi\mybr{0} \mybr{1-\num{0.07}\mybr{\frac{I_A}{I_{A,N}}}^2}n\\
 &=-\SI{0.03124}{\ohm}\cdot I_A+\SI{18}{\volt\second}\mybr{1-\num{0.07}\mybr{\frac{I_A}{\SI{845}{\ampere}}}^2}\frac{\SI{1500}{\rounds\per\minute}}{\SI{60}{\second\per\minute}}\\
 \end{align}
-\begin{figure*}[!hp]
+\begin{figure*}[!htbp]
 \centering
 \begin{tikzpicture}
 	\begin{axis}[
@@ -2012,7 +2012,7 @@ U_A&=-R_A I_A + k_1\phi\mybr{I_A} n=-R_A I_A + k_1\phi\mybr{0} \mybr{1-\num{0.07
 		xmin=0,
 		ymax=500,
 		xmax=1.5*845,
-		legend to name=ua-legende,
+		legend to name=ua-legende1,
 		name=uaplot]
 	\addplot[domain=0:1.5*845, blue] {-0.03124*x+18*1500/60};
 	\addlegendentry{$U_A$ ohne ARW}
@@ -2020,7 +2020,7 @@ U_A&=-R_A I_A + k_1\phi\mybr{I_A} n=-R_A I_A + k_1\phi\mybr{0} \mybr{1-\num{0.07
 	\addlegendentry{$U_A$ mit ARW}
     \end{axis}
 	\node at (uaplot.east) [anchor=south, xshift=-2cm, yshift=-1.5cm]
-			{\pgfplotslegendfromname{ua-legende}};
+			{\pgfplotslegendfromname{ua-legende1}};
 \end{tikzpicture}
 \end{figure*}
 
@@ -2161,7 +2161,7 @@ n_{Feldschw\ddot{a}ch,1}&=\frac{U_{A,max}-R_A I_{A,N}}{k_1\phi}=\frac{\num{1.2}\
 n_{Feldschw\ddot{a}ch,2}&=\frac{-U_{A,max}-R_A I_{A,N}}{k_1\phi}=\frac{\num{1.2}\cdot\mybr{\SI{-400}{\volt}}-\SI{0.3041}{\ohm}\cdot\mybr{\SI{-156}{\ampere}}}{\SI{14.10}{\volt\second}}\SI{60}{\second\per\minute}\\
 &=\SI{-1841}{\rounds\per\minute}.
 \end{align}
-\begin{figure*}[!h]
+\begin{figure*}[!htb]
 \centering
 \begin{tikzpicture}
 	\begin{axis}[
@@ -2199,7 +2199,7 @@ Bei Linkslauf dreht sich das Vorzeichen von $I_A$ um
 M_i&=M_{i,N}\frac{n_{Felschw\ddot{a}ch,2}}{n}\\
 &=\SI{-350.1}{\newton\metre}\frac{\SI{-1841}{\rounds\per\minute}}{n}.
 \end{align}
-\begin{figure*}[!ht]
+\begin{figure*}[!htb]
 \centering
 \begin{tikzpicture}
 	\begin{axis}[
@@ -2393,7 +2393,7 @@ U_A=-R_A I_A + k_1\phi n=-\SI{100}{\milli\ohm}\cdot I_A+\SI{5}{\volt\second}\fra
 U_A&=-R_A I_A + k_1\phi\mybr{I_A} n=-R_A I_A + k_1\phi\mybr{0} \mybr{1-\num{0.05}\mybr{\frac{I_A}{I_{A,N}}}^2}n\\
 &=-\SI{100}{\milli\ohm}\cdot I_A+\SI{5}{\volt\second}\mybr{1-\num{0.05}\mybr{\frac{I_A}{\SI{100}{\ampere}}}^2}\frac{\SI{960}{\rounds\per\minute}}{\SI{60}{\second\per\minute}}\\
 \end{align}
-\begin{figure*}[!hp]
+\begin{figure*}[!htbp]
 	\centering
 	\begin{tikzpicture}
 	\begin{axis}[
@@ -2404,7 +2404,7 @@ U_A&=-R_A I_A + k_1\phi\mybr{I_A} n=-R_A I_A + k_1\phi\mybr{0} \mybr{1-\num{0.05
 	xmin=0,
 	ymax=90,
 	xmax=200,
-	legend to name=ua-legende,
+	legend to name=ua-legende2,
 	name=uaplot]
 	\addplot[domain=0:200, blue] {-0.100*x+5*960/60};
 	\addlegendentry{$U_A$ ohne ARW}
@@ -2412,7 +2412,7 @@ U_A&=-R_A I_A + k_1\phi\mybr{I_A} n=-R_A I_A + k_1\phi\mybr{0} \mybr{1-\num{0.05
 	\addlegendentry{$U_A$ mit ARW}
 	\end{axis}
 	\node at (uaplot.east) [anchor=south, xshift=-2cm, yshift=-1.5cm]
-	{\pgfplotslegendfromname{ua-legende}};
+	{\pgfplotslegendfromname{ua-legende2}};
 	\end{tikzpicture}
 \end{figure*}
 
@@ -2481,7 +2481,7 @@ M&=\frac{k_1\phi\mybr{I_A}}{2\pi}I_A=\frac{k_1\phi_N\sqrt{\frac{I_A}{I_{A,N}}}}{
 \end{align}
 
 \subsection{}
-\begin{figure*}[!h]
+\begin{figure*}[!ht]
 \centering
 \begin{circuitikz}
 \begin{scope}[scale=0.8]
@@ -2617,7 +2617,7 @@ k_1\phi_N&=\frac{2\pi M_N}{I_{A,N}}=\frac{2\pi\SI{100}{\newton\metre}}{\SI{60}{\
 \num{1.5} M_N&=\frac{k_1\phi\mybr{I_A}}{2\pi}I_A=\frac{k_1\phi_N}{2\pi}\mybr{\frac{I_A}{I_{A,N}}}^{\num{0.6}} I_A\\
 I_A&=\sqrt[\num{1.6}]{\frac{2\pi \num{1.5}M_N I_{A,N}^{\num{0.6}}}{k_1\phi_N}}=\sqrt[\num{1.6}]{\frac{2\pi \num{1.5}\cdot\SI{100}{\newton\metre} \mybr{\SI{60}{\ampere}}^{\num{0.6}}}{\SI{10.47}{\volt\second}}}=\SI{77.31}{\ampere}
 \end{align}
-\begin{figure*}[!h]
+\begin{figure*}[!htbp]
 \centering
 \begin{circuitikz}
 \begin{scope}[scale=0.8]
@@ -2646,7 +2646,7 @@ R_V&=R_{Ges}-R_A=\SI{5.691}{\ohm}-\SI{1}{\ohm}=\SI{4.691}{\ohm}
 \begin{equation}
 I_A=\sqrt[\num{1.6}]{\frac{2\pi \num{1.8}M_N I_{A,N}^{\num{0.6}}}{k_1\phi_N}}=\sqrt[\num{1.6}]{\frac{2\pi \num{1.8}\cdot\SI{100}{\newton\metre} \mybr{\SI{60}{\ampere}}^{\num{0.6}}}{\SI{10.47}{\volt\second}}}=\SI{86.65}{\ampere}
 \end{equation}
-\begin{figure*}[!h]
+\begin{figure*}[!htbp]
 \centering
 \begin{circuitikz}
 \begin{scope}[scale=0.8]
@@ -2680,7 +2680,7 @@ n_N&=\frac{U_{A,N}-R_A I_{A,N}}{k\phi_N}\\
 &=\frac{U_{A,N}-R_A I_A}{\mybr{\frac{I_A}{I_{A,N}}}^{\num{0.6}}\mybr{U_{A,N}-R_A I_{A,N}}}\\
 &=\frac{\SI{440}{\volt}-\SI{1}{\ohm}I_A}{\mybr{\frac{I_A}{\SI{60}{\ampere}}}^{\num{0.6}}\mybr{\SI{440}{\volt}-\SI{1}{\ohm}\cdot\SI{60}{\ampere}}}
 \end{align}
-\begin{table}[htbp]
+\begin{table}[!htbp]
 	\begin{center}
 	\begin{tabular}{SSS}
 		\toprule
@@ -2695,7 +2695,7 @@ n_N&=\frac{U_{A,N}-R_A I_{A,N}}{k\phi_N}\\
 	\end{tabular}
 	\end{center}
 \end{table}
-\begin{figure*}[!hp]
+\begin{figure*}[!htbp]
 \centering
 \begin{tikzpicture}
 	\begin{axis}[
@@ -2721,7 +2721,7 @@ u_L&=L_A\frac{\d i_A}{\d t}=U_i-U_{Netz}\\
 \frac{\partial u_L}{\partial i_A}&<0\\
 \frac{\partial U_i}{\partial i_A}&<\frac{\partial U_{Netz}}{\partial i_A}
 \end{align}
-\begin{figure*}[!hp]
+\begin{figure*}[!htbp]
 \centering
 \begin{circuitikz}
 \begin{scope}[scale=0.8]
@@ -2740,7 +2740,7 @@ u_L&=L_A\frac{\d i_A}{\d t}=U_i-U_{Netz}\\
 \end{scope}
 \end{circuitikz}
 \end{figure*}
-\begin{figure*}[!hp]
+\begin{figure*}[!htbp]
 \centering
 \begin{tikzpicture}
 	\begin{axis}[
@@ -2751,7 +2751,7 @@ u_L&=L_A\frac{\d i_A}{\d t}=U_i-U_{Netz}\\
 		xmin=0,
 		ymax=600,
 		xmax=100,
-		legend to name=stab-legende,
+		legend to name=stab-legende1,
 		name=stabplot]
     \addplot[smooth,blue] plot coordinates {
         (0 , 0)
@@ -2775,7 +2775,7 @@ u_L&=L_A\frac{\d i_A}{\d t}=U_i-U_{Netz}\\
 	\draw[color=black] (axis cs:87,528) circle (2pt) node[above left] {stabil};
     \end{axis}
 	\node at (stabplot.east) [anchor=south, xshift=-1.50cm, yshift=-1.5cm]
-			{\pgfplotslegendfromname{stab-legende}};
+			{\pgfplotslegendfromname{stab-legende1}};
 \end{tikzpicture}
 \end{figure*}
 
@@ -2982,16 +2982,45 @@ U_A&=R_i I_A+k_1\phi n_1=\SI{0.7928}{\ohm}\cdot\SI{49.67}{\ampere}+\SI{12.01}{\v
 \end{align}
 
 \subsection{}
-kein Plan
+\begin{align}
+\frac{M_{Last}}{i}&=\frac{\SI{2943}{\newton\metre}}{31}=\SI{94.94}{\newton\metre}\\
+M_i&=\frac{k\phi_N}{2\pi}\mybr{\frac{U_A-k_1\phi n}{R_A}}\\
+&=\frac{\SI{12.01}{\volt\second}}{2\pi}\mybr{\frac{\SI{440}{\volt}-\SI{12.01}{\volt\second}\cdot n}{\SI{0.7928}{\ohm}}}
+\end{align}
+\begin{figure*}[!htbp]
+	\centering
+	\begin{tikzpicture}
+		\begin{axis}[
+		xlabel=$n$ in \si{\rounds\per\minute},
+		ylabel=$M$ in \si{\newton\metre},
+		grid,
+		ymin=0,
+		xmin=0,
+		ymax=150,
+		xmax=2300,
+		legend to name=stab-legende2,
+		name=stabplot]
+		\addplot[domain=1500:2200, blue] {12.01/(2*pi)*(440-12.01*x/60)/0.7928};
+		\addlegendentry{$M_i$}
+		\addplot[domain=0:2300, red] {94.94};
+		\addlegendentry{$\frac{M_{Last}}{i}$}
+		\end{axis}
+		\node at (stabplot.east) [anchor=south, xshift=-3.50cm, yshift=-1.5cm]
+		{\pgfplotslegendfromname{stab-legende2}};
+	\end{tikzpicture}
+\end{figure*}
+\begin{align}
+J\frac{\d\omega}{\d t}&=M_i-M_{Last}\\
+J\frac{\partial}{\partial\omega}\mybr{\frac{\d\omega}{\d t}}&<0\quad\text{für Stabilität}\\
+\frac{\partial M_i}{\partial\omega}&<\frac{\partial M_{Last}}{\partial\omega}\rightarrow \text{stabil}
+\end{align}
+
 
 \section{}
-\begin{align}
-U_{Netz}&=U_0+R_i I_A = \SI{170}{\volt} + \SI{4}{\ohm}I_A\\
-u_L&=L_A\frac{\d i_A}{\d t}=U_i-U_{Netz}\\
-\frac{\partial u_L}{\partial i_A}&<0\\
-\frac{\partial U_i}{\partial i_A}&<\frac{\partial U_{Netz}}{\partial i_A}
-\end{align}
-\begin{figure*}[!hp]
+\begin{equation}
+U_B=U_0+R_i I_A = \SI{170}{\volt} + \SI{4}{\ohm}I_A
+\end{equation}
+\begin{figure*}[!htbp]
 	\centering
 	\begin{circuitikz}
 		\begin{scope}[scale=0.8]
@@ -3003,14 +3032,19 @@ u_L&=L_A\frac{\d i_A}{\d t}=U_i-U_{Netz}\\
 			-- (0,0);
 			
 			%Spannungspfeil
-			\draw (0,0) to [open, v^=$U_{Netz}$] (0,3);
+			\draw (0,0) to [open, v^=$U_B$] (0,3);
 			\draw (3.5,3) to [open, v^>=$U_i$] (3.5,0);
 			
 			
 		\end{scope}
 	\end{circuitikz}
 \end{figure*}
-\begin{figure*}[!hp]
+\begin{align}
+u_L&=L_A\frac{\d i_A}{\d t}=U_i-U_B\label{2015:stab}\\
+\frac{\partial u_L}{\partial i_A}&<0\\
+\frac{\partial U_i}{\partial i_A}&<\frac{\partial U_B}{\partial i_A}
+\end{align}
+\begin{figure*}[!htbp]
 	\centering
 	\begin{tikzpicture}
 	\begin{axis}[
@@ -3021,7 +3055,7 @@ u_L&=L_A\frac{\d i_A}{\d t}=U_i-U_{Netz}\\
 	xmin=0,
 	ymax=600,
 	xmax=100,
-	legend to name=stab-legende,
+	legend to name=stab-legende3,
 	name=stabplot]
 	\addplot[smooth,blue] plot coordinates {
 		(0 , 0)
@@ -3040,18 +3074,22 @@ u_L&=L_A\frac{\d i_A}{\d t}=U_i-U_{Netz}\\
 	};
 	\addlegendentry{$U_A$}
 	\addplot[domain=0:100, red] {170+4*x};
-	\addlegendentry{$U_{Netz}$}
+	\addlegendentry{$U_B$}
 	\draw[color=black] (axis cs:30,290) circle (2pt)  node[below right] {instabil};
 	\draw[color=black] (axis cs:92,538) circle (2pt) node[above left] {stabil};
 	\end{axis}
 	\node at (stabplot.east) [anchor=south, xshift=-1.50cm, yshift=-1.5cm]
-	{\pgfplotslegendfromname{stab-legende}};
+	{\pgfplotslegendfromname{stab-legende3}};
 	\end{tikzpicture}
 \end{figure*}
 
+Bringt man im linken Arbeitspunkt eine Störung des Ankerstroms $I_A$ auf, wird die Ankerspannung größer als die Batteriespannung. Aus \eqref{2015:stab} erkennt man, dass der Ankerstrom dadurch weiter ansteigt und die Maschine daher nicht mehr zum Arbeitspunkt zurückkehrt. Der linke Arbeitspunkt ist instabil. Beim rechten Arbeitspunkt ist die Änderungsrate des Ankerstroms negativ, bei einer positiven Störung des Ankerstroms, wodurch die Maschine in den Arbeitspunkt zurückkehrt. Der rechte Arbeitspunkt ist stabil.
+
+Bei der Prüfung ist es wichtig diese verbale Beschreibung auch hinzuzufügen, sonst bekommt man einen halben Punkt abgezogen bei diesem Unterpunkt.
+
 \section{}
 \subsection{}
-\begin{figure*}[!h]
+\begin{figure*}[!htbp]
 	\centering
 	\begin{circuitikz}
 		\begin{scope}[scale=0.8]
@@ -3098,7 +3136,7 @@ u_L&=L_A\frac{\d i_A}{\d t}=U_i-U_{Netz}\\
 M_N&=\frac{k_1\phi}{2\pi}I_{A,N}\\
 k_1\phi&=\frac{2\pi M_N}{I_{A,N}}=\frac{2\pi\SI{20}{\newton\metre}}{\SI{10}{\ampere}}=\SI{12.57}{\volt\second}\\
 R_A I_{A,N}^2&=\mybr{1-\eta_N}U_{A,N}I_{A,N}\\
-R_A&=\frac{\mybr{1-\eta_N}U_{A,N}}{I_{A,N}}=\frac{\mybr{1-\num{0.85}\SI{440}{\volt}}}{\SI{10}{\ampere}}=\SI{6.6}{\ohm}\\
+R_A&=\frac{\mybr{1-\eta_N}U_{A,N}}{I_{A,N}}=\frac{\mybr{1-\num{0.85}}\SI{440}{\volt}}{\SI{10}{\ampere}}=\SI{6.6}{\ohm}\\
 \num{0.7}M_N&\rightarrow\num{0.7}{I_{A,N}}\\
 \num{0.5}U_{A,N}&=R_A\num{0.7}I_{A,N}+k_1\phi n\\
 n&=\frac{\num{0.5}\cdot U_{A,N}-R_A\num{0.7}I_{A,N}}{k_1\phi}\\
@@ -3216,7 +3254,7 @@ n=\frac{\num{0.5}U_{A,N}-R_A\num{0.5} I_{A,N}}{k_1\phi\mybr{1-\num{0.05}\mybr{\f
 	&=\SI{9.899}{\ampere}\mybr{\frac{\num{0.1}}{r_S}\mybr{1-\e^{-\frac{r_S}{l_S}\frac{t}{T_{Bez}}}}-\num{0.25}\e^{-\frac{r_S}{l_S}\frac{t}{T_{Bez}}}}\sigma\mybr{t}\\
 \end{align}
 Aus der Messkurve kann man $I_2\mybr{t\rightarrow\infty}=\SI{25}{\ampere}$ und $\tau_{mess}=\SI{10}{\milli\second}$ ablesen.
-\begin{figure*}[!hp]
+\begin{figure*}[!htbp]
 	\centering
 	\begin{tikzpicture}
 	\begin{axis}[
@@ -3342,7 +3380,7 @@ I_3\mybr{t}&=I_{Bez}\Re\mybr{\i_S\mybr{\frac{t}{T_{Bez}}}\e^{-\j\SI{240}{\degree
 &=\SI{7.071}{\ampere}\mybr{\frac{\num{0.1}}{r_S}\mybr{1-\e^{-\frac{r_S}{l_S}\frac{t}{T_{Bez}}}}-\num{0.4979}\e^{-\frac{r_S}{l_S}\frac{t}{T_{Bez}}}}\sigma\mybr{t}\\
 \end{align}
 Aus der Messkurve kann man $I_3\mybr{t\rightarrow\infty}=\SI{15}{\ampere}$ und $\tau_{mess}=\SI{10}{\milli\second}$ ablesen.
-\begin{figure*}[!hp]
+\begin{figure*}[!htbp]
 	\centering
 	\begin{tikzpicture}
 	\begin{axis}[
@@ -3478,7 +3516,7 @@ I_3\mybr{t}&=I_{Bez}\Re\mybr{\i_S\mybr{\frac{t}{T_{Bez}}}\e^{-\j\SI{240}{\degree
 &=\SI{7.071}{\ampere}\mybr{\frac{\num{0.1}}{r_S}\mybr{1-\e^{-\frac{r_S}{l_S}\frac{t}{T_{Bez}}}}-\num{0.4979}\e^{-\frac{r_S}{l_S}\frac{t}{T_{Bez}}}}\sigma\mybr{t}\\
 \end{align}
 Aus der Messkurve kann man $I_3\mybr{t\rightarrow\infty}=\SI{15}{\ampere}$ und $\tau_{mess}=\SI{10}{\milli\second}$ ablesen.
-\begin{figure*}[!hp]
+\begin{figure*}[htbp]
 	\centering
 	\begin{tikzpicture}
 	\begin{axis}[
@@ -3654,6 +3692,279 @@ m_R&=\Psi_M i_q+\mybr{l_d-l_q}i_d i_q\\
 \clearpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\part{2014 Nachtest SM}
+
+\begin{figure*}[!hp]
+	\centering{
+		\begin{tikzpicture}
+		\pgfplotsset{set layers}
+		\begin{axis}[
+		xlabel=$I_f$ in \si{\ampere},
+		ylabel=verkettete Spannung $U_s$ in \si{\volt},
+		grid,
+		ymin=0,
+		ymax=600,
+		xmin=0,
+		xmax=70,
+		xtick={0,5,...,20,25,30,35,...,70}, 
+		xticklabels={0, 5,...,20,{},{},35,40,...,55,$I_{fIV}$,65,70}, 
+		extra x ticks={24,28}, 
+		extra x tick labels={$I_{fL}$,$I_{fK}$},
+		extra y ticks={74.347,474.347}, 
+		extra y tick labels={$U_{iK}$,$U_{iIV}$},
+		extra tick style={grid=none,xtick style={draw=none}},
+		axis y line*=left,
+		%scale=2.5,
+		height=0.5\textheight,
+		width=0.88\textwidth
+		]
+		
+		% Induktiver Volllastpunkt
+		\draw[dashed] (axis cs:60,0) -- (axis cs:60,400);
+		
+		%I_{fK} von I_{IV} subtrahieren
+		\draw[thick, blue] (axis cs:60,400) -- (axis cs:60-27.5,400);
+		\draw [fill,blue] (axis cs:60,400) ellipse [x radius=0.08cm, y radius=0.08cm];
+		\draw [fill,blue] (axis cs:60-27.5,400) ellipse [x radius=0.08cm, y radius=0.08cm];
+		
+		%Leerlaufkennlinie
+		\addplot[smooth,blue] plot coordinates {
+			(0,0)
+			(2.3,50)
+			(4.5,97)
+			(10,217)
+			(14.5,300)
+			(20,365)
+			(24,400)
+			(30,440)
+			(35,470)
+			(40,490)
+			(45,510)
+			(50,525)
+			(55,540)
+			(60,555)
+			(62,560)
+			
+		};
+		\label{plot_one}
+		
+		%Anfangssteigung der Leerlaufkennlinie
+		\addplot[domain=0:20, green,dashed] {x*50/2.3};
+		\label{plot_two}
+		
+		%Parallelverschieben
+		\addplot[domain=60-27.5:35.92, blue,thick] {(x-(60-27.5))*50/2.3+400};
+		
+		%Dreieck fertig zeichnen
+		\draw[blue,thick] (axis cs:35.92,474.3478) -- (axis cs:60,400);
+		
+		%Potierreaktanz
+		\draw[dashed] (axis cs:35.92,400) -- node[right]{$x_p$} (axis cs:35.92,474.3478);
+		
+		%innere Spannung im induktiven Vollastpunkt
+		\draw[dashed] (axis cs:0,474.3478) -- (axis cs:35.92,474.3478);
+		
+		%oberer Punkt im Dreieck
+		\draw [fill,blue] (axis cs:35.92,474.3478) ellipse [x radius=0.08cm, y radius=0.08cm];
+		
+		%innere Spannung im Kurzschlusspunkt
+		\draw[thick, blue] (axis cs:0,0) -- (axis cs:35.92-60+27.5,74.3478);
+		\draw[thick, blue] (axis cs:35.92-60+27.5,74.3478) -- (axis cs:27.5,0);
+		\draw[dashed] (axis cs:0,74.3478) -- (axis cs:35.92-60+27.5,74.3478);
+		
+		%auf Felderregerseite umgerechnete Ankernennstrom
+		\draw [decorate,decoration={brace,amplitude=5pt},xshift=0pt,yshift=-3pt]
+		(axis cs:60,400) -- (axis cs:27.5,400) node [black,midway,yshift=-13pt] 
+		{$I_{sN}''$};
+		
+		%innere Spannung aus Punkt 7
+		\draw[dashed,->] (axis cs:0,440) -- (axis cs:30,440);
+		\draw[dashed,<-] (axis cs:30,0) node[above right] {7) $I_m$} -- (axis cs:30,440);
+		
+		%Außenleiterspannung aus Punkt 8
+		\draw[dashed,->] (axis cs:55.92,0) -- (axis cs:55.92,543);
+		\draw[dashed,->] (axis cs:55.92,543) -- (axis cs:0,543) node[above right] {8) $U_{AL}$};
+		
+		\end{axis}
+		
+		\begin{axis}[
+		ylabel=$I_S$ in \si{\ampere},
+		ymin=0,
+		ymax=173.3,
+		xmin=0,
+		xmax=70,
+		axis y line*=right,
+		axis x line=none,
+		legend pos=south east,
+		height=0.5\textheight,
+		width=0.88\textwidth,
+		ytick style={draw=none},
+		ytick={0,
+			28.9,
+			57.8,
+			86.6,
+			115.5,
+			144.4,
+			173.3
+		}
+		]
+		\addlegendimage{/pgfplots/refstyle=plot_one}\addlegendentry{$U_s$}
+		\addlegendimage{/pgfplots/refstyle=plot_two}\addlegendentry{$\frac{\d U_{s}}{\d I_f}\vert_{I_f=0}$}
+		%Kurzschlusskennlinie
+		\addplot[domain=0:37, red] {115.5/27.5*x};
+		\addlegendentry{$I_S$}
+		\draw[thick] (axis cs:18.4,0) -- node[left]{$k_{c0}$} (axis cs:18.4,77.28);
+		\draw[dashed] (axis cs:18.4,77.28) -- (axis cs:18.4,115.5);
+		\draw[thick] (axis cs:24,0) -- node[left]{$k_c$} (axis cs:24,100.8);
+		\draw[dashed] (axis cs:24,100.8) -- (axis cs:24,115.5);
+		\draw[dashed] (axis cs:27.5,0) -- (axis cs:27.5,115.5);
+		\end{axis}
+		\end{tikzpicture}
+	}
+\end{figure*}
+
+\section{}
+\begin{align}
+U_{Str}&=\frac{U_N}{\sqrt{3}}=\frac{\SI{400}{\volt}}{\sqrt{3}}=\SI{230.9}{\volt}\\
+I_{Str}&=I_{sN}=\frac{S_N}{3U_{Str}}=\frac{\SI{80}{\kilo\volt}}{3\cdot\SI{230.9}{\volt}}=\SI{115.5}{\ampere}\\
+U_{Bez}&=U_{Str}=\SI{230.9}{\volt}\\
+I_{Bez}&=I_{Str}=\SI{115.5}{\ampere}\\
+Z_{Bez}&=\frac{U_{Bez}}{I_{Bez}}=\frac{\SI{230.9}{\volt}}{\SI{115.5}{\ampere}}=\SI{1.999}{\ohm}\\
+S_{Bez}&=3U_{Bez}I_{Bez}=S_N=\SI{80}{\kilo\volt}\\
+M_{Bez}&=\frac{S_N}{\Omega_N}=\frac{S_N p}{2\pi f_N}=\frac{\SI{80}{\kilo\volt}\cdot 2}{2\pi \SI{50}{\hertz}}=\SI{509.3}{\newton\metre}
+\end{align}
+
+\section{}
+aus Diagramm:
+\begin{align}
+k_c&=\frac{I_{fK}}{I_{sN}}=\frac{\num{101}}{\num{115.5}}=\num{0.8745}\\
+k_{c0}&=\frac{I_{fK}}{I_{sN}}=\frac{\num{77}}{\num{115.5}}=\num{0.6667}\\
+x_d&=\frac{1}{k_c}=\frac{1}{\num{0.8658}}=\num{1.144}\\
+x_{d0}&=\frac{1}{k_{c0}}=\frac{1}{\num{0.6667}}=\num{1.500}
+\end{align}
+
+\section{}
+aus Diagramm:
+\begin{align}
+I_{fL}&=\SI{24}{\ampere}\\
+I_{fK}&=\SI{27.5}{\ampere}
+\end{align}
+
+\section{}
+aus Diagramm:
+\begin{equation}
+x_p=\frac{\SI{474}{\volt}-\SI{400}{\volt}}{\SI{400}{\volt}}=\num{0.1850}
+\end{equation}
+
+\section{}
+\begin{align}
+I_{sN}''&=I_{fIV}-I_{fK}=\SI{60}{\ampere}-\SI{27.5}{\ampere}=\SI{32.5}{\ampere}\\
+\gamma&=\frac{I_{sN}''}{I_{sN}}=\frac{\SI{32.5}{\ampere}}{\SI{115.5}{\ampere}}=\num{0.2814}
+\end{align}
+
+\section{}
+\begin{figure*}[!hp]
+	\centering
+	\begin{circuitikz}
+		\begin{scope}[scale=0.8]
+			%\draw [help lines] (-1,-1) grid (7,4); %Zeichnet Raster und vereinfacht damit das Zeichnen
+			
+			%Schaltung
+			\draw (6,0) to [short,o-] (0,0)
+			to [european voltage source] (0,3)
+			to[inductor, l=$x_{dh}$] (3,3)
+			to[inductor, l=$x_p$, i<=$\i_s$,-o] (6,3);
+			
+			%Spannungspfeil
+			\draw (0.5,3) to [open, v^>=$\u_p$] (0.5,0);
+			\draw (3.5,3) to [open, v^>=$\u_i$] (3.5,0);
+			\draw (6.5,3) to [open, v^>=$\u_s$] (6.5,0);
+			
+			
+		\end{scope}
+	\end{circuitikz}
+\end{figure*}
+
+\section{}
+\begin{align}
+u_s&=1\quad i_s=1\quad\cos\mybr{\varphi_s}=\num{-0.88}\quad\text{Annahme Generatorbetrieb}\\
+\varphi_s&=-\arccos\mybr{\num{-0.88}}=\SI{-151.6}{\degree}\\
+\u_i&=\u_s-\j x_p\i_s\\
+r_S&=0\\
+\u_{s,uv}&=\j\\
+\i_{s,uv}&=1\e^{\j\mybr{-\varphi_s+\SI{90}{\degree}}}=\e^{\SI{151.6}{\degree}+\SI{90}{\degree}}=\e^{\j\SI{241.6}{\degree}}\\
+\u_{i,uv}&=\u_{s,uv}-\j x_p \i_{s,uv}=\j-\j\num{0.1850}\cdot\e^{\j\SI{241.6}{\degree}}=\num{1.100}\e^{\j\SI{98.51}{\degree}}\\
+U_i&=\vert\u_{i,uv}\vert U_N=\num{1.100}\cdot\SI{400}{\volt}=\SI{440}{\volt}\\
+I_m&=\SI{30.0}{\ampere}\quad\text{aus Diagramm}\\
+\I_{m,uv}&=\SI{30.0}{\ampere}\e^{\j\SI{8.51}{\degree}}\quad\text{$\SI{90}{\degree}$ auf $\u_{i,uv}$}\\
+\I_{sN,uv}''&=\SI{32.5}{\ampere}\e^{\j\SI{241.6}{\degree}}\quad\text{gleicher Winkel wie $\i_{s,uv}$}\\
+\I_{f,uv}&=\I_{m,uv}-\I_{sN,uv}''=\SI{30.0}{\ampere}\e^{\j\SI{8.51}{\degree}}-\SI{32.5}{\ampere}\e^{\j\SI{241.6}{\degree}}=\SI{55.92}{\ampere}\e^{\j\SI{36.20}{\degree}}\\
+&\text{$\mybr{0-\u_p-\u_i}$ und $\mybr{0-\I_f-\I_m}$ bilden ähnliche Dreiecke, daher gilt}\nonumber\\
+\frac{I_m}{I_f}&=\frac{u_i}{u_p}\\
+u_p&=\frac{u_i I_f}{I_m}=\frac{\num{1.100}\cdot\SI{55.92}{\ampere}}{\SI{30.0}{\ampere}}=\num{2.050}\\
+\arg\mybr{\u_{p,uv}}&=\arg\mybr{\I_{f,uv}}+\SI{90}{\degree}=\SI{36.20}{\degree}+\SI{90}{\degree}=\SI{126.2}{\degree}\\
+\u_{p,uv}&=\num{2.050}\e^{\j\SI{126.2}{\degree}}\\
+\vartheta&=\arg\mybr{\u_{s,uv}}-\arg\mybr{\u_{p,uv}}=\SI{90}{\degree}-\SI{126.2}{\degree}=\SI{-36.20}{\degree}
+\end{align}
+\begin{figure*}[!ht]
+	\centering
+	\begin{tikzpicture}[>=triangle 45,thick,node distance=0.5cm]
+	
+	\path (0,0) coordinate (origin1);
+	\path (1*8,0) coordinate (u);
+	\path (0,1*8) coordinate (v);
+	\path (36.20:8) coordinate (d);
+	\path (126.2:11) coordinate (q);
+	\path (0,1*5) coordinate (us);
+	\path (241.6:1*5) coordinate (is);
+	\path (98.51:1.100*5) coordinate (ui);
+	\path (8.51:30.0*0.1) coordinate (Im);
+	\path (36.20:55.92*0.1) coordinate (If);
+	\path (126.2:2.050*5) coordinate (up);
+	\path (126.2:2.5) coordinate (arc1);
+	\path (241.6:1) coordinate (arc2);
+	
+	
+	\draw [->] (origin1) -- (u);
+	\draw [->] (origin1) -- (v);
+	\draw [->] (origin1) -- (d);
+	\draw [->] (origin1) -- (q);
+	\draw [->] (origin1) -- node[below right]{$\u_s$} (us);
+	\draw [->] (origin1) -- node[above left]{$\i_s$} (is);
+	\draw [->] (origin1) -- node[above left]{$\u_i$} (ui);
+	\draw [->] (origin1) -- node[above left]{$\I_f$} (If);
+	\draw [->] (origin1) -- node[below left]{$\u_p$} (up);
+	\draw [->] (origin1) -- node[above]{$\I_m$} (Im);
+	
+	\draw [->] (up) -- node[above right]{$\j x_{dh} \i_s$} (ui);
+	\draw [->] (ui) -- (us) node[above right]{$\j x_p \i_s$};
+	\draw [->] (If) -- node[right]{$\I_{sN}''$} (Im) ;
+	
+	\draw [->] (arc1) arc (126.2:90:2.5) node[midway,below]{$\vartheta$};
+	\draw [->] (arc2) arc (241.6:90:1) node[midway,right]{$\varphi_s$};
+	
+	\node [below of =u] {$u$};
+	\node [right of =v] {$v$};
+	\node [below right of =d] {$d$};
+	\node [left of =q] {$q$};
+	
+	\end{tikzpicture}
+\end{figure*}
+
+\section{}
+\begin{align}
+i_s&=0\\
+I_f&=\mathrm{const.}=\SI{55.92}{\ampere}\\
+u_s&=u_i=u_p\\
+\text{aus Diagramm:}\nonumber\\
+U_{AL}&=\SI{543}{\volt}
+\end{align}
+Hinweis: Laut Herrn Hofer ist bei Bsp. 2.7 im Übungsskriptum die Lösung falsch.
+
+
+\clearpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \part{2015 APSM}
 \section{}
 \begin{align}
@@ -3755,7 +4066,7 @@ i_q\mybr{\tau}&=\frac{u_{S,q0}}{r_S}\mybr{1-\e^{-\frac{r_S}{l_q}\tau}}+i_{S,q0}\
 &=\frac{\num{-0.06428}}{\num{0.06}}\mybr{1-\e^{-\frac{\num{0.06}}{\num{0.95}}\tau}}+\num{0.6}\e^{-\frac{\num{0.06}}{\num{0.95}}\tau}\\
 &=\num{-1.071}\mybr{1-\e^{\num{-0.06316}\tau}}+\num{0.6}\e^{\num{-0.06316}\tau}\\
 i_q\mybr{\tau\rightarrow\infty}&=\frac{u_{S,q0}}{r_S}=\num{-1.071}\\
-m\mybr{\tau\rightarrow}&=\Psi_M i_q+\mybr{l_d-l_q}i_d i_q\\
+m\mybr{\tau\rightarrow\infty}&=\Psi_M i_q+\mybr{l_d-l_q}i_d i_q\\
 &=1\cdot\mybr{\num{-1.071}
 }+\mybr{\num{0.6}-\num{0.95}}\num{1.277}\cdot\mybr{-1.071}\\
 &=\num{-0.5923}
