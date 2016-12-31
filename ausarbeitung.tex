@@ -25,7 +25,7 @@
 \fancyhf{} %alle Kopf- und Fußzeilenfelder bereinigen
 \fancyhead[L]{Labor Elektrische Antriebe\\UE 370.042} %Kopfzeile links
 \fancyhead[C]{Lösungen zu Test Beispielen} %zentrierte Kopfzeile
-\fancyhead[R]{v1.6\\www.fet.at} %Kopfzeile rechts
+\fancyhead[R]{v1.7\\www.fet.at} %Kopfzeile rechts
 \renewcommand{\headrulewidth}{0.4pt} %obere Trennlinie
 \fancyfoot[C]{\thepage} %Seitennummer
 \renewcommand{\footrulewidth}{0.4pt} %untere Trennlinie
@@ -1796,21 +1796,25 @@ U_{di\alpha}&=U_{di0}\cos\mybr{\alpha}\\
 
 \section{}
 \subsection{}
+Um konsistente Gleichungen zu erhalten, wird ein Widerstand $R_A'$ berechnet, welcher die gesamte Verlustleistung aufnimmt
+\begin{equation}
+R_A'=\frac{\mybr{U_{A,N}I_{A,N}-P_N}}{I_{A,N}^2}=\frac{\mybr{\SI{400}{\volt}\cdot\SI{156}{\ampere}-\SI{55}{\kilo\watt}}}{\mybr{\SI{156}{\ampere}}^2}=\SI{0.3041}{\ohm}.
+\end{equation}
 Für Rechtslauf gilt
 \begin{equation}
-U_A=R_A I_{A,N}+k_1\phi n=\SI{0.2433}{\ohm}\cdot\SI{156}{\ampere}+\SI{14.10}{\volt\second}\frac{n}{\SI{60}{\second\per\minute}},
+U_A=R_A' I_{A,N}+k_1\phi n=\SI{0.3041}{\ohm}\cdot\SI{156}{\ampere}+\SI{14.10}{\volt\second}\frac{n}{\SI{60}{\second\per\minute}},
 \end{equation}
 bei Linkslauf dreht sich das Vorzeichen von $I_A$ um
 \begin{equation}
-U_A=R_A I_{A,N}+k_1\phi n=\SI{0.2433}{\ohm}\cdot\mybr{\SI{-156}{\ampere}}+\SI{14.10}{\volt\second}\frac{n}{\SI{60}{\second\per\minute}}.
+U_A=R_A' I_{A,N}+k_1\phi n=\SI{0.3041}{\ohm}\cdot\mybr{\SI{-156}{\ampere}}+\SI{14.10}{\volt\second}\frac{n}{\SI{60}{\second\per\minute}}.
 \end{equation}
 Die maximal zulässige Spannung ist $\num{1.2}\cdot\SI{400}{\volt}=\SI{480}{\volt}$.
 Die Drehzahlen ab denen der Feldschwächbetrieb verwendet werden muss berechnen sich zu
 \begin{align}
-n_{Feldschw\ddot{a}ch,1}&=\frac{U_{A,max}-R_A I_{A,N}}{k_1\phi}=\frac{\num{1.2}\cdot\SI{400}{\volt}-\SI{0.2433}{\ohm}\cdot\SI{156}{\ampere}}{\SI{14.10}{\volt\second}}\SI{60}{\second\per\minute}\\
-&=\SI{1881}{\rounds\per\minute}\\
-n_{Feldschw\ddot{a}ch,2}&=\frac{-U_{A,max}-R_A I_{A,N}}{k_1\phi}=\frac{\num{1.2}\cdot\mybr{\SI{-400}{\volt}}-\SI{0.2433}{\ohm}\cdot\mybr{\SI{-156}{\ampere}}}{\SI{14.10}{\volt\second}}\SI{60}{\second\per\minute}\\
-&=\SI{-1881}{\rounds\per\minute}.
+n_{Feldschw\ddot{a}ch,1}&=\frac{U_{A,max}-R_A I_{A,N}}{k_1\phi}=\frac{\num{1.2}\cdot\SI{400}{\volt}-\SI{0.3041}{\ohm}\cdot\SI{156}{\ampere}}{\SI{14.10}{\volt\second}}\SI{60}{\second\per\minute}\\
+&=\SI{1841}{\rounds\per\minute}\\
+n_{Feldschw\ddot{a}ch,2}&=\frac{-U_{A,max}-R_A I_{A,N}}{k_1\phi}=\frac{\num{1.2}\cdot\mybr{\SI{-400}{\volt}}-\SI{0.3041}{\ohm}\cdot\mybr{\SI{-156}{\ampere}}}{\SI{14.10}{\volt\second}}\SI{60}{\second\per\minute}\\
+&=\SI{-1841}{\rounds\per\minute}.
 \end{align}
 \begin{figure*}[!h]
 \centering
@@ -1823,10 +1827,10 @@ n_{Feldschw\ddot{a}ch,2}&=\frac{-U_{A,max}-R_A I_{A,N}}{k_1\phi}=\frac{\num{1.2}
 		xmin=-3000,
 		ymax=500,
 		xmax=3000]
-	\addplot[domain=-3000:-1881.043, blue] {-1.2*400};
-	\addplot[domain=-1881.043:0, blue] {-0.2433*156+14.10/60*x};
-	\addplot[domain=0:1881.043, blue] {0.2433*156+14.10/60*x};
-	\addplot[domain=1881.043:3000, blue] {1.2*400};
+	\addplot[domain=-3000:-1840.683, blue] {-1.2*400};
+	\addplot[domain=-1840.683:0, blue] {-0.3041*156+14.10/60*x};
+	\addplot[domain=0:1840.683, blue] {0.3041*156+14.10/60*x};
+	\addplot[domain=1840.683:3000, blue] {1.2*400};
     \end{axis}
 \end{tikzpicture}
 \end{figure*}
@@ -1843,12 +1847,12 @@ M_{i,N}=\frac{k_1\phi}{2\pi}I_{A,N}=\frac{\SI{14.10}{\volt\second}}{2\pi}\mybr{\
 Im Feldschwächbetrieb gilt
 \begin{align}
 M_i&=M_{i,N}\frac{n_{Felschw\ddot{a}ch,1}}{n}\\
-&=\SI{350.1}{\newton\metre}\frac{\SI{1881}{\rounds\per\minute}}{n}.
+&=\SI{350.1}{\newton\metre}\frac{\SI{1841}{\rounds\per\minute}}{n}.
 \end{align}
 Bei Linkslauf dreht sich das Vorzeichen von $I_A$ um
 \begin{align}
 M_i&=M_{i,N}\frac{n_{Felschw\ddot{a}ch,2}}{n}\\
-&=\SI{-350.1}{\newton\metre}\frac{\SI{-1881}{\rounds\per\minute}}{n}.
+&=\SI{-350.1}{\newton\metre}\frac{\SI{-1841}{\rounds\per\minute}}{n}.
 \end{align}
 \begin{figure*}[!ht]
 \centering
@@ -1861,10 +1865,10 @@ M_i&=M_{i,N}\frac{n_{Felschw\ddot{a}ch,2}}{n}\\
 		xmin=-3000,
 		ymax=400,
 		xmax=3000]
-	\addplot[domain=-3000:-1881.043, blue] {350.1*1881/x};
-	\addplot[domain=-1881.043:0, blue] {-350.1};
-	\addplot[domain=0:1881.043, blue] {350.1};
-	\addplot[domain=1881.043:3000, blue] {350.1*1881/x};
+	\addplot[domain=-3000:-1840.683, blue] {350.1*1841/x};
+	\addplot[domain=-1840.683:0, blue] {-350.1};
+	\addplot[domain=0:1840.683, blue] {350.1};
+	\addplot[domain=1840.683:3000, blue] {350.1*1841/x};
     \end{axis}
 \end{tikzpicture}
 \end{figure*}
@@ -1881,7 +1885,7 @@ P=M_i\omega=M_i 2\pi n=\SI{-350.1}{\newton\metre}\cdot 2\pi \frac{n}{\SI{60}{\se
 Im Feldschwächbereich gilt
 \begin{align}
 P&=M_i\omega=M_i 2\pi n=M_{i,N}\frac{n_{Felschw\ddot{a}ch,1}}{n}2\pi n\\
-&=\SI{350.1}{\newton\metre}\frac{\SI{1881}{\rounds\per\minute}}{\SI{60}{\second\per\minute}}2\pi=\SI{68.96}{\kilo\watt}
+&=\SI{350.1}{\newton\metre}\frac{\SI{1841}{\rounds\per\minute}}{\SI{60}{\second\per\minute}}2\pi=\SI{67.50}{\kilo\watt}
 \end{align}
 \begin{figure*}[!ht]
 \centering
@@ -1894,10 +1898,10 @@ P&=M_i\omega=M_i 2\pi n=M_{i,N}\frac{n_{Felschw\ddot{a}ch,1}}{n}2\pi n\\
 		xmin=-3000,
 		ymax=80000,
 		xmax=3000]
-	\addplot[domain=-3000:-1881.043, blue] {68960};
-	\addplot[domain=-1881.043:0, blue] {-350.1*2*pi*x/60};
-	\addplot[domain=0:1881.043, blue] {350.1*2*pi*x/60};
-	\addplot[domain=1881.043:3000, blue] {68960};
+	\addplot[domain=-3000:-1840.683, blue] {67500};
+	\addplot[domain=-1840.683:0, blue] {-350.1*2*pi*x/60};
+	\addplot[domain=0:1840.683, blue] {350.1*2*pi*x/60};
+	\addplot[domain=1840.683:3000, blue] {67500};
     \end{axis}
 \end{tikzpicture}
 \end{figure*}
@@ -1907,16 +1911,15 @@ P&=M_i\omega=M_i 2\pi n=M_{i,N}\frac{n_{Felschw\ddot{a}ch,1}}{n}2\pi n\\
 U_{di\alpha}&=U_{di0}\cos\mybr{\alpha}\\
 \alpha&=\arccos\mybr{\frac{U_{di\alpha}}{U_{di0}}}=\arccos\mybr{\frac{U_A\mybr{n}}{\frac{3}{\pi}\sqrt{2}U_{v,eff}}}=\arccos\mybr{\frac{U_A\mybr{n}}{\frac{3}{\pi}\sqrt{2}\cdot\SI{400}{\volt}}}
 \end{align}
-Bei Rechtslauf ist die linke Brücke aktiv
-\begin{align}
-\alpha_1&=\arccos\mybr{\frac{R_A I_{A,N}+k_1\phi n}{\frac{3}{\pi}\sqrt{2}U_{v,eff}}}=\arccos\mybr{\frac{\SI{0.2433}{\ohm}\cdot\SI{156}{\ampere}+\SI{14.10}{\volt\second}\frac{n}{\SI{60}{\second\per\minute}}}{\frac{3}{\pi}\sqrt{2}\cdot\SI{400}{\volt}}}\\
-\alpha_2&=\SI{90}{\degree},
-\end{align}
-bei Linkslauf ist die rechte Brücke aktiv
-\begin{align}
-\alpha_1&=\SI{90}{\degree}\\
-\alpha_2&=\arccos\mybr{\frac{R_A I_{A,N}+k_1\phi n}{\frac{3}{\pi}\sqrt{2}U_{v,eff}}}=\arccos\mybr{\frac{\SI{0.2433}{\ohm}\cdot\mybr{\SI{-156}{\ampere}}+\SI{14.10}{\volt\second}\frac{n}{\SI{60}{\second\per\minute}}}{\frac{3}{\pi}\sqrt{2}\cdot\mybr{\SI{-400}{\volt}}}}.
-\end{align}
+Bei Rechtslauf ist die linke Brücke aktiv, die rechte wird nicht angesteuert
+\begin{equation}
+\alpha_1=\arccos\mybr{\frac{R_A' I_{A,N}+k_1\phi n}{\frac{3}{\pi}\sqrt{2}U_{v,eff}}}=\arccos\mybr{\frac{\SI{0.3041}{\ohm}\cdot\SI{156}{\ampere}+\SI{14.10}{\volt\second}\frac{n}{\SI{60}{\second\per\minute}}}{\frac{3}{\pi}\sqrt{2}\cdot\SI{400}{\volt}}},
+\end{equation}
+bei Linkslauf ist die rechte Brücke aktiv, die linke wird nicht angesteuert
+\begin{equation}
+\alpha_2=\arccos\mybr{\frac{R_A' I_{A,N}+k_1\phi n}{\frac{3}{\pi}\sqrt{2}U_{v,eff}}}=\arccos\mybr{\frac{\SI{0.3041}{\ohm}\cdot\mybr{\SI{-156}{\ampere}}+\SI{14.10}{\volt\second}\frac{n}{\SI{60}{\second\per\minute}}}{\frac{3}{\pi}\sqrt{2}\cdot\mybr{\SI{-400}{\volt}}}}.
+\end{equation}
+Würden beide Brücken gleichzeitig angesteuert werden, würde es zu einem Kurzschluss kommen.
 \begin{figure*}[!ht]
 \centering
 \begin{tikzpicture}
@@ -1926,19 +1929,17 @@ bei Linkslauf ist die rechte Brücke aktiv
 		grid,
 		ymin=0,
 		xmin=-3000,
-		ymax=180,
+		ymax=90,
 		xmax=3000,
 		legend to name=alpha-legende,
 		name=alphaplot]
-	\addplot[domain=-3000:0, blue] {90};
-	\addlegendentry{$\alpha_1$}
-	\addplot[domain=-3000:-1881.043, red] {acos(-1.2*400/(3/pi*sqrt(2)*(-400))};
-	\addlegendentry{$\alpha_2$}
 	
-	\addplot[domain=0:1881.043, blue] {acos((0.2433*156+14.10/60*x)/(3/pi*sqrt(2)*400)};
-	\addplot[domain=1881.043:3000, blue] {acos(1.2*400/(3/pi*sqrt(2)*400)};
-	\addplot[domain=-1881.043:0, red] {acos((-0.2433*156+14.10/60*x)/(3/pi*sqrt(2)*(-400))};
-	\addplot[domain=0:3000, red] {90};
+	\addplot[domain=0:1840.683, blue] {acos((0.3041*156+14.10/60*x)/(3/pi*sqrt(2)*400)};
+	\addlegendentry{$\alpha_1$}
+	\addplot[domain=-3000:-1840.683, red] {acos(-1.2*400/(3/pi*sqrt(2)*(-400))};
+	\addlegendentry{$\alpha_2$}
+	\addplot[domain=1840.683:3000, blue] {acos(1.2*400/(3/pi*sqrt(2)*400)};
+	\addplot[domain=-1840.683:0, red] {acos((-0.3041*156+14.10/60*x)/(3/pi*sqrt(2)*(-400))};
 
     \end{axis}
 	\node at (alphaplot.east) [anchor=south, xshift=-1.50cm, yshift=1.5cm]
@@ -1947,7 +1948,7 @@ bei Linkslauf ist die rechte Brücke aktiv
 \end{figure*}
 
 \subsection{}
-Außerhalb des Intervalls $\mybr{\SI{-1881}{\rounds\per\minute},\SI{1881}{\rounds\per\minute}}$ ist ein Feldschwächbetrieb erforderlich.
+Außerhalb des Intervalls $\mybr{\SI{-1841}{\rounds\per\minute},\SI{1841}{\rounds\per\minute}}$ ist ein Feldschwächbetrieb erforderlich.
 
 \clearpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -2027,7 +2028,7 @@ M&=\frac{k_1\phi\mybr{I_A}}{2\pi}I_A=\frac{k_1\phi_N\sqrt{\frac{I_A}{I_{A,N}}}}{
 \begin{align}
 M_N&=\frac{k_1\phi_N}{2\pi}I_{A,N}=\frac{\SI{16}{\volt\second}}{2\pi}\SI{45}{\ampere}=\SI{768.3}{\newton\metre}\\
 \num{1.5}M_N&=\frac{k_1\phi_N\frac{I_A^{\frac{3}{2}}}{\sqrt{I_{A,N}}}}{2\pi}\\
-I_A&=\sqrt[\frac{3}{2}]{\frac{2\pi\num{1.5}M_N}{k_1\phi_N}\sqrt{I_{A,N}}}=\sqrt[\frac{3}{2}]{\frac{2\pi\num{1.5}\cdot\SI{114.6}{\newton\metre}}{\SI{16}{\volt\second}}\sqrt{\SI{45}{\ampere}}}=\SI{58.97}{\ampere}\\
+I_A&=\sqrt[\frac{3}{2}]{\frac{2\pi\num{1.5}M_N}{k_1\phi_N}\sqrt{I_{A,N}}}=\sqrt[\frac{3}{2}]{\frac{2\pi\num{1.5}\cdot\SI{768.3}{\newton\metre}}{\SI{16}{\volt\second}}\sqrt{\SI{45}{\ampere}}}=\SI{58.97}{\ampere}\\
 R_{Ges}&=\frac{U_{Netz}}{I_A}=\frac{U_{A,N}}{I_A}=\frac{\SI{400}{\volt}}{\SI{58.97}{\ampere}}=\SI{6.783}{\ohm}\\
 R_V&=R_{Ges}-R_A=\SI{6.783}{\ohm}-\SI{2.5}{\ohm}=\SI{4.283}{\ohm}
 \end{align}
