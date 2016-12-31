@@ -1,0 +1,1483 @@
+\documentclass[11pt,a4paper]{scrartcl}
+\usepackage{a4wide}
+\usepackage{fancyhdr}
+\usepackage[naustrian]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{enumerate}%Aufzählungen
+\usepackage{amsmath}%Formeln
+\usepackage[locale=DE]{siunitx}%Einheiten
+\usepackage{eurosym}%Eurosymbol
+\usepackage{tikz}%Zeichnungen
+\usepackage{pgfplots}%Funktionen plotten
+\usepackage[european]{circuitikz}%Schaltungen
+\usetikzlibrary{decorations.pathreplacing,arrows}
+\usepackage{tabularx}%Tabellen
+\usepackage{trfsigns}%Korrespondezsymbole
+\usepackage{ulem}%Unterstreichen von Text
+\allowdisplaybreaks%Seitenumbruch in align Umgebung erlauben
+\usepackage{titlesec}%neue Überschriften definieren
+\usepackage{subcaption}%mehrere Grafiken nebeneinander darstellen
+
+
+\pagestyle{fancy} %eigener Seitenstil
+\fancyhf{} %alle Kopf- und Fußzeilenfelder bereinigen
+\fancyhead[L]{Labor Elektrische Antriebe\\UE 370.042} %Kopfzeile links
+\fancyhead[C]{Lösungen zu Test Beispielen} %zentrierte Kopfzeile
+\fancyhead[R]{v1.0\\www.fet.at} %Kopfzeile rechts
+\renewcommand{\headrulewidth}{0.4pt} %obere Trennlinie
+\fancyfoot[C]{\thepage} %Seitennummer
+\renewcommand{\footrulewidth}{0.4pt} %untere Trennlinie
+
+\sisetup{
+  per-mode = fraction,
+}
+
+\newcommand{\mybr}[1]{\left(#1\right)}
+\newcommand{\ugamma}{\underline{\gamma}}
+\renewcommand{\j}{\mathrm{j}}
+\newcommand{\Z}{\underline{Z}}
+\newcommand{\z}{\underline{z}}
+\newcommand{\y}{\underline{y}}
+\renewcommand{\S}{\underline{S}}
+\renewcommand{\u}{\underline{u}}
+\newcommand{\U}{\underline{U}}
+\newcommand{\I}{\underline{I}}
+\renewcommand{\i}{\underline{i}}
+\newcommand{\E}{\underline{E}}
+\newcommand{\PPsi}{\underline{\Psi}}
+\newcommand{\0}{_{\mybr{0}}}
+\newcommand{\1}{_{\mybr{1}}}
+\newcommand{\2}{_{\mybr{2}}}
+\newcommand{\UPS}{U_{1,Str}}
+\newcommand{\USS}{U_{2,Str}}
+\newcommand{\UPA}{U_{1,AL}}
+\newcommand{\USA}{U_{2,AL}}
+\newcommand{\IPS}{I_{1,Str}}
+\newcommand{\ISS}{I_{2,Str}}
+\newcommand{\IPA}{I_{1,AL}}
+\newcommand{\ISA}{I_{2,AL}}
+\newcommand{\UPNS}{U_{1,N,Str}}
+\newcommand{\USNS}{U_{2,N,Str}}
+\newcommand{\UPNA}{U_{1,N,AL}}
+\newcommand{\USNA}{U_{2,N,AL}}
+\newcommand{\IPNS}{I_{1,N,Str}}
+\newcommand{\ISNS}{I_{2,N,Str}}
+\newcommand{\IPNA}{I_{1,N,AL}}
+\newcommand{\ISNA}{I_{2,N,AL}}
+\newcommand{\ce}{\cos\mybr{\varphi_1}}
+\newcommand{\se}{\sin\mybr{\varphi_1}}
+\newcommand{\cz}{\cos\mybr{\varphi_2}}
+\newcommand{\sz}{\sin\mybr{\varphi_2}}
+\renewcommand{\a}{\underline{a}}
+\renewcommand{\e}{\mathrm{e}}
+\renewcommand{\d}{\mathrm{d}}
+\renewcommand{\Re}{\mathrm{Re}}
+\renewcommand{\Im}{\mathrm{Im}}
+
+%Überschrift ohne Numerierung
+\makeatletter
+\@addtoreset{section}{part}
+\makeatother
+\titleformat{\part}[display]
+{\normalfont\LARGE\bfseries\centering}{}{0pt}{}
+
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\part{2007 Trafo}
+\section{und 2}
+\begin{figure*}[!h]
+\begin{subfigure}{.5\textwidth}
+\centering
+\begin{tikzpicture}[>=triangle 45,thick,node distance=0.5cm]
+
+\path (0,0) coordinate (origin1);
+\path (90:3cm) coordinate (1U);
+\path (2*120+90:3cm) coordinate (1V);
+\path (1*120+90:3cm) coordinate (1W);
+\path (0,-6cm) coordinate (origin2);
+\path (origin2) ++(90+30:3cm) coordinate (2U);
+\path (origin2) ++(90+30+2*120:3cm) coordinate (2V);
+\path (origin2) ++(90+30+1*120:3cm) coordinate (2W);
+\path (1.5cm,-0.3cm) coordinate (U1V1N);
+\path (origin2) ++(1.2cm,1.8cm) coordinate (U2U2V);
+
+\path (240:3cm) coordinate (Usek);
+\path (240:1cm) coordinate (arc1);
+\path (240:2.5cm) coordinate (arc2);
+\path (90:1.3cm) coordinate (arc3);
+\path (-0.3cm, 1.3cm) coordinate (arc3help);
+
+\draw [->] (origin1) -- (1U);
+\draw [->] (origin1) -- (1V);
+\draw [->] (origin1) -- (1W);
+
+\draw [->] (origin2) -- (2U);
+\draw [->] (origin2) -- (2V);
+\draw [->] (origin2) -- (2W);
+
+\draw [->] (2V) -- (2U);
+\draw [->] (2U) -- (2W);
+\draw [->] (2W) -- (2V);
+
+\node [above of =1U] {1U};
+\node [below right of =1V] {1V};
+\node [below left of =1W] {1W};
+\node [above of =2U] {2U};
+\node [right of =2V] {2V};
+\node [below left of =2W] {2W};
+\node [right of =U1V1N] {$U_{1V1N}=U_b$};
+\node [right of =U2U2V] {$U_{2U2V}=-U_e$};
+
+\end{tikzpicture}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+\centering
+\begin{circuitikz}
+
+%\draw [help lines] (-1,-1) grid (12,17); %Zeichnet Raster und vereinfacht damit das Zeichnen
+	
+	%U
+	\draw (0,0) node[above=5mm] {$1U$}
+	to[american inductor, o-] (0,-3);
+	\draw (0,-0.7) node[right=1.5mm] {$\bullet$};
+
+	\draw (0,-5) node[above=5mm] {$2U$}
+	to[american inductor, o-] (0,-9);
+	\draw (0,-6.2) node[right=1.5mm] {$\bullet$};
+
+	%V
+	\draw (2,0) node[above=5mm] {$1V$}
+	to[american inductor, o-] (2,-3);
+	\draw (2,-0.7) node[right=1.5mm] {$\bullet$};
+
+	\draw (2,-5) node[above=5mm] {$2V$}
+	to[american inductor, o-] (2,-9);
+	\draw (2,-6.2) node[right=1.5mm] {$\bullet$};
+	
+	%V
+	\draw (4,0) node[above=5mm] {$1W$}
+	to[american inductor, o-] (4,-3);
+	\draw (4,-0.7) node[right=1.5mm] {$\bullet$};
+
+	\draw (4,-5) node[above=5mm] {$2W$}
+	to[american inductor, o-] (4,-9);
+	\draw (4,-6.2) node[right=1.5mm] {$\bullet$};
+	
+	%Verbindung
+	\draw (0,-3) to[short,-*] (2,-3)
+	-- (4,-3);
+	\draw (0,-5.5) to[short,*-] (1,-5.5)
+	-- (1,-9)
+	-- (2,-9);
+	\draw (2,-5.5) to[short,*-] (3,-5.5)
+	-- (3,-9)
+	-- (4,-9);
+	\draw (4,-5.5) to[short,*-] (5,-5.5)
+	-- (5,-10)
+	-- (0,-10)
+	-- (0,-9);
+
+	%Spannungspfeile
+	\draw (-0.2,0) to [open, v>=$U_a$] (-0.2,-3);
+	\draw (1.8,0) to [open, v>=$U_b$] (1.8,-3);
+	\draw (3.8,0) to [open, v>=$U_c$] (3.8,-3);
+
+	\draw (-0.2,-5.5) to [open, v>=$U_d$] (-0.2,-8.5);
+	\draw (1.8,-5.5) to [open, v>=$U_e$] (1.8,-8.5);
+	\draw (3.8,-5.5) to [open, v>=$U_f$] (3.8,-8.5);
+	
+\end{circuitikz}
+\end{subfigure}%
+\end{figure*}
+
+\stepcounter{section}
+\section{}
+\begin{equation}
+\frac{N_1}{N_2}=\frac{\UPNS}{\USNS}=\frac{\frac{\SI{24}{\kilo\volt}}{\sqrt{3}}}{\SI{10.5}{\kilo\volt}}=\num{1.3197}
+\end{equation}
+
+\section{}
+\begin{align}
+\IPNS&=\frac{S_N}{3\UPNS}=\frac{\SI{35}{\mega\volt\ampere}}{3\frac{\SI{24}{\kilo\volt}}{\sqrt{3}}}=\SI{842.0}{\ampere}\\
+\IPNA&=\IPNS=\SI{842.0}{\ampere}\\
+\ISNS&=\frac{S_N}{3\USNS}=\frac{\SI{35}{\mega\volt\ampere}}{3\cdot\SI{10.5}{\kilo\volt}}=\SI{1111}{\ampere}\\
+\ISNA&=\sqrt{3}\ISNS=\sqrt{3}\cdot\SI{1111}{\ampere}=\SI{1924}{\ampere}
+\end{align}
+
+\section{}
+\subsection{}
+\begin{equation}
+u_1=\num{0.95}\quad i=\num{0.85}\quad \cos\mybr{\varphi_2}=0.9
+\end{equation}
+\begin{equation}
+\sin\mybr{\varphi_2}=-\sqrt{1-\cz^2}=-\sqrt{1-\num{0.9}^2}=\num{-0.4359}
+\end{equation}
+\begin{align}
+u_1\ce&=u_2\cz+u_R i\\
+u_1\se&=u_2\sz+u_X i\\
+u_1^2&=\mybr{u_1\ce}^2+\mybr{u_1\se}^2\\
+&=\mybr{u_2\cz+u_R i}^2+\mybr{u_2\sz+u_X i}^2\\
+&=u_R^2i^2+u_X^2i^2+u_2^2+2u_R i u_2 \cz+2u_X i u_2\sz
+\end{align}
+\begin{align}
+u_2^2+u_2\mybr{2u_R i \cz+2u_X i \sz}+u_R^2 i^2 + u_X^2 i^2 - u_1^2 &= 0\\
+u_2^2+u_2\mybr{2\cdot\num{0.013}\cdot\num{0.85}\cdot\num{0.9}+2\cdot\num{0.084}\cdot\num{0.85}\cdot\mybr{\num{-0.4359}}}+\num{0.013}^2\cdot\num{0.85}^2&+\\
+\num{0.084}^2\cdot\num{0.85}^2-\num{0.95}^2 &=0\\
+u_2^2-\num{0.04236}u_2-\num{0.8973}&=0
+\end{align}
+\begin{align}
+u_2&=\frac{\num{0.04236}\pm\sqrt{\num{0.04236}^2-4\cdot1\cdot\mybr{\num{-0.8973}}}}{2\cdot1}\\
+u_{2,1}&=\num{0.9687}\\
+u_{2,2}&=\num{-0.9263}
+\end{align}
+$u_2$ ist ein Betrag und kann somit nicht negativ sein, daher ist die Lösung $u_{2,1}$ richtig.
+\begin{align}
+\USS&=u_2\USNS=\num{0.9687}\cdot\SI{10.5}{\kilo\volt}=\SI{10.17}{\kilo\volt}\\
+\USA&=u_2\USNA=\num{0.9687}\cdot\SI{10.5}{\kilo\volt}=\SI{10.17}{\kilo\volt}
+\end{align}
+
+\subsection{}
+\begin{align}
+\ISS&=i\ISNS=\num{0.85}\cdot\SI{1111}{\ampere}=\SI{944.4}{\ampere}\\
+\ISA&=i\ISNA=\num{0.85}\cdot\SI{1924}{\ampere}=\SI{1635}{\ampere}\\
+\end{align}
+
+\subsection{}
+\begin{equation}
+P_2=S_N u_2 i \cz=\SI{35}{\mega\volt\ampere}\cdot\num{0.9687}\cdot\num{0.85}\cdot\num{0.9}=\SI{25.94}{\mega\watt}
+\end{equation}
+
+\subsection{}
+\begin{equation}
+Q_2=S_N u_2 i \sz=\SI{35}{\mega\volt\ampere}\cdot\num{0.9071}\cdot\num{0.85}\cdot\num{0.4359}=\SI{11.76}{\mega\volt\ampere}
+\end{equation}
+
+\clearpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\part{2008 Trafo}
+\section{}
+\begin{equation}
+\frac{N_1}{N_2}=\frac{\UPNS}{\USNS}=\frac{\frac{\SI{132}{\kilo\volt}}{\sqrt{3}}}{\frac{\SI{15}{\kilo\volt}}{\sqrt{3}}}=\num{8.8}
+\end{equation}
+
+\section{}
+\begin{align}
+\IPNS&=\frac{S_N}{3\UPNS}=\frac{\SI{80}{\mega\volt\ampere}}{3\cdot\frac{\SI{132}{\kilo\volt}}{\sqrt{3}}}=\SI{349.9}{\ampere}\\
+\IPNA&=\IPNS=\SI{349.9}{\ampere}\\
+\ISNS&=\frac{S_N}{3\USNS}=\frac{\SI{80}{\mega\volt\ampere}}{3\cdot\frac{\SI{15}{\kilo\volt}}{\sqrt{3}}}=\SI{3079}{\ampere}\\
+\ISNA&=\ISNS=\SI{3079}{\ampere}
+\end{align}
+
+\section{}
+\subsection{}
+\begin{equation}
+u_1=1\quad i=1\quad u_2=1
+\end{equation}
+\begin{align}
+u_1\ce&=u_2\cz+u_R i\\
+u_1\se&=u_2\sz+u_X i\\
+u_1^2&=\mybr{u_1\ce}^2+\mybr{u_1\se}^2\\
+&=\mybr{u_2\cz+u_R i}^2+\mybr{u_2\sz+u_X i}^2\\
+&=u_R^2i^2+u_X^2i^2+u_2^2+2u_R i u_2 \cz+2u_X i u_2\sz\\
+1&=u_X^2+u_2^2+2u_X\sz\\
+0&=2\sz u_X+u_X^2\\
+\sz&=-\frac{u_X}{2}=-\frac{\num{0.09}}{2}=\num{-0.045}\\
+\cz&=\sqrt{1-\sz^2}=\sqrt{1-\num{0.045}^2}=\num{0.9990}
+\end{align}
+\begin{align}
+\z_L&=\frac{u_2}{i}\e^{\j\varphi_2}=\cz+\j\sz=\num{0.9990}-\j\num{0.045}\\
+\Z_L&=\z_L\frac{3\USNA^2}{S_N}=\mybr{\num{0.9990}-\j\num{0.045}}\frac{3\cdot\mybr{\SI{15}{\kilo\volt}}^2}{\SI{80}{\mega\volt\ampere}}=\SI{8.429}{\ohm}+\j\SI{0.3797}{\ohm}=R'+\j X'
+\end{align}
+Hinweis: Verwendet man $\frac{3U_S^2}{S_N}$ als Normierung für die der Lastimpedanzen, mit der an einem Strang der Lastimpedanz $\Z_L$ anliegenden Spannung $U_S$, erhält man immer die korrekte bezogene Impedanz bzw. wie hier, im umgekehrten Fall, die Impedanz eines Stranges der Last. In diesem Beispiel ist die Strangspannung an der Last gleich der Außenleiterspannung der sekundärseitigen Sternschaltung des Trafos.
+\begin{align}
+\frac{R\cdot\frac{1}{\j\omega C}}{R+\frac{1}{\j\omega C}}&=\frac{R}{1+\j\omega R C}=R'+\j X'\\
+R&=\mybr{R'+\j\omega C'}\mybr{1+\j\omega R C}\\
+\text{Realteil:}\\
+R&=R'-X'\omega R C\\
+\text{Imaginärteil:}\\
+0&=X'+R'\omega R C\\
+\omega R C &= -\frac{X'}{R'}\\
+R &= R' + \frac{X'^2}{R'}=\SI{8.429}{\ohm} + \frac{\mybr{\SI{0.3797}{\ohm}}^2}{\SI{8.429}{\ohm}}=\SI{8.446}{\ohm}\\
+C &= -\frac{X'}{R'\omega R}=\frac{\SI{0.3797}{\ohm}}{\SI{8.429}{\ohm}\cdot2\pi\SI{60}{\hertz}\cdot\SI{8.446}{\ohm}}=\SI{14.15}{\micro\farad}
+\end{align}
+
+\subsection{}
+\begin{equation}
+P_2=S_N u_2 i \cz=\SI{80}{\mega\volt\ampere}\cdot\num{1}\cdot\num{1}\cdot\num{0.9990}=\SI{79.92}{\mega\watt}
+\end{equation}
+
+\section{}
+\begin{align}
+I_{2K}&=\frac{\ISNA}{\left| u_R+\j u_X +\j x_{Netz}\right|}=\frac{\ISNA}{\left| u_R+\j u_X +\j X_{Netz}\frac{S_N}{3U_S^2}\right|}\\
+&=\frac{\SI{3079}{\ampere}}{\left| \num{0}+\j\num{0.09}+\j\SI{4.598}{\ohm}\frac{\SI{80}{\mega\volt\ampere}}{3\cdot\mybr{\frac{\SI{132}{\kilo\volt}}{\sqrt{3}}}^2}\right|}=\SI{27.71}{\kilo\ampere}
+\end{align}
+
+\section{}
+gleiche magnetische Beanspruchung:
+\begin{equation}
+\hat\Phi=\text{const.}
+\end{equation}
+aus
+\begin{equation}
+U=\frac{1}{\sqrt{2}}N\omega\hat\Phi
+\end{equation}
+folgt
+\begin{align}
+U_{1N,E}&=\frac{f_{N,E}}{f_{N}}U_{1N}=\frac{\SI{50}{\hertz}}{\SI{60}{\hertz}}\SI{132}{\kilo\volt}=\SI{110}{\kilo\volt}\\
+U_{2N,E}&=\frac{f_{N,E}}{f_{N}}U_{2N}=\frac{\SI{50}{\hertz}}{\SI{60}{\hertz}}\SI{15}{\kilo\volt}=\SI{12.5}{\kilo\volt}
+\end{align}
+gleiche thermische Beanspruchung:
+\begin{equation}
+R_k I^2 = \text{const.}
+\end{equation}
+da sich R mit der Frequenz nicht ändert bleibt der Strom gleich
+\begin{align}
+I_{1N,E}&=I_{1N}=\SI{349.9}{\ampere}\\
+I_{2N,E}&=I_{2N}=\SI{3079}{\ampere}
+\end{align}
+\begin{equation}
+S_N=3U_{1N,E,Str}I_{1N,E}=3\cdot\frac{\SI{110}{\kilo\volt}}{\sqrt{3}}\cdot\SI{349.9}{\ampere}=\SI{66.66}{\mega\volt\ampere}
+\end{equation}
+
+\section{}
+\begin{align}
+u_{R,E}&=R_k\frac{S_{N,E}}{3U_{1N,E,Str}^2}=u_R\frac{3\UPNS^2}{S_N}\frac{S_{N,E}}{3U_{1N,E,Str}^2}=u_R\frac{\frac{5}{6}}{\mybr{\frac{5}{6}}^2}=\num{0.0}\cdot\frac{6}{5}=\num{0.0}\\
+u_{X,E}&=L_k\frac{S_{N,E}\omega_{N,E}}{3U_{1N,E,Str}^2}=u_X\frac{3\UPNS^2}{S_N\omega_N}\frac{S_{N,E}\omega_{N,E}}{3U_{1N,E,Str}^2}=\\
+&=u_X\frac{\mybr{\frac{5}{6}}^2}{\mybr{\frac{5}{6}}^2}=u_X=\num{0.09}\\
+u_{K,E}&=\sqrt{u_{R,E}^2+u_{X,E}^2}=0.09
+\end{align}
+
+\clearpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\part{2009 Trafo}
+\section{}
+\begin{figure*}[!h]
+\begin{subfigure}{.55\textwidth}
+\centering
+\begin{tikzpicture}[>=triangle 45,thick,node distance=0.5cm]
+
+\path (0,0) coordinate (origin1);
+\path (90:3cm) coordinate (1U);
+\path (2*120+90:3cm) coordinate (1V);
+\path (1*120+90:3cm) coordinate (1W);
+\path (0,-6cm) coordinate (origin2);
+\path (origin2) ++(90+150:3cm) coordinate (2U);
+\path (origin2) ++(90+150+2*120:3cm) coordinate (2V);
+\path (origin2) ++(90+150+1*120:3cm) coordinate (2W);
+\path (0.7cm,1.7cm) coordinate (U1U1N);
+\path (origin2) ++(-2.5cm,0cm) coordinate (U2U2V);
+
+\path (240:3cm) coordinate (Usek);
+\path (240:1cm) coordinate (arc1);
+\path (240:2.5cm) coordinate (arc2);
+\path (90:1.3cm) coordinate (arc3);
+\path (-0.3cm, 1.3cm) coordinate (arc3help);
+
+\draw [->] (origin1) -- (1U);
+\draw [->] (origin1) -- (1V);
+\draw [->] (origin1) -- (1W);
+
+\draw [->] (origin2) -- (2U);
+\draw [->] (origin2) -- (2V);
+\draw [->] (origin2) -- (2W);
+
+\draw [->] (2V) -- (2U);
+\draw [->] (2U) -- (2W);
+\draw [->] (2W) -- (2V);
+
+\node [above of =1U] {1U};
+\node [below right of =1V] {1V};
+\node [below left of =1W] {1W};
+\node [below left of =2U] {2U};
+\node [above right of =2V] {2V};
+\node [right of =2W] {2W};
+\node [right of =U1U1N] {$U_{1U1N}=U_a$};
+\node [left of =U2U2V] {$U_{2U2V}=-U_d$};
+
+\end{tikzpicture}
+\end{subfigure}%
+\begin{subfigure}{.45\textwidth}
+\centering
+\begin{circuitikz}
+
+%\draw [help lines] (-1,-1) grid (6,-10); %Zeichnet Raster und vereinfacht damit das Zeichnen
+	
+	%U
+	\draw (0,0) node[above=5mm] {$1U$}
+	to[american inductor, o-] (0,-3);
+	\draw (0,-0.7) node[right=1.5mm] {$\bullet$};
+
+	\draw (0,-5) [american inductor, -o] 
+	to node[below=10mm] {$2U$} (0,-9);
+	\draw (0,-6.2) node[right=1.5mm] {$\bullet$};
+
+	%V
+	\draw (2,0) node[above=5mm] {$1V$}
+	to[american inductor, o-] (2,-3);
+	\draw (2,-0.7) node[right=1.5mm] {$\bullet$};
+
+	\draw (2,-5) [american inductor, -o]
+	to node[below=10mm] {$2V$} (2,-9);
+	\draw (2,-6.2) node[right=1.5mm] {$\bullet$};
+	
+	%V
+	\draw (4,0) node[above=5mm] {$1W$}
+	to[american inductor, o-] (4,-3);
+	\draw (4,-0.7) node[right=1.5mm] {$\bullet$};
+
+	\draw (4,-5) [american inductor, -o] 
+	to node[below=10mm] {$2W$} (4,-9);
+	\draw (4,-6.2) node[right=1.5mm] {$\bullet$};
+	
+	%Verbindung
+	\draw (0,-3) to[short,-*] (2,-3)
+	-- (4,-3);
+	\draw (0,-5) -- (1,-5)
+	-- (1,-8.5)
+	to[short,-*] (2,-8.5);
+	\draw (2,-5) -- (3,-5)
+	-- (3,-8.5)
+	to[short,-*] (4,-8.5);
+	\draw (4,-5) -- (4,-4.5)
+	-- (-1,-4.5)
+	-- (-1,-8.5)
+	to[short,-*] (0,-8.5);
+
+	%Spannungspfeile
+	\draw (-0.2,0) to [open, v>=$U_a$] (-0.2,-3);
+	\draw (1.8,0) to [open, v>=$U_b$] (1.8,-3);
+	\draw (3.8,0) to [open, v>=$U_c$] (3.8,-3);
+
+	\draw (-0.2,-5.5) to [open, v>=$U_d$] (-0.2,-8.5);
+	\draw (1.8,-5.5) to [open, v>=$U_e$] (1.8,-8.5);
+	\draw (3.8,-5.5) to [open, v>=$U_f$] (3.8,-8.5);
+	
+\end{circuitikz}
+\end{subfigure}%
+\end{figure*}
+\begin{equation}
+\frac{N_1}{N_2}=\frac{\UPNS}{\USNS}=\frac{\frac{\SI{240}{\kilo\volt}}{\sqrt{3}}}{\SI{21}{\kilo\volt}}=\num{11.55}
+\end{equation}
+
+\section{}
+\begin{align}
+\IPNS&=\frac{S_N}{3\UPNS}=\frac{\SI{850}{\mega\volt\ampere}}{3\frac{\SI{420}{\kilo\volt}}{\sqrt{3}}}=\SI{1168}{\ampere}\\
+\IPNA&=\IPS=\SI{1168}{\ampere}\\
+\ISNS&=\frac{S_N}{3\USNS}=\frac{\SI{850}{\mega\volt\ampere}}{3\cdot\SI{21}{\kilo\volt}}=\SI{13.49}{\kilo\ampere}\\
+\ISNA&=\sqrt{3}\ISNS=\sqrt{3}\cdot\SI{13.49}{\kilo\ampere}=\SI{23.37}{\kilo\ampere}
+\end{align}
+
+\section{}
+\subsection{}
+\begin{equation}
+u_1=1\quad i=1\quad \cz=0\quad \sz=-1
+\end{equation}
+\begin{align}
+u_1\ce&=u_2\cz+u_R i\\
+u_1\se&=u_2\sz+u_X i\\
+\ce&=\cz\quad \rightarrow\quad \se = \pm 1\\
+u_1\se&=1\cdot\mybr{-1}+1\cdot u_X\\
+u_1\se&=\num{-0.875}\\
+u_1&=\num{0.875}\quad\text{$u_1$ ist ein Betrag und somit $>0$}\\
+\se&=\num{-1}\\
+U_{20}&=u_1\USNA=\num{0.875}\cdot\SI{21}{\kilo\volt}=\SI{18.38}{\kilo\volt}
+\end{align}
+
+\subsection{}
+\begin{align}
+\ddot{u}&=\frac{U_{Netz}}{U_{20}}=\frac{U_{1,AL}}{\USNA}\\
+&=\frac{\SI{385}{\kilo\volt}}{\SI{18.38}{\kilo\volt}}=\frac{\SI{420}{\kilo\volt}+x\cdot\SI{5}{\kilo\volt}}{\SI{21}{\kilo\volt}}\\
+x&=\frac{\frac{\SI{385}{\kilo\volt}}{\SI{18.38}{\kilo\volt}}\cdot\SI{21}{\kilo\volt}-\SI{420}{\kilo\volt}}{\SI{5}{\kilo\volt}}=4
+\end{align}
+
+\section{}
+\subsection{}
+\begin{equation}
+i=\num{0.9}\quad \cz=-0.8
+\end{equation}
+\begin{align}
+u_1&=\frac{\SI{385}{\kilo\volt}}{\SI{420}{\kilo\volt}}=\num{0.9167}\\
+\sz&=-\sqrt{1-\cz^2}=-\sqrt{1-{\num{0.8}}^2}=\num{-0.6}\\
+u_1\ce&=u_2\cz+u_R i\\
+u_1\se&=u_2\sz+u_X i\\
+u_1^2&=\mybr{u_1\ce}^2+\mybr{u_1\se}^2\\
+&=\mybr{u_2\cz+u_R i}^2+\mybr{u_2\sz+u_X i}^2\\
+&=u_R^2i^2+u_X^2i^2+u_2^2+2u_R i u_2 \cz+2u_X i u_2\sz
+\end{align}
+\begin{align}
+u_2^2+u_2\mybr{2u_R i \cz+2u_X i \sz}+u_R^2 i^2 + u_X^2 i^2 - u_1^2 &= 0\\
+u_2^2+u_2\mybr{\num{0.0}+2\cdot\num{0.125}\cdot\num{0.9}\cdot\mybr{\num{-0.6}}}+\num{0.0}+\num{0.125}^2\cdot\num{0.9}^2-\num{0.9167}^2 &=0\\
+u_2^2+\num{0.135}u_2-\num{0.8277}&=0
+\end{align}
+\begin{align}
+u_2&=\frac{\num{0.135}\pm\sqrt{\num{0.135}^2-4\cdot1\cdot\mybr{\num{-0.8277}}}}{2\cdot1}\\
+u_{2,1}&=\num{0.9798}\\
+u_{2,2}&=\num{-0.8448}
+\end{align}
+$u_2$ ist ein Betrag und kann somit nicht negativ sein, daher ist die Lösung $u_{2,1}$ richtig.
+\begin{align}
+\USA&=u_2\USNA=\num{0.9798}\cdot\SI{21}{\kilo\volt}=\SI{20.58}{\kilo\volt}
+\end{align}
+
+\subsection{}
+\begin{equation}
+P_2=S_N u_2 i \cz=\SI{850}{\mega\volt\ampere}\cdot\num{0.9798}\cdot\num{0.9}\cdot\num{-0.8}=\SI{-599.6}{\mega\watt}
+\end{equation}
+
+\clearpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\part{2010 Trafo}
+\section{}
+\begin{figure*}[!h]
+\begin{subfigure}{.5\textwidth}
+\centering
+\begin{tikzpicture}[>=triangle 45,thick,node distance=0.5cm]
+
+\path (0,0) coordinate (origin1);
+\path (90:3cm) coordinate (1U);
+\path (2*120+90:3cm) coordinate (1V);
+\path (1*120+90:3cm) coordinate (1W);
+\path (0,-6cm) coordinate (origin2);
+\path (origin2) ++(90+30:3cm) coordinate (2U);
+\path (origin2) ++(90+30+2*120:3cm) coordinate (2V);
+\path (origin2) ++(90+30+1*120:3cm) coordinate (2W);
+\path (1.5cm,-0.3cm) coordinate (U1V1N);
+\path (origin2) ++(1.2cm,1.8cm) coordinate (U2U2V);
+
+\path (240:3cm) coordinate (Usek);
+\path (240:1cm) coordinate (arc1);
+\path (240:2.5cm) coordinate (arc2);
+\path (90:1.3cm) coordinate (arc3);
+\path (-0.3cm, 1.3cm) coordinate (arc3help);
+
+\draw [->] (origin1) -- (1U);
+\draw [->] (origin1) -- (1V);
+\draw [->] (origin1) -- (1W);
+
+\draw [->] (origin2) -- (2U);
+\draw [->] (origin2) -- (2V);
+\draw [->] (origin2) -- (2W);
+
+\draw [->] (2V) -- (2U);
+\draw [->] (2U) -- (2W);
+\draw [->] (2W) -- (2V);
+
+\node [above of =1U] {1U};
+\node [below right of =1V] {1V};
+\node [below left of =1W] {1W};
+\node [above of =2U] {2U};
+\node [right of =2V] {2V};
+\node [below left of =2W] {2W};
+\node [right of =U1V1N] {$U_{1V1N}=U_b$};
+\node [right of =U2U2V] {$U_{2U2V}=-U_e$};
+
+\end{tikzpicture}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+\centering
+\begin{circuitikz}
+
+%\draw [help lines] (-1,-1) grid (12,17); %Zeichnet Raster und vereinfacht damit das Zeichnen
+	
+	%U
+	\draw (0,0) node[above=5mm] {$1U$}
+	to[american inductor, o-] (0,-3);
+	\draw (0,-0.7) node[right=1.5mm] {$\bullet$};
+
+	\draw (0,-5) node[above=5mm] {$2U$}
+	to[american inductor, o-] (0,-9);
+	\draw (0,-6.2) node[right=1.5mm] {$\bullet$};
+
+	%V
+	\draw (2,0) node[above=5mm] {$1V$}
+	to[american inductor, o-] (2,-3);
+	\draw (2,-0.7) node[right=1.5mm] {$\bullet$};
+
+	\draw (2,-5) node[above=5mm] {$2V$}
+	to[american inductor, o-] (2,-9);
+	\draw (2,-6.2) node[right=1.5mm] {$\bullet$};
+	
+	%V
+	\draw (4,0) node[above=5mm] {$1W$}
+	to[american inductor, o-] (4,-3);
+	\draw (4,-0.7) node[right=1.5mm] {$\bullet$};
+
+	\draw (4,-5) node[above=5mm] {$2W$}
+	to[american inductor, o-] (4,-9);
+	\draw (4,-6.2) node[right=1.5mm] {$\bullet$};
+	
+	%Verbindung
+	\draw (0,-3) to[short,-*] (2,-3)
+	-- (4,-3);
+	\draw (0,-5.5) to[short,*-] (1,-5.5)
+	-- (1,-9)
+	-- (2,-9);
+	\draw (2,-5.5) to[short,*-] (3,-5.5)
+	-- (3,-9)
+	-- (4,-9);
+	\draw (4,-5.5) to[short,*-] (5,-5.5)
+	-- (5,-10)
+	-- (0,-10)
+	-- (0,-9);
+
+	%Spannungspfeile
+	\draw (-0.2,0) to [open, v>=$U_a$] (-0.2,-3);
+	\draw (1.8,0) to [open, v>=$U_b$] (1.8,-3);
+	\draw (3.8,0) to [open, v>=$U_c$] (3.8,-3);
+
+	\draw (-0.2,-5.5) to [open, v>=$U_d$] (-0.2,-8.5);
+	\draw (1.8,-5.5) to [open, v>=$U_e$] (1.8,-8.5);
+	\draw (3.8,-5.5) to [open, v>=$U_f$] (3.8,-8.5);
+	
+\end{circuitikz}
+\end{subfigure}%
+\end{figure*}
+
+\section{}
+\begin{equation}
+\frac{N_1}{N_2}=\frac{\UPNS}{\USNS}=\frac{\frac{\SI{24}{\kilo\volt}}{\sqrt{3}}}{\SI{10.5}{\kilo\volt}}=\num{1.3197}
+\end{equation}
+
+\section{}
+\begin{align}
+\IPNS&=\frac{S_N}{3\UPNS}=\frac{\SI{35}{\mega\volt\ampere}}{3\frac{\SI{24}{\kilo\volt}}{\sqrt{3}}}=\SI{842.0}{\ampere}\\
+\IPNA&=\IPS=\SI{842.0}{\ampere}\\
+\ISNS&=\frac{S_N}{3\USNS}=\frac{\SI{35}{\mega\volt\ampere}}{3\cdot\SI{10.5}{\kilo\volt}}=\SI{1111}{\ampere}\\
+\ISNA&=\sqrt{3}\ISNS=\sqrt{3}\cdot\SI{1111}{\ampere}=\SI{1924}{\ampere}
+\end{align}
+
+\section{}
+\subsection{}
+\begin{equation}
+u_1=\num{0.95}\quad i=\num{0.85}\quad \cos\mybr{\varphi_2}=0.9
+\end{equation}
+\begin{equation}
+\sin\mybr{\varphi_2}=-\sqrt{1-\cz^2}=-\sqrt{1-\num{0.9}^2}=\num{-0.4359}
+\end{equation}
+\begin{align}
+u_1\ce&=u_2\cz+u_R i\\
+u_1\se&=u_2\sz+u_X i\\
+u_1^2&=\mybr{u_1\ce}^2+\mybr{u_1\se}^2\\
+&=\mybr{u_2\cz+u_R i}^2+\mybr{u_2\sz+u_X i}^2\\
+&=u_R^2i^2+u_X^2i^2+u_2^2+2u_R i u_2 \cz+2u_X i u_2\sz
+\end{align}
+\begin{align}
+u_2^2+u_2\mybr{2u_R i \cz+2u_X i \sz}+u_R^2 i^2 + u_X^2 i^2 - u_1^2 &= 0\\
+u_2^2+u_2\mybr{2\cdot\num{0.013}\cdot\num{0.85}\cdot\num{0.9}+2\cdot\num{0.084}\cdot\num{0.85}\cdot\mybr{\num{-0.4359}}}+\num{0.013}^2\cdot\num{0.85}^2&+\\
+\num{0.084}^2\cdot\num{0.85}^2-\num{0.95}^2 &=0\nonumber\\
+u_2^2-\num{0.04236}u_2-\num{0.8973}&=0
+\end{align}
+\begin{align}
+u_2&=\frac{\num{0.04236}\pm\sqrt{\num{0.04236}^2-4\cdot1\cdot\mybr{\num{-0.8973}}}}{2\cdot1}\\
+u_{2,1}&=\num{0.9687}\\
+u_{2,2}&=\num{-0.9263}
+\end{align}
+$u_2$ ist ein Betrag und kann somit nicht negativ sein, daher ist die Lösung $u_{2,1}$ richtig.
+\begin{align}
+\USS&=u_2\USNS=\num{0.9687}\cdot\SI{10.5}{\kilo\volt}=\SI{10.17}{\kilo\volt}\\
+\USA&=u_2\USNA=\num{0.9687}\cdot\SI{10.5}{\kilo\volt}=\SI{10.17}{\kilo\volt}
+\end{align}
+
+\subsection{}
+\begin{align}
+\ISS&=i\ISNS=\num{0.85}\cdot\SI{1111}{\ampere}=\SI{944.4}{\ampere}\\
+\ISA&=i\ISNA=\num{0.85}\cdot\SI{1924}{\ampere}=\SI{1635}{\ampere}\\
+\end{align}
+
+\subsection{}
+\begin{equation}
+P_2=S_N u_2 i \cz=\SI{35}{\mega\volt\ampere}\cdot\num{0.9687}\cdot\num{0.85}\cdot\num{0.9}=\SI{25.94}{\mega\watt}
+\end{equation}
+
+\clearpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\part{2011 Trafo}
+\section{}
+\begin{figure*}[!h]
+\begin{subfigure}{.5\textwidth}
+\centering
+\begin{tikzpicture}[>=triangle 45,thick,node distance=0.5cm]
+
+\path (0,0) coordinate (origin1);
+\path (90:3cm) coordinate (1U);
+\path (2*120+90:3cm) coordinate (1V);
+\path (1*120+90:3cm) coordinate (1W);
+\path (0,-6cm) coordinate (origin2);
+\path (origin2) ++(90+180:3cm) coordinate (2U);
+\path (origin2) ++(90+180+2*120:3cm) coordinate (2V);
+\path (origin2) ++(90+180+1*120:3cm) coordinate (2W);
+\path (0.7cm,1.7cm) coordinate (U1U1N);
+\path (origin2) ++(0.8cm,-1.7cm) coordinate (U2U2N);
+
+\path (240:3cm) coordinate (Usek);
+\path (240:1cm) coordinate (arc1);
+\path (240:2.5cm) coordinate (arc2);
+\path (90:1.3cm) coordinate (arc3);
+\path (-0.3cm, 1.3cm) coordinate (arc3help);
+
+\draw [->] (origin1) -- (1U);
+\draw [->] (origin1) -- (1V);
+\draw [->] (origin1) -- (1W);
+
+\draw [->] (origin2) -- (2U);
+\draw [->] (origin2) -- (2V);
+\draw [->] (origin2) -- (2W);
+
+\node [above of =1U] {1U};
+\node [below right of =1V] {1V};
+\node [below left of =1W] {1W};
+\node [below left of =2U] {2U};
+\node [above right of =2V] {2V};
+\node [right of =2W] {2W};
+\node [right of =U1U1N] {$U_{1U1N}=U_a$};
+\node [right of =U2U2N] {$U_{2U2N}=-U_d$};
+
+\end{tikzpicture}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+\centering
+\begin{circuitikz}
+
+%\draw [help lines] (-1,-1) grid (6,-10); %Zeichnet Raster und vereinfacht damit das Zeichnen
+	
+	%U
+	\draw (0,0) node[above=5mm] {$1U$}
+	to[american inductor, o-] (0,-3);
+	\draw (0,-0.7) node[right=1.5mm] {$\bullet$};
+
+	\draw (0,-5) [american inductor, -o] 
+	to node[below=10mm] {$2U$} (0,-9);
+	\draw (0,-6.2) node[right=1.5mm] {$\bullet$};
+
+	%V
+	\draw (2,0) node[above=5mm] {$1V$}
+	to[american inductor, o-] (2,-3);
+	\draw (2,-0.7) node[right=1.5mm] {$\bullet$};
+
+	\draw (2,-5) [american inductor, -o]
+	to node[below=10mm] {$2V$} (2,-9);
+	\draw (2,-6.2) node[right=1.5mm] {$\bullet$};
+	
+	%V
+	\draw (4,0) node[above=5mm] {$1W$}
+	to[american inductor, o-] (4,-3);
+	\draw (4,-0.7) node[right=1.5mm] {$\bullet$};
+
+	\draw (4,-5) [american inductor, -o] 
+	to node[below=10mm] {$2W$} (4,-9);
+	\draw (4,-6.2) node[right=1.5mm] {$\bullet$};
+	
+	%Verbindung
+	\draw (0,-3) to[short,-*] (2,-3)
+	-- (4,-3);
+	\draw (0,-5) to[short,-*] (2,-5)
+	-- (4,-5);
+
+	%Spannungspfeile
+	\draw (-0.2,0) to [open, v>=$U_a$] (-0.2,-3);
+	\draw (1.8,0) to [open, v>=$U_b$] (1.8,-3);
+	\draw (3.8,0) to [open, v>=$U_c$] (3.8,-3);
+
+	\draw (-0.2,-5.5) to [open, v>=$U_d$] (-0.2,-8.5);
+	\draw (1.8,-5.5) to [open, v>=$U_e$] (1.8,-8.5);
+	\draw (3.8,-5.5) to [open, v>=$U_f$] (3.8,-8.5);
+	
+\end{circuitikz}
+\end{subfigure}%
+\end{figure*}
+
+\section{}
+\begin{equation}
+\frac{N_1}{N_2}=\frac{\UPNS}{\USNS}=\frac{\frac{\SI{132}{\kilo\volt}}{\sqrt{3}}}{\frac{\SI{15}{\kilo\volt}}{\sqrt{3}}}=\num{8.8}
+\end{equation}
+
+\section{}
+\begin{align}
+\IPNS&=\frac{S_N}{3\UPNS}=\frac{\SI{80}{\mega\volt\ampere}}{3\cdot\frac{\SI{132}{\kilo\volt}}{\sqrt{3}}}=\SI{349.9}{\ampere}\\
+\IPNA&=\IPNS=\SI{349.9}{\ampere}\\
+\ISNS&=\frac{S_N}{3\USNS}=\frac{\SI{80}{\mega\volt\ampere}}{3\cdot\frac{\SI{15}{\kilo\volt}}{\sqrt{3}}}=\SI{3079}{\ampere}\\
+\ISNA&=\ISNS=\SI{3079}{\ampere}
+\end{align}
+
+\section{}
+\subsection{}
+\begin{equation}
+u_1=1\quad i=1\quad u_2=1
+\end{equation}
+\begin{align}
+u_1\ce&=u_2\cz+u_R i\\
+u_1\se&=u_2\sz+u_X i\\
+u_1^2&=\mybr{u_1\ce}^2+\mybr{u_1\se}^2\\
+&=\mybr{u_2\cz+u_R i}^2+\mybr{u_2\sz+u_X i}^2\\
+&=u_R^2i^2+u_X^2i^2+u_2^2+2u_R i u_2 \cz+2u_X i u_2\sz\\
+1&=u_X^2+u_2^2+2u_X\sz\\
+0&=2\sz u_X+u_X^2\\
+\sz&=-\frac{u_X}{2}=-\frac{\num{0.09}}{2}=\num{-0.045}\\
+\cz&=\sqrt{1-\sz^2}=\sqrt{1-\num{0.045}^2}=\num{0.9990}
+\end{align}
+\begin{align}
+\z_L&=\frac{u_2}{i}\e^{\j\varphi_2}=\cz+\j\sz=\num{0.9990}-\j\num{0.045}\\
+\Z_L&=\z_L\frac{3\USNA^2}{S_N}=\mybr{\num{0.9990}-\j\num{0.045}}\frac{3\cdot\mybr{\SI{15}{\kilo\volt}}^2}{\SI{80}{\mega\volt\ampere}}=\SI{8.429}{\ohm}+\j\SI{0.3797}{\ohm}=R'+\j X'
+\end{align}
+\begin{align}
+\frac{R\cdot\frac{1}{\j\omega C}}{R+\frac{1}{\j\omega C}}&=\frac{R}{1+\j\omega R C}=R'+\j X'\\
+R&=\mybr{R'+\j\omega C'}\mybr{1+\j\omega R C}\\
+\text{Realteil:}\\
+R&=R'-X'\omega R C\\
+\text{Imaginärteil:}\\
+0&=X'+R'\omega R C\\
+\omega R C &= -\frac{X'}{R'}\\
+R &= R' + \frac{X'^2}{R'}=\SI{8.429}{\ohm} + \frac{\mybr{\SI{0.3797}{\ohm}}^2}{\SI{8.429}{\ohm}}=\SI{8.446}{\ohm}\\
+C &= -\frac{X'}{R'\omega R}=\frac{\SI{0.3797}{\ohm}}{\SI{8.429}{\ohm}\cdot2\pi\SI{60}{\hertz}\cdot\SI{8.446}{\ohm}}=\SI{14.15}{\micro\farad}
+\end{align}
+
+\subsection{}
+\begin{equation}
+P_2=S_N u_2 i \cz=\SI{80}{\mega\volt\ampere}\cdot\num{1}\cdot\num{1}\cdot\num{0.9990}=\SI{79.92}{\mega\watt}
+\end{equation}
+
+\section{}
+\begin{align}
+I_{2K}&=\frac{\ISNA}{\left| u_R+\j u_X +\j x_{Netz}\right|}=\frac{\ISNA}{\left| u_R+\j u_X +\j X_{Netz}\frac{S_N}{3U_S^2}\right|}\\
+&=\frac{\SI{3079}{\ampere}}{\left| \num{0}+\j\num{0.09}+\j\SI{4.598}{\ohm}\frac{\SI{80}{\mega\volt\ampere}}{3\cdot\mybr{\frac{\SI{132}{\kilo\volt}}{\sqrt{3}}}^2}\right|}=\SI{27.71}{\kilo\ampere}
+\end{align}
+
+\section{}
+gleiche magnetische Beanspruchung:
+\begin{equation}
+\hat\Phi=\text{const.}
+\end{equation}
+aus
+\begin{equation}
+U=\frac{1}{\sqrt{2}}N\omega\hat\Phi
+\end{equation}
+folgt
+\begin{align}
+U_{1N,50}&=\frac{f_{N,50}}{f_{N}}U_{1N}=\frac{\SI{50}{\hertz}}{\SI{60}{\hertz}}\SI{132}{\kilo\volt}=\SI{110}{\kilo\volt}\\
+U_{2N,50}&=\frac{f_{N,50}}{f_{N}}U_{2N}=\frac{\SI{50}{\hertz}}{\SI{60}{\hertz}}\SI{15}{\kilo\volt}=\SI{12.5}{\kilo\volt}
+\end{align}
+gleiche thermische Beanspruchung:
+\begin{equation}
+R_k I^2 = \text{const.}
+\end{equation}
+da sich R mit der Frequenz nicht ändert bleibt der Strom gleich
+\begin{align}
+I_{1N,50}&=I_{1N}=\SI{349.9}{\ampere}\\
+I_{2N,50}&=I_{2N}=\SI{3079}{\ampere}
+\end{align}
+\begin{equation}
+S_{N,50}=3U_{1N,50,Str}I_{1N,50}=3\cdot\frac{\SI{110}{\kilo\volt}}{\sqrt{3}}\cdot\SI{349.9}{\ampere}=\SI{66.66}{\mega\volt\ampere}
+\end{equation}
+\begin{align}
+u_{R,50}&=R_k\frac{S_{N,50}}{3U_{1N,50,Str}^2}=u_R\frac{3\UPNS^2}{S_N}\frac{S_{N,50}}{3U_{1N,50,Str}^2}=u_R\frac{\frac{5}{6}}{\mybr{\frac{5}{6}}^2}=\num{0.0}\cdot\frac{6}{5}=\num{0.0}\\
+u_{X,50}&=L_k\frac{S_{N,50}\omega_{N,50}}{3U_{1N,50,Str}^2}=u_X\frac{3\UPNS^2}{S_N\omega_N}\frac{S_{N,50}\omega_{N,50}}{3U_{1N,50,Str}^2}=\\
+&=u_X\frac{\mybr{\frac{5}{6}}^2}{\mybr{\frac{5}{6}}^2}=u_X=\num{0.09}\\
+u_{K,50}&=\sqrt{u_{R,50}^2+u_{X,50}^2}=0.09
+\end{align}
+
+\clearpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\part{2014 Trafo}
+\section{}
+\begin{figure*}[!h]
+\begin{subfigure}{.5\textwidth}
+\centering
+\begin{tikzpicture}[>=triangle 45,thick,node distance=0.5cm]
+
+\path (0,0) coordinate (origin1);
+\path (90:3cm) coordinate (1U);
+\path (2*120+90:3cm) coordinate (1V);
+\path (1*120+90:3cm) coordinate (1W);
+\path (0,-6.5cm) coordinate (origin2);
+\path (origin2) ++(90:3cm) coordinate (2U);
+\path (origin2) ++(90+2*120:3cm) coordinate (2V);
+\path (origin2) ++(90+1*120:3cm) coordinate (2W);
+\path (1.7cm,1.7cm) coordinate (U1U1V);
+\path (-1.7cm,1.7cm) coordinate (U1W1U);
+\path (0cm,-1.5cm) coordinate (U1V1W);
+\path (origin2) ++(60:1.73205cm) coordinate (UAdrittel);
+\path (origin2) ++(1.0cm,0.5cm) coordinate (Ud);
+\path (origin2) ++(1.2cm,2.2cm) coordinate (Ue);
+
+
+\path (240:3cm) coordinate (Usek);
+\path (240:1cm) coordinate (arc1);
+\path (240:2.5cm) coordinate (arc2);
+\path (90:1.3cm) coordinate (arc3);
+\path (-0.3cm, 1.3cm) coordinate (arc3help);
+
+\draw [->] (origin1) -- (1U);
+\draw [->] (origin1) -- (1V);
+\draw [->] (origin1) -- (1W);
+
+\draw [->] (1V) -- (1U);
+\draw [->] (1U) -- (1W);
+\draw [->] (1W) -- (1V);
+
+\draw [->] (origin2) -- (2U);
+\draw [->] (origin2) -- (2V);
+\draw [->] (origin2) -- (2W);
+
+\draw [->] (origin2) -- (UAdrittel);
+\draw [->] (UAdrittel) -- (2U);
+
+\node [above of =1U] {1U};
+\node [below right of =1V] {1V};
+\node [below left of =1W] {1W};
+\node [above of =2U] {2U};
+\node [above right of =2V] {2V};
+\node [below left of =2W] {2W};
+\node [right of =U1U1V] {$U_{1U1V}=-U_b$};
+\node [left of =U1W1U] {$U_{1W1U}=-U_a$};
+\node [below of =U1V1W] {$U_{1V1W}=-U_c$};
+\node [right of =Ud] {$U_d=U_g$};
+\node [right of =Ue] {$-U_e=-U_h$};
+
+\end{tikzpicture}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+\centering
+\begin{circuitikz}
+
+%\draw [help lines] (-1,-1) grid (5,17); %Zeichnet Raster und vereinfacht damit das Zeichnen
+	
+	%U
+	\draw (0,1) node[above=5mm] {$1U$} to[short,o-] (0,0)
+	to[american inductor] (0,-3);
+	\draw (0,-0.8) node[right=1.5mm] {$\bullet$};
+
+	\draw (0,-5) node[above=5mm] {$2U$}
+	to[american inductor, o-] (0,-7.5);
+	\draw (0,-5.7) node[right=1.5mm] {$\bullet$};
+	
+	\draw (0,-8.5) to[american inductor] (0,-11);
+	\draw (0,-9.2) node[right=1.5mm] {$\bullet$};
+
+	%V
+	\draw (2,1) node[above=5mm] {$1V$} to[short,o-] (2,0)
+	to[american inductor] (2,-3);
+	\draw (2,-0.8) node[right=1.5mm] {$\bullet$};
+
+	\draw (2,-5) node[above=5mm] {$2V$}
+	to[american inductor, o-] (2,-7.5);
+	\draw (2,-5.7) node[right=1.5mm] {$\bullet$};
+	
+	\draw (2,-8.5) to[american inductor] (2,-11);
+	\draw (2,-9.2) node[right=1.5mm] {$\bullet$};
+	
+	%W
+	\draw (4,1) node[above=5mm] {$1W$} to[short,o-] (4,0)
+	to[american inductor] (4,-3);
+	\draw (4,-0.8) node[right=1.5mm] {$\bullet$};
+
+	\draw (4,-5) node[above=5mm] {$2W$}
+	to[american inductor, o-] (4,-7.5);
+	\draw (4,-5.7) node[right=1.5mm] {$\bullet$};
+	
+	\draw (4,-8.5) to[american inductor] (4,-11);
+	\draw (4,-9.2) node[right=1.5mm] {$\bullet$};
+	
+	%N
+	\draw (-1.5,-5) node[above=5mm] {$2N$} -- (-1.5,-6);
+	
+	%Verbindung
+	%Primär
+	\draw (0,0) to[short,*-] (1,0)
+	-- (1,-3)
+	-- (2,-3);
+	\draw (2,0) to[short,*-] (3,0)
+	-- (3,-3)
+	-- (4,-3);
+	\draw (0,-3) -- (0,-3.5)
+	-- (5,-3.5)
+	-- (5,0)
+	to[short,-*] (4,0);
+	%Sekundär
+	\draw (0,-7.5) -| (1,-11)
+	-- (2,-11);
+	\draw (2,-7.5) -| (3,-11)
+	-- (4,-11);
+	\draw (4,-7.5) -| (5,-11.5)
+	-| (0,-11);
+	%Neutralleiter
+	\draw (-1.5,-6) -- (-1.5,-8.5)
+	to[short,-*] (0,-8.5)
+	to[short,-*] (2,-8.5)
+	-- (4,-8.5);
+
+	%Spannungspfeile
+	\draw (-0.2,0) to [open, v>=$U_a$] (-0.2,-3);
+	\draw (1.8,0) to [open, v>=$U_b$] (1.8,-3);
+	\draw (3.8,0) to [open, v>=$U_c$] (3.8,-3);
+
+	\draw (-0.2,-5) to [open, v>=$U_d$] (-0.2,-7.5);
+	\draw (1.8,-5) to [open, v>=$U_e$] (1.8,-7.5);
+	\draw (3.8,-5) to [open, v>=$U_f$] (3.8,-7.5);
+	
+	\draw (-0.2,-8.5) to [open, v>=$U_g$] (-0.2,-11);
+	\draw (1.8,-8.5) to [open, v>=$U_h$] (1.8,-11);
+	\draw (3.8,-8.5) to [open, v>=$U_i$] (3.8,-11);
+	
+\end{circuitikz}
+\end{subfigure}%
+\end{figure*}
+
+
+\section{}
+\begin{equation}
+\frac{N_1}{\frac{N_2}{2}}=\frac{\UPNS}{\frac{\USNA}{3}}=\frac{\SI{12}{\kilo\volt}}{\frac{\SI{210}{\volt}}{3}}=\num{85.71}
+\end{equation}
+
+\section{}
+\begin{align}
+\IPNS&=\frac{S_N}{3\UPNS}=\frac{\SI{800}{\kilo\volt\ampere}}{3\cdot\SI{12}{\kilo\volt}}=\SI{22.22}{\ampere}\\
+\IPNA&=\sqrt{3}\IPNS=\sqrt{3}\cdot\SI{22.22}{\ampere}=\SI{38.49}{\ampere}\\
+\ISNS&=\frac{S_N}{3\USNS}=\frac{\SI{800}{\kilo\volt\ampere}}{3\frac{\SI{210}{\volt}}{\sqrt{3}}}=\SI{2199}{\ampere}\\
+\ISNA&=\ISNS=\SI{2199}{\ampere}
+\end{align}
+
+\section{}
+\subsection{}
+\begin{align}
+\tan\mybr{\varphi_2}&=\frac{X_2}{R_2}\\
+L_2&=\frac{R_2\tan\mybr{\varphi_2}}{2\pi f_N}=\frac{\SI{0.16}{\ohm}\tan\mybr{\arccos\mybr{0.8}}}
+{2\pi\SI{60}{\hertz}}=\SI{318.3}{\micro\henry}
+\end{align}
+
+\subsection{}
+\begin{align}
+\z_L&=\mybr{R_2+\j 2\pi f_N L_2}\frac{S_N}{3\USNS^2}=\mybr{\SI{0.16}{\ohm}+\j2\pi\SI{60}{\hertz}\cdot\SI{318.3}{\micro\henry}}\frac{\SI{800}{\kilo\volt\ampere}}{3\mybr{\SI{210}{\volt}}^2}\\
+&=\num{0.9675}+\j\num{0.7256}\label{eq:alterWiderstand}\\
+i&=\frac{u_2}{\left|\j u_X+\z\right|}=\frac{1}{\left|\j\num{0.04}+\num{0.9675}+\j\num{0.7256}\right|}=\num{0.8105}\\
+\ISS&=i\ISNS=\num{0.8105}\cdot\SI{2199}{\ampere}=\SI{1782}{\ampere}\\
+\ISA&=i\ISNA=\num{0.8105}\cdot\SI{2199}{\ampere}=\SI{1782}{\ampere}
+\end{align}
+
+\subsection{}
+\begin{align}
+u_2&=i\cdot\left|\z\right|=\num{0.8105}\cdot\left|\num{0.9675}+\j\num{0.7256}\right|=\num{0.9802}\\
+\USA&=u_2\USNA=\num{0.9802}\cdot\SI{210}{\volt}=\SI{205.8}{\volt}\\
+\USS&=u_2\USNS=\num{0.9802}\cdot\frac{\SI{210}{\volt}}{\sqrt{3}}=\SI{118.8}{\volt}
+\end{align}
+
+\section{}
+\subsection{}
+\begin{equation}
+u_1=1\quad u_2=1
+\end{equation}
+\begin{align}
+u_1\ce&=u_2\cz+u_R i\\
+u_1\se&=u_2\sz+u_X i\\
+\ce&=\cz
+\end{align}
+aus der Skizze
+\begin{figure*}[!h]
+\centering
+\begin{tikzpicture}[>=triangle 45,thick,node distance=0.5cm]
+
+\path (0,0) coordinate (origin1);
+\path (35:3cm) coordinate (u1);
+\path (35:1.5cm) coordinate (u1name);
+\path (360-35:3cm) coordinate (u2);
+\path (360-35:1.5cm) coordinate (u2name);
+\path (3cm,0cm) coordinate (uxname);
+\path (360-35:1.5cm) coordinate (u2name);
+\path (0:2cm) coordinate (i);
+\path (2cm,-0.1cm) coordinate (iname);
+\path (35:1.5cm) coordinate (arc1);
+\path (360-35:1.5cm) coordinate (arc2);
+\path (1cm,-0.2cm) coordinate (arc1name);
+\path (1cm,0.2cm) coordinate (arc2name);
+\path (0:3cm) coordinate (arc3);
+
+\draw [->] (origin1) -- (u1);
+\draw [->] (origin1) -- (u2);
+\draw [->] (u2) -- (u1);
+\draw [<-] (arc1) arc (35:0:1.5cm);
+\draw [<-] (arc2) arc (-35:0:1.5cm);
+\draw [->] (origin1) -- (i);
+\draw [-]  (arc3) arc (0:360:3cm);
+
+\node [above of =u1name] {$u_1$};
+\node [below of =u2name] {$u_2$};
+\node [right of =uxname] {$iu_X$};
+\node [above of =iname] {$i$};
+\node [above of =arc1name] {$\varphi_1$};
+\node [below of =arc2name] {$\varphi_2$};
+
+\end{tikzpicture}
+\end{figure*}
+
+folgt
+\begin{align}
+\varphi_1&=-\varphi_2\\
+\se&=\sz+i u_X\\
+\sz&=-\frac{i u_X}{2}\label{eq:sinphi21}\\
+i&=\frac{u_2}{z_L}=u_2 y_L\\
+i&=y_L\\
+\z_L&=\frac{\u_2}{\i}=z_L\e^{\j\varphi_2}\\
+\y_L&=\frac{\i}{\u_2}=y_L\e^{-\j\varphi_2}=y_L\cz-y_L\j\sz=g_2+\j b_2\\
+y_L\sz&=-b_2\\
+\sz&=-\frac{b_2}{i}\label{eq:sinphi22}\\
+\text{aus \eqref{eq:sinphi21} und \eqref{eq:sinphi22} folgt}\nonumber\\
+-\frac{i u_X}{2}&=-\frac{b_2}{i}\\
+i^2&=\frac{2 b_2}{u_X}=y^2=g_2^2+b_2^2\\
+0&=b_2^2-\frac{2 b_2}{u_X}+g_2^2\\
+\y_L'&=\frac{1}{\z_L'}=\frac{1}{\num{0.9675}+\j\num{0.7256}}=\num{0.6615}-\j\num{0.4961}=g_2'+\j b_2'\\
+\end{align}
+mit $\z_L'$ aus \eqref{eq:alterWiderstand}. 
+\begin{align}
+b_2&=\frac{\frac{2}{u_X}\pm\sqrt{\mybr{\frac{2}{u_X}}^2-4\cdot 1\cdot g_2^2}}{2\cdot1}\\
+&=\frac{\frac{2}{\num{0.04}}\pm\sqrt{\mybr{\frac{2}{\num{0.04}}}^2-4\cdot 1\cdot \num{0.6615}^2}}{2\cdot1}\\
+b_{21}&=\num{0.008753}\\
+b_{22}&=\num{49.99}\quad \text{führt zu einer Überlastung des Trafos (\SI{111,0}{\kilo\ampere})}\\
+b_C&=b_{21}-b_2'= \num{0.008753}+\num{0.4961} = 0.5049\\
+C&=\frac{b_C}{\omega Z_{Bez}}=\frac{b_C S_N}{2\pi f_N 3 U_S^2}=\frac{0.5049\cdot\SI{800}{\kilo\volt\ampere}}{2\pi\SI{60}{\hertz}\cdot 3\mybr{\SI{210}{\volt}}^2}=\SI{8.098}{\milli\farad}
+\end{align}
+Hinweis: Der Lösungsweg stammt von Prof. Schmidt. Laut ihm ist das der kürzeste Rechenweg für dieses Beispiel.
+
+\subsection{}
+\begin{align}
+\ISA&=i\ISNA=y_L\ISNA=\sqrt{g_2'^2+b_C^2}\ISNA\\
+&=\sqrt{\num{0.6615}^2+\num{0.008753}^2}\cdot\SI{2199}{\ampere}=\SI{1455}{\ampere}
+\end{align}
+
+\clearpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\part{2014 Nachtest Trafo}
+\section{}
+\begin{figure*}[!h]
+\begin{subfigure}{.55\textwidth}
+\centering
+\begin{tikzpicture}[>=triangle 45,thick,node distance=0.5cm]
+
+\path (0,0) coordinate (origin1);
+\path (90:3cm) coordinate (1U);
+\path (2*120+90:3cm) coordinate (1V);
+\path (1*120+90:3cm) coordinate (1W);
+\path (0,-6cm) coordinate (origin2);
+\path (origin2) ++(90+150:3cm) coordinate (2U);
+\path (origin2) ++(90+150+2*120:3cm) coordinate (2V);
+\path (origin2) ++(90+150+1*120:3cm) coordinate (2W);
+\path (0.7cm,1.7cm) coordinate (U1U1N);
+\path (origin2) ++(-2.5cm,0cm) coordinate (U2U2V);
+
+\path (240:3cm) coordinate (Usek);
+\path (240:1cm) coordinate (arc1);
+\path (240:2.5cm) coordinate (arc2);
+\path (90:1.3cm) coordinate (arc3);
+\path (-0.3cm, 1.3cm) coordinate (arc3help);
+
+\draw [->] (origin1) -- (1U);
+\draw [->] (origin1) -- (1V);
+\draw [->] (origin1) -- (1W);
+
+\draw [->] (origin2) -- (2U);
+\draw [->] (origin2) -- (2V);
+\draw [->] (origin2) -- (2W);
+
+\draw [->] (2V) -- (2U);
+\draw [->] (2U) -- (2W);
+\draw [->] (2W) -- (2V);
+
+\node [above of =1U] {1U};
+\node [below right of =1V] {1V};
+\node [below left of =1W] {1W};
+\node [below left of =2U] {2U};
+\node [above right of =2V] {2V};
+\node [right of =2W] {2W};
+\node [right of =U1U1N] {$U_{1U1N}=U_a$};
+\node [left of =U2U2V] {$U_{2U2V}=-U_d$};
+
+\end{tikzpicture}
+\end{subfigure}%
+\begin{subfigure}{.45\textwidth}
+\centering
+\begin{circuitikz}
+
+%\draw [help lines] (-1,-1) grid (6,-10); %Zeichnet Raster und vereinfacht damit das Zeichnen
+	
+	%U
+	\draw (0,0) node[above=5mm] {$1U$}
+	to[american inductor, o-] (0,-3);
+	\draw (0,-0.7) node[right=1.5mm] {$\bullet$};
+
+	\draw (0,-5) [american inductor, -o] 
+	to node[below=10mm] {$2U$} (0,-9);
+	\draw (0,-6.2) node[right=1.5mm] {$\bullet$};
+
+	%V
+	\draw (2,0) node[above=5mm] {$1V$}
+	to[american inductor, o-] (2,-3);
+	\draw (2,-0.7) node[right=1.5mm] {$\bullet$};
+
+	\draw (2,-5) [american inductor, -o]
+	to node[below=10mm] {$2V$} (2,-9);
+	\draw (2,-6.2) node[right=1.5mm] {$\bullet$};
+	
+	%V
+	\draw (4,0) node[above=5mm] {$1W$}
+	to[american inductor, o-] (4,-3);
+	\draw (4,-0.7) node[right=1.5mm] {$\bullet$};
+
+	\draw (4,-5) [american inductor, -o] 
+	to node[below=10mm] {$2W$} (4,-9);
+	\draw (4,-6.2) node[right=1.5mm] {$\bullet$};
+	
+	%Verbindung
+	\draw (0,-3) to[short,-*] (2,-3)
+	-- (4,-3);
+	\draw (0,-5) -- (1,-5)
+	-- (1,-8.5)
+	to[short,-*] (2,-8.5);
+	\draw (2,-5) -- (3,-5)
+	-- (3,-8.5)
+	to[short,-*] (4,-8.5);
+	\draw (4,-5) -- (4,-4.5)
+	-- (-1,-4.5)
+	-- (-1,-8.5)
+	to[short,-*] (0,-8.5);
+
+	%Spannungspfeile
+	\draw (-0.2,0) to [open, v>=$U_a$] (-0.2,-3);
+	\draw (1.8,0) to [open, v>=$U_b$] (1.8,-3);
+	\draw (3.8,0) to [open, v>=$U_c$] (3.8,-3);
+
+	\draw (-0.2,-5.5) to [open, v>=$U_d$] (-0.2,-8.5);
+	\draw (1.8,-5.5) to [open, v>=$U_e$] (1.8,-8.5);
+	\draw (3.8,-5.5) to [open, v>=$U_f$] (3.8,-8.5);
+	
+\end{circuitikz}
+\end{subfigure}%
+\end{figure*}
+
+\section{}
+\begin{equation}
+\frac{N_1}{N_2}=\frac{\UPNS}{\USNS}=\frac{\frac{\SI{400}{\kilo\volt}}{\sqrt{3}}}{\SI{21}{\kilo\volt}}=\num{11.00}
+\end{equation}
+
+\section{}
+\begin{align}
+\IPNS&=\frac{S_N}{3\UPNS}=\frac{\SI{450}{\mega\volt\ampere}}{3\frac{\SI{400}{\kilo\volt}}{\sqrt{3}}}=\SI{649.5}{\ampere}\\
+\IPNA&=\IPS=\SI{649.5}{\ampere}\\
+\ISNS&=\frac{S_N}{3\USNS}=\frac{\SI{450}{\mega\volt\ampere}}{3\cdot\SI{21}{\kilo\volt}}=\SI{12.37}{\kilo\ampere}\\
+\ISNA&=\sqrt{3}\ISNS=\sqrt{3}\cdot\SI{12.37}{\kilo\ampere}=\SI{21.43}{\kilo\ampere}
+\end{align}
+
+\section{}
+\subsection{}
+\begin{equation}
+u_1=1\quad i=1\quad \cz=0\quad \sz=-1
+\end{equation}
+\begin{align}
+u_1\ce&=u_2\cz+u_R i\\
+u_1\se&=u_2\sz+u_X i\\
+\ce&=\cz\quad \rightarrow\quad \se = \pm 1\\
+u_1\se&=1\cdot\mybr{-1}+1\cdot u_X\\
+u_1\se&=\num{-0.875}\\
+u_1&=\num{0.875}\quad\text{$u_1$ ist ein Betrag und somit $>0$}\\
+\se&=\num{-1}\\
+U_{20}&=u_1\USNA=\num{0.875}\cdot\SI{21}{\kilo\volt}=\SI{18.38}{\kilo\volt}
+\end{align}
+
+\subsection{}
+\begin{equation}
+U_{10,nom}=U_{20,nom}\ddot{u}=\SI{18.38}{\kilo\volt}\frac{\SI{400}{\kilo\volt}}{\SI{21}{\kilo\volt}}=\SI{350.1}{\kilo\volt}
+\end{equation}
+
+\subsection{}
+\begin{equation}
+U_{10,max}=U_{20,nom}\ddot{u}_{max}=\SI{18.38}{\kilo\volt}\frac{\SI{400}{\kilo\volt}+8\cdot\SI{5}{\kilo\volt}}{\SI{21}{\kilo\volt}}=\SI{385.1}{\kilo\volt}
+\end{equation}
+
+\section{}
+\subsection{}
+\begin{equation}
+u_2=1\quad i=\num{19}\quad \cz=-0.8
+\end{equation}
+\begin{align}
+\sz&=-\sqrt{1-\cz^2}=-\sqrt{1-{\num{0.8}}^2}=\num{-0.6}\\
+u_1\ce&=u_2\cz+u_R i\\
+u_1\se&=u_2\sz+u_X i\\
+u_1^2&=\mybr{u_1\ce}^2+\mybr{u_1\se}^2\\
+&=\mybr{u_2\cz+u_R i}^2+\mybr{u_2\sz+u_X i}^2\\
+u_1&=\pm\sqrt{\mybr{u_2\cz+u_R i}^2+\mybr{u_2\sz+u_X i}^2}\\
+u_1&=\pm\sqrt{\mybr{1\cdot\mybr{\num{-0.8}}}^2+\mybr{\num{-0.6}+\num{0.125}\cdot 1}^2}\\
+u_{1,1}&=\num{0.9304}\\
+u_{1,2}&=\num{-0.9304}\\
+\end{align}
+$u_1$ ist ein Betrag und kann somit nicht negativ sein, daher ist die Lösung $u_{1,1}$ richtig.
+\begin{align}
+\USA&=u_1\USNA=\num{0.9304}\cdot\SI{21}{\kilo\volt}=\SI{19.54}{\kilo\volt}
+\end{align}
+
+\subsection{}
+\begin{align}
+\ddot{u}&=\frac{U_{Netz}}{U_{20}}=\frac{U_{1,AL}}{\USNA}\\
+&=\frac{\SI{400}{\kilo\volt}}{\SI{19.54}{\kilo\volt}}=\frac{\SI{400}{\kilo\volt}+x\cdot\SI{5}{\kilo\volt}}{\SI{21}{\kilo\volt}}\\
+x&=\frac{\frac{\SI{400}{\kilo\volt}}{\SI{19.54}{\kilo\volt}}\cdot\SI{21}{\kilo\volt}-\SI{400}{\kilo\volt}}{\SI{5}{\kilo\volt}}=5.978\approx 6
+\end{align}
+
+\subsection{}
+\begin{equation}
+P_2=S_N u_2 i \cz=\SI{450}{\mega\volt\ampere}\cdot\num{1}\cdot\num{1}\cdot\mybr{\num{-0.8}}=\SI{-360}{\mega\watt}
+\end{equation}
+
+\clearpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\part{2014 ASM}
+\section{}
+\subsection{}
+\begin{align}
+U_{Bez}&=\sqrt{2}U_{N,Str}=\sqrt{2}\frac{\SI{400}{\volt}}{\sqrt{3}}=\SI{326.6}{\volt}\\
+I_{Bez}&=\sqrt{2}I_{N_Str}=\sqrt{2}\SI{25}\ampere=\SI{35.36}{\ampere}\\
+\omega_{Bez}&=2\pi f_N=2 \pi \SI{75}{\hertz}=\SI{471.2}{\per\second}\\
+\Psi_{Bez}&=\frac{U_Bez}{\omega_Bez}=\frac{\SI{326.6}{\volt}}{\SI{471.2}{\per\second}}=\SI{0.6931}{\volt\second}\\
+t_{Bez}&=\frac{1}{\omega_{Bez}}=\frac{1}{\SI{471.2}{\per\second}}=\SI{0.002122}{\second}\\
+Z_{Bez}&=\frac{U_{Bez}}{I_{Bez}}=\frac{\SI{326.6}{\volt}}{\SI{35.36}{\ampere}}=\SI{9.236}{\ohm}\\
+P_{Bez}&=3U_{N,Str}I_{N,Str}=3\cdot\frac{\SI{400}{\volt}}{\sqrt{3}}\cdot\SI{25}{\ampere}=\SI{17.32}{\kilo\watt}\\
+M_{Bez}&=\frac{P_{Bez}p}{\omega_{Bez}}=\frac{\SI{17.32}{\kilo\watt}\cdot 3}{\SI{471.2}{\per\second}}=\SI{110.3}{\newton\metre}
+\end{align}
+
+\subsection{}
+\begin{equation}
+n=\frac{f_N\cdot\SI{60}{\second\per\minute}}{p}=\frac{\SI{75}{\hertz}\cdot\SI{60}{\second\per\minute}}{3}=\SI{1850}{\per\minute}
+\end{equation}
+
+\subsection{}
+\begin{align}
+I_0&=\frac{U_{LL,Str}}{\left|R_{S,Str}+\j X_{S,Str,60}\right|}\\
+R_{S,Str}&=\frac{U_{LL,Str}}{I_{0,\mybr{\SI{266}{\volt},\SI{50}{\hertz}}}}\cos\mybr{\varphi_0}=\frac{\frac{\SI{266}{\volt}}{\sqrt{3}}}{\SI{7.136}{\ampere}}\cdot\num{0.00857}=\SI{0.1845}{\ohm}\\
+X_{S,Str,50}&=\sqrt{\mybr{\frac{U_{LL,Str}}{I_{0,\mybr{\SI{266}{\volt},\SI{50}{\hertz}}}}}^2-R_{S,Str}^2}=\sqrt{\mybr{\frac{\frac{\SI{266}{\volt}}{\sqrt{3}}}{\SI{7.136}{\ampere}}}^2-\mybr{\SI{0.1845}{\ohm}}^2}\\
+&=\SI{21.52}{\ohm}\\
+X_{S,Str,75}=&\frac{\SI{75}{\hertz}}{\SI{50}{\hertz}}X_{S,Str,50}=\frac{\SI{60}{\hertz}}{\SI{50}{\hertz}}\SI{21.52}{\ohm}=\SI{32.28}{\ohm}\\
+X_R&=\mybr{1-\sigma}X_S=\mybr{1-\num{0.08}}\SI{32.28}=\SI{29.70}{\ohm}\\
+X_\sigma&=\sigma X_S=\num{0.08}\SI{32.28}=\SI{2.582}{\ohm}\\
+r_S&=\frac{R_S}{Z_{Bez}}=\frac{\SI{0.1845}{\ohm}}{\SI{9.236}{\ohm}}=\num{0.01998}\\
+x_S&=\frac{X_S}{Z_{Bez}}=\frac{\SI{32.28}{\ohm}}{\SI{9.236}{\ohm}}=\num{3.495}\\
+x_R&=\frac{X_R}{Z_{Bez}}=\frac{\SI{29.70}{\ohm}}{\SI{9.236}{\ohm}}=\num{3.216}\\
+x_\sigma&=\frac{X_\sigma}{Z_{Bez}}=\frac{\SI{2.582}{\ohm}}{\SI{9.236}{\ohm}}=\num{0.2799}
+\end{align}
+
+\section{}
+\begin{align}
+\u_S&=r_S\i_S+\frac{\d\Psi_S}{\d\tau}+\j\omega_K\Psi_S\\
+\u_R&=0=r_R\i_R+\frac{\d\Psi_R}{\d\tau}+\j\mybr{\omega_K-\omega_m}\Psi_R\\
+\PPsi_S&=l_S\i_S+\mybr{1-\sigma}l_S\i_R\\
+\PPsi_R&=l_S\mybr{1-\sigma}\mybr{\i_S+\i_R}\\
+\i_R&=0\quad \text{wegen Leerlauf}\\
+\PPsi_S&=l_s\i_S=l_s i_S\e^{\j\omega\tau+\varphi_i}\\
+\omega_K&=0\quad\text{statorfestes Koordinatensystem}\\
+\u_S&=r_S\i_S+\frac{\d}{\d\tau}\mybr{l_s i_S\e^{\j\omega\tau+\varphi_i}}\\
+&=r_S\i_S+\j\omega l_S \i_S\\
+\left|\i_S\right|&=\frac{\left|\u_S\right|}{\left|r_S+\j\omega l_S\right|}=\frac{1}{\sqrt{\num{0.02}^2+\mybr{\num{1.5}\cdot\num{3.5}}^2}}=\num{0.1905}\\
+\left|\PPsi_S\right|&=l_S\left|\i_S\right|=\num{3.5}\cdot\num{0.1905}=\num{0.6668}\\
+\left|\PPsi_R\right|&=\mybr{1-\sigma}l_S\left|\i_S\right|=\mybr{1-\num{0.08}}\num{3.5}\cdot\num{0.1905}=\num{0.6134}
+\end{align}
+
+\section{}
+\subsection{}
+\begin{align}
+i_1&=\Re\mybr{\i_S\e^{\j\SI{0}{\degree}}}=\Re\mybr{\mybr{\num{-0.346}+\j\num{0.785}}\e^{\j\SI{0}{\degree}}}=\num{-0.346}\\
+i_2&=\Re\mybr{\i_S\e^{-\j\SI{120}{\degree}}}=\Re\mybr{\mybr{\num{-0.346}+\j\num{0.785}}\e^{-\j\SI{120}{\degree}}}=\num{0.8528}\\
+i_1&=\Re\mybr{\i_S\e^{-\j\SI{240}{\degree}}}=\Re\mybr{\mybr{\num{-0.346}+\j\num{0.785}}\e^{-\j\SI{240}{\degree}}}=\num{-0.5068}\\
+I_1&=i_1I_{Bez}=\num{-0.346}\cdot\SI{35.36}{\ampere}=\SI{-12.23}{\ampere}\\
+I_2&=i_2I_{Bez}=\num{0.8528}\cdot\SI{35.36}{\ampere}=\SI{30.16}{\ampere}\\
+I_3&=i_3I_{Bez}=\num{-0.5068}\cdot\SI{35.36}{\ampere}=\SI{-17.92}{\ampere}
+\end{align}
+
+\subsection{}
+\begin{align}
+\i_{S,xy}&=\i_{S,\alpha\beta}\e^{-\j\gamma}=\mybr{\num{-0.346}+\j\num{0.785}}\e^{-\j\SI{45}{\degree}}=\num{0.3104}+\j\num{0.7997}\\
+\PPsi_{R,xy}&=l_S\mybr{1-\sigma}\mybr{\i_{S,xy}+\i_{R,xy}}
+\end{align}
+Im xy-Koordinatensystem liegt in $\PPsi_{R,xy}$ in der x-Achse und ist somit rein reell. Daraus folgt, dass 
+\begin{equation}
+\Im\mybr{\PPsi_{R,xy}}=0\quad \text{bzw.}\quad \Im\mybr{\i_{S,xy}}=-\Im\mybr{\i_{R,xy}}.
+\end{equation}
+Aus
+\begin{equation}
+\u_R=0=r_R\i_{R,xy}+0+\j\mybr{\omega_K-\omega_m}\PPsi_{R,xy}\\
+\end{equation}
+folgt
+\begin{equation}
+\Re\mybr{\i_{R,xy}}=0
+\end{equation}
+und damit
+\begin{equation}
+\i_{R,xy}=-\j\Im\mybr{\i_{S,xy}}=-\j\num{0.7997}.
+\end{equation}
+\begin{align}
+\i_{R,\alpha\beta}&=\i_{R,xy}\e^{\j\gamma}=-\j\num{0.7997}\cdot\e^{\j\SI{45}{\degree}}=\SI{0.5655}-\j\num{0.5655}\\
+\PPsi_{R,\alpha\beta}&=\mybr{1-\sigma}l_S\mybr{\i_{S,\alpha\beta}+\i_{R,\alpha\beta}}\\
+&=\mybr{1-\num{0.08}}\num{3.5}\mybr{\num{-0.346}+\j\num{0.785}+\SI{0.5655}-\j\num{0.5655}}=\num{0.7068}+\j\num{0.7068}\\
+\PPsi_{S,\alpha\beta}&=\PPsi_{R,\alpha\beta}+\sigma l_S\i_{S,\alpha\beta}\\
+&=\num{0.7068}+\j\num{0.7068}+\num{0.08}\cdot\num{3.5}\mybr{\num{-0.346}+\j\num{0.785}}=\num{0.6098}+\j\num{0.9265}
+\end{align}
+
+\subsection{}
+\begin{equation}
+m=-\Im\mybr{\i_{S,\alpha\beta}^*\PPsi_{S,\alpha\beta}}=-\Im\mybr{\mybr{\num{-0.346}+\j\num{0.785}}\mybr{\num{0.6098}+\j\num{0.9265}}}=\num{0.7993}
+\end{equation}
+
+\section{}
+\subsection{}
+\begin{equation}
+\PPsi_{S,\alpha\beta}=\PPsi_{R,\alpha\beta}+\sigma l_S\i_{S,\alpha\beta}=\num{0.5}+\j\num{0.866}+\num{0.1}\cdot\num{3.5}\mybr{\num{-0.274}+\j\num{0.525}}=\num{0.4041}+\j\num{1.050}
+\end{equation}
+\begin{figure*}[!h]
+\centering
+\begin{tikzpicture}[>=triangle 45,thick,node distance=0.5cm]
+
+\path (0,0) coordinate (origin1);
+\path (1*8,0) coordinate (alpha);
+\path (0,1*8) coordinate (beta);
+\path (-0.274*6,0.525*6) coordinate (is);
+\path (0.5*6,0.866*6) coordinate (PsiR);
+\path (0.4041*6,1.050*6) coordinate (PsiS);
+\path (-0.4111*6,0.1582*6) coordinate (m1);
+\path (m1) ++(0.4041*6,1.050*6) coordinate (m2);
+
+\fill[gray!30,nearly transparent] (origin1) -- (m1) -- (m2) -- (PsiS) -- cycle;
+
+\draw [->] (origin1) -- (alpha);
+\draw [->] (origin1) -- (beta);
+\draw [->] (origin1) -- node[below left]{$\i_S$} (is);
+\draw [->] (origin1) -- node[below right]{$\PPsi_R$} (PsiR);
+\draw [->] (origin1) -- node[above left]{$\PPsi_S$} (PsiS);
+\draw [->] (PsiR) -- node[above right]{$\PPsi_\sigma$} (PsiS);
+\draw [-] (origin1) -- (m1);
+\draw [-] (m1) -- (m2);
+\draw [-] (PsiS) -- node[below=0.7cm] {$m$} (m2);
+
+\node [below of =alpha] {$\alpha$};
+\node [right of =beta] {$\beta$};
+
+\end{tikzpicture}
+\end{figure*}
+
+\subsection{}
+\begin{equation}
+m=-\Im\mybr{\i_{S,\alpha\beta}^*\PPsi_{S,\alpha\beta}}=-\Im\mybr{\mybr{\num{-0.274}-\j\num{0.525}}\mybr{\num{0.4041}+\j\num{1.050}}}=\num{0.4999}
+\end{equation}
+
+
+
+
+
+
+
+
+
+
+\end{document}
