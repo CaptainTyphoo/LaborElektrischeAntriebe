@@ -27,7 +27,7 @@
 \fancyhf{} %alle Kopf- und Fußzeilenfelder bereinigen
 \fancyhead[L]{Labor Elektrische Antriebe\\UE 370.042} %Kopfzeile links
 \fancyhead[C]{Lösungen zu Test Beispielen} %zentrierte Kopfzeile
-\fancyhead[R]{v2.3\\www.fet.at} %Kopfzeile rechts
+\fancyhead[R]{v2.4\\www.fet.at} %Kopfzeile rechts
 \renewcommand{\headrulewidth}{0.4pt} %obere Trennlinie
 \fancyfoot[C]{\thepage} %Seitennummer
 \renewcommand{\footrulewidth}{0.4pt} %untere Trennlinie
@@ -1074,7 +1074,7 @@ L_2&=\frac{R_2\tan\mybr{\varphi_2}}{2\pi f_N}=\frac{\SI{0.16}{\ohm}\tan\mybr{\ar
 \begin{align}
 \z_L&=\mybr{R_2+\j 2\pi f_N L_2}\frac{S_N}{3\USNS^2}=\mybr{\SI{0.16}{\ohm}+\j2\pi\SI{60}{\hertz}\cdot\SI{318.3}{\micro\henry}}\frac{\SI{800}{\kilo\volt\ampere}}{3\mybr{\SI{210}{\volt}}^2}\\
 &=\num{0.9675}+\j\num{0.7256}\label{eq:alterWiderstand}\\
-i&=\frac{u_2}{\left|\j u_X+\z\right|}=\frac{1}{\left|\j\num{0.04}+\num{0.9675}+\j\num{0.7256}\right|}=\num{0.8105}\\
+i&=\frac{u_1}{\left|\j u_X+\z\right|}=\frac{1}{\left|\j\num{0.04}+\num{0.9675}+\j\num{0.7256}\right|}=\num{0.8105}\\
 \ISS&=i\ISNS=\num{0.8105}\cdot\SI{2199}{\ampere}=\SI{1782}{\ampere}\\
 \ISA&=i\ISNA=\num{0.8105}\cdot\SI{2199}{\ampere}=\SI{1782}{\ampere}
 \end{align}
@@ -1287,8 +1287,8 @@ Hinweis: Der Lösungsweg stammt von Prof. Schmidt. Laut ihm ist das der kürzest
 \begin{align}
 \IPNS&=\frac{S_N}{3\UPNS}=\frac{\SI{450}{\mega\volt\ampere}}{3\frac{\SI{400}{\kilo\volt}}{\sqrt{3}}}=\SI{649.5}{\ampere}\\
 \IPNA&=\IPS=\SI{649.5}{\ampere}\\
-\ISNS&=\frac{S_N}{3\USNS}=\frac{\SI{450}{\mega\volt\ampere}}{3\cdot\SI{21}{\kilo\volt}}=\SI{12.37}{\kilo\ampere}\\
-\ISNA&=\sqrt{3}\ISNS=\sqrt{3}\cdot\SI{12.37}{\kilo\ampere}=\SI{21.43}{\kilo\ampere}
+\ISNS&=\frac{S_N}{3\USNS}=\frac{\SI{450}{\mega\volt\ampere}}{3\cdot\SI{21}{\kilo\volt}}=\SI{7.143}{\kilo\ampere}\\
+\ISNA&=\sqrt{3}\ISNS=\sqrt{3}\cdot\SI{7.143}{\kilo\ampere}=\SI{12.37}{\kilo\ampere}
 \end{align}
 
 \section{}
@@ -1300,11 +1300,12 @@ u_1=1\quad i=1\quad \cz=0\quad \sz=-1
 u_1\ce&=u_2\cz+u_R i\\
 u_1\se&=u_2\sz+u_X i\\
 \ce&=\cz\quad \rightarrow\quad \se = \pm 1\\
-u_1\se&=1\cdot\mybr{-1}+1\cdot u_X\\
-u_1\se&=\num{-0.875}\\
-u_1&=\num{0.875}\quad\text{$u_1$ ist ein Betrag und somit $>0$}\\
+u_2\sz&=u_1\se-u_X i\\
+u_2\mybr{-1}&=1\cdot\se-\num{0.125}\cdot1\\
+u_2&=-\se+\num{0.125}\quad\text{$u_2$ ist ein Betrag und somit $>0$}\\
 \se&=\num{-1}\\
-U_{20}&=u_1\USNA=\num{0.875}\cdot\SI{21}{\kilo\volt}=\SI{18.38}{\kilo\volt}
+u_2&=\num{0.875}\\
+U_{20}&=u_2\USNA=\num{0.875}\cdot\SI{21}{\kilo\volt}=\SI{18.38}{\kilo\volt}
 \end{align}
 
 \subsection{}
@@ -1320,10 +1321,18 @@ U_{10,max}=U_{20,nom}\ddot{u}_{max}=\SI{18.38}{\kilo\volt}\frac{\SI{400}{\kilo\v
 \section{}
 \subsection{}
 \begin{equation}
-u_2=1\quad i=\num{19}\quad \cz=-0.8
+s_N=1\quad\cz=-\num{0.8}
 \end{equation}
 \begin{align}
 \sz&=-\sqrt{1-\cz^2}=-\sqrt{1-{\num{0.8}}^2}=\num{-0.6}\\
+i&=-\num{0.8}-\j\num{0.6}\\
+\vert i\vert&=\sqrt{\mybr{\num{0.8}}^2+\mybr{\num{0.6}}^2}=1\\
+u_2&=\frac{s_N}{i}=\frac{1}{1}=1
+\end{align}
+\begin{equation}
+u_2=1\quad i=\num{1}\quad \cz=-\num{0.8}\quad \sz=-\num{0.6}
+\end{equation}
+\begin{align}
 u_1\ce&=u_2\cz+u_R i\\
 u_1\se&=u_2\sz+u_X i\\
 u_1^2&=\mybr{u_1\ce}^2+\mybr{u_1\se}^2\\
@@ -1442,16 +1451,19 @@ P_2=S_N u_2 i \cz=\SI{450}{\mega\volt\ampere}\cdot\num{1}\cdot\num{1}\cdot\mybr{
 			\draw (0,-3) -- (4,-3);
 			
 			%Sekundär
-			\draw (0,-7.5) -| (1,-8)
+			\draw (0,-5) -- (1,-5)
 			|- (2,-8.5);
-			\draw (2,-7.5) -| (3,-8)
+			\draw (2,-5) -- (3,-5)
 			|- (4,-8.5);
-			\draw (4,-7.5) |- (4,-8)
-			-| (0,-8.5);
+			\draw (4,-5) |- (-1,-4)
+			|- (0,-8.5);
 			%Neutralleiter
-			\draw (-1.5,-10) |- (0,-5)
-			to[short,*-] (2,-5)
-			to[short,*-] (4,-5);
+			\draw (-1.5,-10) |- (0,-8)
+			to[short,*-] (2,-8)
+			to[short,*-] (4,-8);
+			\draw (0,-8) -- (0,-7);
+			\draw (2,-8) -- (2,-7);
+			\draw (4,-8) -- (4,-7);
 			
 			%Spannungspfeile
 			\draw (-0.2,0) to [open, v>=$U_a$] (-0.2,-3);
