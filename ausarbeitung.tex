@@ -27,7 +27,7 @@
 \fancyhf{} %alle Kopf- und Fußzeilenfelder bereinigen
 \fancyhead[L]{Labor Elektrische Antriebe\\UE 370.042} %Kopfzeile links
 \fancyhead[C]{Lösungen zu Test Beispielen} %zentrierte Kopfzeile
-\fancyhead[R]{v2.4\\www.fet.at} %Kopfzeile rechts
+\fancyhead[R]{v2.5\\www.fet.at} %Kopfzeile rechts
 \renewcommand{\headrulewidth}{0.4pt} %obere Trennlinie
 \fancyfoot[C]{\thepage} %Seitennummer
 \renewcommand{\footrulewidth}{0.4pt} %untere Trennlinie
@@ -2618,7 +2618,7 @@ k_1\phi_1&=\SI{6.489}{\volt\second}\\
 k_1\phi_2&=\SI{0.4587}{\volt\second}\\
 I_{A,1}&=\frac{2\pi M_L}{k_1\phi_1}=\frac{2\pi\SI{15}{\newton\metre}}{\SI{6.489}{\volt\second}}=\SI{14.52}{\ampere}\\
 I_{A,2}&=\frac{2\pi M_L}{k_1\phi_2}=\frac{2\pi\SI{15}{\newton\metre}}{\SI{0.4587}{\volt\second}}=\SI{205.5}{\ampere}\\
-&\text{$I_{A,2}$ ist 20 mal größer als Nennstrom und daher unrealistisch}\\
+&\text{$I_{A,2}$ ist 10 mal größer als Nennstrom und daher unrealistisch}\\
 \varphi&=\frac{k_1\phi_1}{k_1\phi_N}=\frac{\SI{6.489}{\volt\second}}{\SI{11.00}{\volt\second}}=\num{0.5899}
 \end{align}
 
@@ -2678,7 +2678,7 @@ I_A=\sqrt[\num{1.6}]{\frac{2\pi \num{1.8}M_N I_{A,N}^{\num{0.6}}}{k_1\phi_N}}=\s
 \end{circuitikz}
 \end{figure*}
 \begin{align}
-R_{Ges}&=\frac{U_i}{I_A}=\frac{k_1\phi\mybr{I_A}n}{I_A}=\frac{k_1\phi_N\mybr{\frac{I_A}{I_{A,N}}}^2 n}{I_A}\\
+R_{Ges}&=\frac{U_i}{I_A}=\frac{k_1\phi\mybr{I_A}n}{I_A}=\frac{k_1\phi_N\mybr{\frac{I_A}{I_{A,N}}}^{\num{0.6}} n}{I_A}\\
 &=\frac{\SI{10.47}{\volt\second}\mybr{\frac{\SI{86.65}{\ampere}}{\SI{60}{\ampere}}}^{\num{0.6}}\frac{\SI{1500}{\rounds\per\minute}}{\SI{60}{\second\per\minute}}}{\SI{86.65}{\ampere}}=\SI{3.766}{\ohm}\\
 R_B&=R_{Ges}-R_A=\SI{3.766}{\ohm}-\SI{1}{\ohm}=\SI{2.766}{\ohm}
 \end{align}
@@ -2973,7 +2973,7 @@ I_{A,N}&=\frac{P_N}{\eta_N U_{A,N}}=\frac{\SI{20}{\kilo\watt}}{\num{0.91}\cdot\S
 I_{A,N}^2 R_i&=U_{A,N} I_{A,N}\mybr{1-\eta_N}\\
 R_i&=\frac{\mybr{1-\eta_N}U_{A,N}I_{A,N}}{I_{A,N}^2}=\frac{\mybr{1-\num{0.91}}\SI{440}{\volt}}{\SI{49.95}{\ampere}}=\SI{0.7928}{\ohm}\\
 U_{A,N}&=R_i I_{A,N}+k_1\phi n_N\\
-k_1\phi&=\frac{U_{A,N}-R_i I_{A,N}}{n_N}=\frac{\SI{400}{\volt}-\SI{0.7928}{\ohm}\cdot\SI{49.95}{\ampere}}{\frac{\SI{2000}{\rounds\per\minute}}{\SI{60}{\second\per\minute}}}=\SI{12.01}{\volt\second}\\
+k_1\phi&=\frac{U_{A,N}-R_i I_{A,N}}{n_N}=\frac{\SI{440}{\volt}-\SI{0.7928}{\ohm}\cdot\SI{49.95}{\ampere}}{\frac{\SI{2000}{\rounds\per\minute}}{\SI{60}{\second\per\minute}}}=\SI{12.01}{\volt\second}\\
 n_0&=\frac{U_{A,N}}{k_1\phi}=\frac{\SI{440}{\volt}}{\SI{12.01}{\volt\second}}\SI{60}{\second\per\minute}=\SI{2198}{\rounds\per\minute}
 \end{align}
 
@@ -3574,7 +3574,7 @@ L_{Bez}&=\frac{U_{Bez}T_{Bez}}{I_{Bez}}=\frac{\SI{97.98}{\volt}\cdot\SI{1.061}{\
 \section{}
 \begin{align}
 \isab&=\frac{2}{3I_{Bez}}\mybr{I_1+I_2 \e^{\j\SI{120}{\degree}}+I_3\e^{\j\SI{240}{\degree}}}\\
-&=\frac{2}{3\cdot\SI{7.071}{\ampere}}\mybr{\SI{-2.828}{\ampere}+\SI{5.657}{\ampere} \e^{\j\SI{120}{\degree}}+\SI{-2.828}{\ampere}\e^{\j\SI{240}{\degree}}}\\
+&=\frac{2}{3\cdot\SI{7.071}{\ampere}}\mybr{\SI{-2.828}{\ampere}+\SI{5.657}{\ampere} \e^{\j\SI{120}{\degree}}-\SI{2.828}{\ampere}\e^{\j\SI{240}{\degree}}}\\
 &=\num{-0.4000}+\j\num{0.6928}\\
 \isdq&=\isab\e^{-\j\gamma_m}=\mybr{\num{-0.4000}+\j\num{0.6928}}\e^{-\j\SI{10}{\degree}}=\num{-0.2736}+\j\num{0.7517}\\
 m_R&=\Psi_M i_q +\mybr{l_d-l_q}i_d i_q = \num{1}\cdot\num{0.7517}+\mybr{\num{0.5}-\num{0.9}}\cdot\mybr{\num{-0.2736}}\cdot\num{0.7517}=\num{0.8340}
@@ -3785,8 +3785,8 @@ m_R&=\Psi_M i_q+\mybr{l_d-l_q}i_d i_q\\
 		\draw[dashed] (axis cs:0,74.3478) -- (axis cs:35.92-60+27.5,74.3478);
 		
 		%auf Felderregerseite umgerechnete Ankernennstrom
-		\draw [decorate,decoration={brace,amplitude=5pt},xshift=0pt,yshift=-3pt]
-		(axis cs:60,400) -- (axis cs:27.5,400) node [black,midway,yshift=-13pt] 
+		\draw [decorate,decoration={brace,amplitude=5pt,aspect=0.67},xshift=0pt,yshift=-3pt]
+		(axis cs:60,400) -- (axis cs:35.92,400) node [black,pos=0.67,yshift=-13pt] 
 		{$I_{sN}''$};
 		
 		%innere Spannung aus Punkt 7
@@ -3794,8 +3794,8 @@ m_R&=\Psi_M i_q+\mybr{l_d-l_q}i_d i_q\\
 		\draw[dashed,<-] (axis cs:30,0) node[above right] {7) $I_m$} -- (axis cs:30,440);
 		
 		%Außenleiterspannung aus Punkt 8
-		\draw[dashed,->] (axis cs:55.92,0) -- (axis cs:55.92,543);
-		\draw[dashed,->] (axis cs:55.92,543) -- (axis cs:0,543) node[above right] {8) $U_{AL}$};
+		\draw[dashed,->] (axis cs:48.47,0) -- (axis cs:48.47,521);
+		\draw[dashed,->] (axis cs:48.47,521) -- (axis cs:0,521) node[above right] {8) $U_{AL}$};
 		
 		\end{axis}
 		
@@ -3869,9 +3869,10 @@ x_p=\frac{\SI{474}{\volt}-\SI{400}{\volt}}{\SI{400}{\volt}}=\num{0.1850}
 \end{equation}
 
 \section{}
+aus Diagramm:
 \begin{align}
-I_{sN}''&=I_{fIV}-I_{fK}=\SI{60}{\ampere}-\SI{27.5}{\ampere}=\SI{32.5}{\ampere}\\
-\gamma&=\frac{I_{sN}''}{I_{sN}}=\frac{\SI{32.5}{\ampere}}{\SI{115.5}{\ampere}}=\num{0.2814}
+I_{sN}''&=\SI{24.1}{\ampere}\\
+\gamma&=\frac{I_{sN}''}{I_{sN}}=\frac{\SI{24.1}{\ampere}}{\SI{115.5}{\ampere}}=\num{0.2087}
 \end{align}
 
 \section{}
@@ -3909,14 +3910,14 @@ r_S&=0\\
 U_i&=\vert\u_{i,uv}\vert U_N=\num{1.100}\cdot\SI{400}{\volt}=\SI{440}{\volt}\\
 I_m&=\SI{30.0}{\ampere}\quad\text{aus Diagramm}\\
 \I_{m,uv}&=\SI{30.0}{\ampere}\e^{\j\SI{8.51}{\degree}}\quad\text{$\SI{90}{\degree}$ auf $\u_{i,uv}$}\\
-\I_{sN,uv}''&=\SI{32.5}{\ampere}\e^{\j\SI{241.6}{\degree}}\quad\text{gleicher Winkel wie $\i_{s,uv}$}\\
-\I_{f,uv}&=\I_{m,uv}-\I_{sN,uv}''=\SI{30.0}{\ampere}\e^{\j\SI{8.51}{\degree}}-\SI{32.5}{\ampere}\e^{\j\SI{241.6}{\degree}}=\SI{55.92}{\ampere}\e^{\j\SI{36.20}{\degree}}\\
+\I_{sN,uv}''&=\SI{24.1}{\ampere}\e^{\j\SI{241.6}{\degree}}\quad\text{gleicher Winkel wie $\i_{s,uv}$}\\
+\I_{f,uv}&=\I_{m,uv}-\I_{sN,uv}''=\SI{30.0}{\ampere}\e^{\j\SI{8.51}{\degree}}-\SI{24.1}{\ampere}\e^{\j\SI{241.6}{\degree}}=\SI{48.47}{\ampere}\e^{\j\SI{31.94}{\degree}}\\
 &\text{$\mybr{0-\u_p-\u_i}$ und $\mybr{0-\I_f-\I_m}$ bilden ähnliche Dreiecke, daher gilt}\nonumber\\
 \frac{I_m}{I_f}&=\frac{u_i}{u_p}\\
-u_p&=\frac{u_i I_f}{I_m}=\frac{\num{1.100}\cdot\SI{55.92}{\ampere}}{\SI{30.0}{\ampere}}=\num{2.050}\\
-\arg\mybr{\u_{p,uv}}&=\arg\mybr{\I_{f,uv}}+\SI{90}{\degree}=\SI{36.20}{\degree}+\SI{90}{\degree}=\SI{126.2}{\degree}\\
-\u_{p,uv}&=\num{2.050}\e^{\j\SI{126.2}{\degree}}\\
-\vartheta&=\arg\mybr{\u_{s,uv}}-\arg\mybr{\u_{p,uv}}=\SI{90}{\degree}-\SI{126.2}{\degree}=\SI{-36.20}{\degree}
+u_p&=\frac{u_i I_f}{I_m}=\frac{\num{1.100}\cdot\SI{48.47}{\ampere}}{\SI{30.0}{\ampere}}=\num{1.777}\\
+\arg\mybr{\u_{p,uv}}&=\arg\mybr{\I_{f,uv}}+\SI{90}{\degree}=\SI{31.94}{\degree}+\SI{90}{\degree}=\SI{121.9}{\degree}\\
+\u_{p,uv}&=\num{1.777}\e^{\j\SI{121.9}{\degree}}\\
+\vartheta&=\arg\mybr{\u_{s,uv}}-\arg\mybr{\u_{p,uv}}=\SI{90}{\degree}-\SI{121.9}{\degree}=\SI{-31.90}{\degree}
 \end{align}
 \begin{figure*}[!ht]
 	\centering
@@ -3925,15 +3926,15 @@ u_p&=\frac{u_i I_f}{I_m}=\frac{\num{1.100}\cdot\SI{55.92}{\ampere}}{\SI{30.0}{\a
 	\path (0,0) coordinate (origin1);
 	\path (1*8,0) coordinate (u);
 	\path (0,1*8) coordinate (v);
-	\path (36.20:8) coordinate (d);
-	\path (126.2:11) coordinate (q);
+	\path (31.94:8) coordinate (d);
+	\path (121.9:11) coordinate (q);
 	\path (0,1*5) coordinate (us);
 	\path (241.6:1*5) coordinate (is);
 	\path (98.51:1.100*5) coordinate (ui);
 	\path (8.51:30.0*0.1) coordinate (Im);
-	\path (36.20:55.92*0.1) coordinate (If);
-	\path (126.2:2.050*5) coordinate (up);
-	\path (126.2:2.5) coordinate (arc1);
+	\path (31.94:48.47*0.1) coordinate (If);
+	\path (121.9:1.777*5) coordinate (up);
+	\path (121.9:2.5) coordinate (arc1);
 	\path (241.6:1) coordinate (arc2);
 	
 	
@@ -3952,7 +3953,7 @@ u_p&=\frac{u_i I_f}{I_m}=\frac{\num{1.100}\cdot\SI{55.92}{\ampere}}{\SI{30.0}{\a
 	\draw [->] (ui) -- (us) node[above right]{$\j x_p \i_s$};
 	\draw [->] (If) -- node[right]{$\I_{sN}''$} (Im) ;
 	
-	\draw [->] (arc1) arc (126.2:90:2.5) node[midway,below]{$\vartheta$};
+	\draw [->] (arc1) arc (121.9:90:2.5) node[midway,below]{$\vartheta$};
 	\draw [->] (arc2) arc (241.6:90:1) node[midway,right]{$\varphi_s$};
 	
 	\node [below of =u] {$u$};
@@ -3966,10 +3967,10 @@ u_p&=\frac{u_i I_f}{I_m}=\frac{\num{1.100}\cdot\SI{55.92}{\ampere}}{\SI{30.0}{\a
 \section{}
 \begin{align}
 i_s&=0\\
-I_f&=\mathrm{const.}=\SI{55.92}{\ampere}\\
+I_f&=\mathrm{const.}=\SI{48.47}{\ampere}\\
 u_s&=u_i=u_p\\
 \text{aus Diagramm:}\nonumber\\
-U_{AL}&=\SI{543}{\volt}
+U_{AL}&=\SI{521}{\volt}
 \end{align}
 Hinweis: Laut Herrn Hofer ist bei Bsp. 2.7 im Übungsskriptum die Lösung falsch.
 
@@ -4032,6 +4033,7 @@ Der nächste BLDC Stromraumzeiger hat das Argument von $\SI{150}{\degree}$. Der 
 \begin{align}
 i_{S,BLDC}&=\frac{i_q}{\cos\mybr{\SI{20}{\degree}}}=\frac{\num{0.8}}{\cos\mybr{\SI{20}{\degree}}}=\num{0.8513}\\
 \i_{S,\alpha\beta,BLDC}&=\num{0.8513}\e^{\j\SI{150}{\degree}}\\
+\i_{S,dq,BLDC}&=\i_{S,\alpha\beta,BLDC}\e^{-\j\gamma_m}=\num{0.8513}\e^{\j\SI{150}{\degree}}\e^{-\j\SI{40}{\degree}}=\num{0.8513}\e^{\j\SI{110}{\degree}}\\
 I_1&=I_{Bez}\Re\mybr{\i_{S,\alpha\beta,BLDC}\e^{\j\SI{0}{\degree}}}=\SI{8.485}{\ampere}\cdot\Re\mybr{\num{0.8513}\e^{\j\SI{150}{\degree}}}=\SI{-6.256}{\ampere}\\
 I_2&=I_{Bez}\Re\mybr{\i_{S,\alpha\beta,BLDC}\e^{-\j\SI{120}{\degree}}}=\SI{8.485}{\ampere}\cdot\Re\mybr{\num{0.8513}\e^{\j\SI{150}{\degree}}\e^{-\j\SI{120}{\degree}}}=\SI{6.256}{\ampere}\\	
 I_3&=I_{Bez}\Re\mybr{\i_{S,\alpha\beta,BLDC}\e^{-\j\SI{240}{\degree}}}=\SI{8.485}{\ampere}\cdot\Re\mybr{\num{0.8513}\e^{\j\SI{150}{\degree}}\e^{-\j\SI{240}{\degree}}}=\SI{0}{\ampere}
@@ -4064,7 +4066,7 @@ u_{S,q0}&=r_S i_q+l_q\frac{\d i_q}{\d\tau}
 \begin{align}
 u_{S,d0}&=r_S i_d+l_d\frac{\d i_d}{\d\tau}\\
 &\rotatebox[origin=c]{270}{\laplace}\nonumber\\
-\frac{u_{S,d0}}{s}&=r_S+s l_d I_{S,d}-l_d i_{S,d0}\\
+\frac{u_{S,d0}}{s}&=r_S I_{S,d}+s l_d I_{S,d}-l_d i_{S,d0}\\
 I_{S,d}&=\frac{u_{S,d0}}{s\mybr{r_S+l_d s}}+\frac{l_d i_{S,d0}}{r_S+l_d s}\\
 &=\frac{u_{S,d0}}{l_d}\mybr{\frac{1}{\frac{r_S}{l_d}s}-\frac{1}{\frac{r_S}{l_d}\mybr{\frac{r_S}{l_d}+s}}}+\frac{i_{S,d0}}{\frac{r_S}{l_d}+s}\\
 &=\frac{u_{S,d0}}{r_S}\mybr{\frac{1}{s}-\frac{1}{\frac{r_S}{l_d}+s}}+\frac{i_{S,d0}}{\frac{r_S}{l_d}+s}\\
