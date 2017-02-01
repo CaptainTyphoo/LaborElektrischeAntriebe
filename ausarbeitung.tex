@@ -21,13 +21,14 @@
 \usepackage{subcaption}%mehrere Grafiken nebeneinander darstellen
 \usepackage{booktabs}
 \usepackage{hyperref}%klickbares Inhaltsverzeichnis
+\usepackage{mathtools}%für \abs
 
 
 \pagestyle{fancy} %eigener Seitenstil
 \fancyhf{} %alle Kopf- und Fußzeilenfelder bereinigen
 \fancyhead[L]{Labor Elektrische Antriebe\\UE 370.042} %Kopfzeile links
 \fancyhead[C]{Lösungen zu Test Beispielen} %zentrierte Kopfzeile
-\fancyhead[R]{v2.5\\www.fet.at} %Kopfzeile rechts
+\fancyhead[R]{v2.5.1\\www.fet.at} %Kopfzeile rechts
 \renewcommand{\headrulewidth}{0.4pt} %obere Trennlinie
 \fancyfoot[C]{\thepage} %Seitennummer
 \renewcommand{\footrulewidth}{0.4pt} %untere Trennlinie
@@ -37,6 +38,7 @@
   per-mode = fraction,
 }
 \DeclareSIUnit\rounds{U}
+\DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
 
 \newcommand{\mybr}[1]{\left(#1\right)}
 \newcommand{\ugamma}{\underline{\gamma}}
@@ -3214,6 +3216,182 @@ n_N=\frac{U_{A,N}-R_A I_{A,N}}{k_1\phi\mybr{1-\num{0.05}\mybr{\frac{I_{A,N}}{I_{
 n=\frac{\num{0.5}U_{A,N}-R_A\num{0.5} I_{A,N}}{k_1\phi\mybr{1-\num{0.05}\mybr{\frac{\num{0.5}I_{A,N}}{I_{A,N}}}^2}}=\frac{\num{0.5}\cdot\SI{440}{\volt}-\SI{6.6}{\ohm}\cdot\num{0.5}\cdot\SI{10}{\ampere}}{\SI{12.57}{\volt\second}\mybr{1-\num{0.05}\cdot\num{0.5}^2}}\SI{60}{\second\per\minute}=\SI{903.9}{\rounds\per\minute}
 \end{equation}
 
+
+\clearpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\part{2016 GSM}
+\section{}
+\subsection{}
+\begin{align}
+I_{A,N}&=\frac{P_N}{\eta_N U_{A,N}}=\frac{\SI{25}{\kilo\watt}}{\num{0.85}\cdot\SI{460}{\volt}}=\SI{63.94}{\ampere}\\
+I_{A,N}^2 R_i&=U_{A,N} I_{A,N}\mybr{1-\eta_N}\\
+R_i&=\frac{\mybr{1-\eta_N}U_{A,N}I_{A,N}}{I_{A,N}^2}=\frac{\mybr{1-\num{0.85}}\SI{460}{\volt}}{\SI{63.94}{\ampere}}=\SI{1.079}{\ohm}\\
+P_N&=M_N \omega_N\\
+M_N&=\frac{P_N}{\omega_N}=\frac{\SI{25}{\kilo\watt}}{2\pi\frac{\SI{2000}{\rounds}}{\SI{60}{\second\per\minute}}}=\SI{119.4}{\newton\metre}\\
+M_N&=\frac{k\Phi\mybr{0}}{2\pi}\mybr{\num{1.25}-\num{0.5}}I_{A,N}\\
+k\Phi\mybr{0}&=\frac{2\pi M_N}{\num{0.75}I_{A,N}}=\frac{2\pi\cdot\SI{119.4}{\newton\metre}}{\num{0.75}\cdot\SI{63.94}{\ampere}}=\SI{15.64}{\volt\second}
+\end{align}
+Grenze des Feldschwächbereichs:
+\begin{equation}
+M=\frac{k\Phi\mybr{0}}{2\pi}\frac{I_{A,N}}{2}=\frac{\SI{15.64}{\volt\second}}{2\pi}\cdot\frac{\SI{63.94}{\ampere}}{2}=\SI{79.58}{\newton\metre}
+\end{equation}
+Ohne Feldschwächung:
+\begin{align}
+M&=\frac{k\Phi\mybr{0}}{2\pi}I_A\\
+I_A&=\frac{2\pi M}{k\Phi\mybr{0}}=\frac{2\pi M}{\SI{15.64}{\volt\second}}\\
+n&=\frac{U_A-I_A R_i}{k\Phi\mybr{0}}=\frac{\SI{200}{\volt}-I_A\cdot\SI{1.079}{\ohm}}{\SI{15.64}{\volt\second}}
+\end{align}
+Mit Feldschwächung (Ströme die größer als der Nennstrom sind, werden als unphysikalisch betrachtet):
+\begin{align}
+M\mybr{I_A}&=\frac{k\Phi\mybr{0}}{2\pi}\mybr{\num{1.25}-\num{0.5}\abs*{\frac{I_A}{I_{A,N}}}}I_{A,N}\\
+0&=I_A^2\frac{k\Phi\mybr{0}}{2\pi}\frac{\num{0.5}}{I_{A,N}}-I_A\cdot\num{1.25}\frac{k\Phi\mybr{0}}{2\pi}+M\\
+I_{A,1,2}&=\frac{\num{1.25}\frac{k\Phi\mybr{0}}{2\pi}\pm\sqrt{\mybr{\num{1.25}\frac{k\Phi\mybr{0}}{2\pi}}^2-4\frac{k\Phi\mybr{0}}{2\pi}\num{0.5}\frac{M}{I_{A,N}}}}{2\frac{k\Phi\mybr{0}}{2\pi}\frac{\num{0.5}}{I_{A,N}}}\\
+&=\frac{\num{1.25}\frac{\SI{15.64}{\volt\second}}{2\pi}\pm\sqrt{\mybr{\num{1.25}\frac{\SI{15.64}{\volt\second}}{2\pi}}^2-4\frac{\SI{15.64}{\volt\second}}{2\pi}\num{0.5}\frac{M}{\SI{63.94}{\ampere}}}}{2\frac{\SI{15.64}{\volt\second}}{2\pi}\frac{\num{0.5}}{\SI{63.94}{\ampere}}}\\
+U_A&=I_A R_i+k \Phi\mybr{I_A}n\\
+n&=\frac{U_A-I_A R_i}{k\Phi\mybr{0}\mybr{\num{1.25}-\num{0.5}\frac{I_A}{I_{A,N}}}}\\
+&=\frac{\SI{200}{\volt}-I_A\cdot \SI{1.079}{\ohm}}{\SI{15.64}{\volt\second}\mybr{\num{1.25}-\num{0.5}\frac{I_A}{\SI{63.94}{\ampere}}}}\SI{60}{\second\per\minute}
+\end{align}
+\begin{table}[!htbp]
+	\begin{center}
+		\begin{tabular}{SSSSS}
+			\toprule
+			{$M$} & {$I_{A,1}$ in \si{\ampere}} & {$I_{A,2}$ in \si{\ampere}} & {$n_1$ in \si{\rounds\per\minute}} & {$n_2$ in \si{\rounds\per\minute}} \\
+			\midrule
+			5 & 2.009 &  & 758.9 & \\
+			20 & 8.035 &  & 734.0 & \\
+			50 & 20.09 &  & 684.1 & \\
+			80 & 127.7 & 32.20 &  & 635.1\\
+			100 & 115.3 & 44.56 &  & 646.5\\
+			110 & 107.1 & 52.78 &  & 655.4\\
+			\bottomrule
+		\end{tabular}
+	\end{center}
+\end{table}
+\begin{figure*}[!htbp]
+	\centering
+	\begin{tikzpicture}
+	\begin{axis}[
+	xlabel=$M$ in $\si{\newton\metre}$,
+	ylabel=$n$ in $\si{\rounds\per\minute}$,
+	grid,
+	ymin=570]
+	\addplot[smooth,mark=*,blue] plot coordinates {
+		(5 	, 758.9)
+		(20 , 734.0)
+		(50 , 684.1)
+		(80 , 635.1)
+		(100 , 646.5)
+		(110 , 655.4)
+	};
+	\addlegendentry{1 a) $M$}
+	\addplot[domain=104:107, red] {-200*ln(1-x/110))};
+	\addlegendentry{1 a) (1) $M_{Bremse}$}
+	\addplot[domain=35:40, green] {-500*ln(1-x/50))};
+	\addlegendentry{1 a) (2) $M_{Bremse}$}
+	\addplot[smooth,mark=*,cyan] plot coordinates {
+		(80 , 634.2)
+		(110 , 584.3)
+	};
+	\addlegendentry{1 b) $M$}
+	\draw[color=black] (axis cs:105.7,651.5) circle (2pt)  node[above left] {instabil};
+	\draw[color=black] (axis cs:37.7,704.5) circle (2pt)  node[above right] {stabil};
+	\end{axis}
+	\end{tikzpicture}
+\end{figure*}
+\begin{align}
+J\frac{\d\omega}{\d t}&=M-M_{Bremse}\\
+J\frac{\partial}{\partial\omega}\mybr{\frac{\d\omega}{\d t}}&<0\quad\text{für Stabilität}\\
+\end{align}
+
+\subsubsection{}
+\begin{equation}
+\frac{\partial M}{\partial\omega}>\frac{\partial M_{Bremse}}{\partial\omega}\rightarrow \text{stabil}
+\end{equation}
+Wenn man eine positive Störung auf die Maschine aufbringt, so ist das interne Moment der Maschine größer als das der Bremse, die Maschine beschleunigt weiter, woraus folgt, dass der Arbeitspunkt instabil ist.
+
+\subsubsection{}
+\begin{equation}
+\frac{\partial M}{\partial\omega}<\frac{\partial M_{Bremse}}{\partial\omega}\rightarrow \text{stabil}
+\end{equation}
+Wenn man eine positive Störung auf die Maschine aufbringt, so ist das interne Moment der Maschine kleiner als das Moment der Bremse, die Maschine wird gebremst und kehrt zum Arbeitspunkt zurück, woraus folgt, dass der Arbeitspunkt stabil ist.
+
+\subsection{}
+Mithilfe einer Kompensationswicklung kann die Ankerrückwirkung kompensiert werden.
+\begin{equation}
+\frac{\partial M}{\partial\omega}<\frac{\partial M_{Bremse}}{\partial\omega}\rightarrow \text{stabil}
+\end{equation}
+
+\section{}
+\subsection{}
+\begin{align}
+U_i\mybr{\SI{1000}{\ampere},\SI{1200}{\rounds\per\minute}}&=\SI{590}{\volt}\quad\text{aus Diagramm}\\
+U_i\mybr{\SI{1000}{\ampere},\SI{1200}{\rounds\per\minute}}&=k\phi\mybr{\SI{1000}{\ampere}} n_N\\
+k\phi\mybr{\SI{1000}{\ampere}}&=\frac{U_i\mybr{\SI{1000}{\ampere},\SI{1200}{\rounds\per\minute}}}{n_N}=\frac{\SI{590}{\volt}}{\frac{\SI{1200}{\rounds\per\minute}}{\SI{60}{\second\per\minute}}}=\SI{29.50}{\volt\second}
+\end{align}
+\begin{figure*}[!ht]
+	\centering
+	\begin{circuitikz}
+		\begin{scope}[scale=0.8]
+			%\draw [help lines] (-1,-1) grid (7,4); %Zeichnet Raster und vereinfacht damit das Zeichnen
+			
+			%Schaltung
+			\draw (0,0) to[R, l_=$R_B$] (0,3)
+			to[R, l_=$R_A$] (3,3)
+			to[european voltage source] (3,0)
+			-- (0,0);
+			
+			%Spannungspfeil
+			\draw (3.5,3) to [open, v^>=$U_i$] (3.5,0);
+			
+			
+		\end{scope}
+	\end{circuitikz}
+\end{figure*}
+\begin{align}
+U_i&=k\phi\mybr{\SI{1000}{\ampere}}n=\mybr{R_i+R_B}I_A\\
+R_B&=\frac{k\phi\mybr{\SI{1000}{\ampere}}n}{I_A}-R_i=\frac{\SI{29.50}{\volt\second}\frac{\SI{700}{\rounds\per\minute}}{\SI{60}{\second\per\minute}}}{\SI{1000}{\ampere}}-\SI{0.1}{\ohm}=\SI{0.2442}{\ohm}\\
+U_A&=R_B I_A=\SI{0.2442}{\ohm}\cdot\SI{1000}{\ampere}=\SI{244.2}{\volt}\\
+\frac{\d U}{\d I}&=R_B+R_i=\SI{0.2442}{\ohm}+\SI{0.1}{\ohm}=\SI{0.3442}{\ohm}\\
+\left.\frac{\d U_i\mybr{n_N}}{\d I_A}\right\vert_{I_A=0}&=\SI{1.4}{\volt\per\ampere}\quad\text{aus Diagramm}\\
+\frac{n_{min}}{n_N}&=\frac{R_B+R_i}{\left.\frac{\d U_i\mybr{n_N}}{\d I_A}\right\vert_{I_A=0}}\\
+n_{min}&=n_N\frac{R_B+R_i}{\left.\frac{\d U_i\mybr{n_N}}{\d I_A}\right\vert_{I_A=0}}=\SI{1200}{\rounds\per\minute}\cdot\frac{\SI{0.3442}{\ohm}}{\SI{1.4}{\volt\per\ampere}}=\SI{295.0}{\rounds\per\minute}
+\end{align}
+
+\subsection{}
+\begin{align}
+U_i\mybr{\SI{550}{\ampere},\SI{1200}{\rounds\per\minute}}&=\SI{500}{\volt}\quad\text{aus Diagramm}\\
+U_i&=k\phi n\\
+k\phi&=\frac{U_i\mybr{\SI{550}{\ampere},\SI{1200}{\rounds\per\minute}}}{\frac{\SI{1200}{\rounds\per\minute}}{\SI{60}{\second\per\minute}}}=\SI{25}{\volt\second}\\
+M&=\frac{k\phi}{2\pi}I_A=\frac{\SI{25}{\volt\second}}{2\pi}\SI{550}{\ampere}=\SI{2188}{\newton\metre}\\
+U_A&=R_i I_A +k \phi n\\
+n&=\frac{U_A-R_i I_A}{k\phi}=\frac{\num{0.8}\cdot\SI{800}{\volt}-\SI{0.1}{\ohm}\cdot\SI{550}{\ampere}}{\SI{25}{\volt\second}}=\SI{23.40}{\per\second}\\
+\frac{n_{in}}{n_{out}}&=\frac{3}{1}\\
+n_{out}&=\frac{n_{in}}{3}=\frac{\SI{23.40}{\per\second}}{3}=\SI{7.800}{\per\second}\\
+v&=n_{out}2\pi r=\SI{7.800}{\per\second}\cdot 2 \pi \cdot \SI{0.2}{\metre}\cdot\SI{3.6}{\kilo\metre\second\per\metre\per\hour}=\SI{35.29}{\kilo\metre\per\hour}\\
+\frac{M_{out}}{M_{in}}&=3\\
+M_{out}&=3M_{in}\\
+P&=Fv=U_A I_A\\
+F&=mg\sin\mybr{\alpha}\\
+\alpha&=\arcsin\mybr{\frac{U_A I_A}{m g v}}\\
+&=\arcsin\mybr{\frac{\num{0.8}\cdot\SI{800}{\volt}\cdot\SI{550}{\ampere}}{\SI{20}{\tonne}\cdot\SI{9.81}{\metre\per\second\squared}\cdot\frac{\SI{35.29}{\kilo\metre\per\hour}}{\SI{3.6}{\kilo\metre\second\per\metre\per\hour}}}}\\
+&=\SI{10.55}{\degree}\\
+\tan\mybr{\alpha}&=\tan\mybr{\SI{10.55}{\degree}}=\SI{18.62}{\percent}
+\end{align}
+
+\subsection{}
+\begin{align}
+U_i\mybr{\SI{750}{\ampere},\SI{1200}{\rounds\per\minute}}&=\SI{550}{\volt}\quad\text{aus Diagramm}\\
+U_i&=k\phi n\\
+k\phi\mybr{\SI{750}{\ampere}}&=\frac{U_i\mybr{\SI{750}{\ampere},\SI{1200}{\rounds\per\minute}}}{n}=\frac{\SI{550}{\volt}}{\frac{\SI{1200}{\rounds\per\minute}}{\SI{60}{\second\per\minute}}}=\SI{27.50}{\volt\second}\\
+U_A&=R_A I_A+ k\phi\mybr{\SI{750}{\ampere}} n\\ &=\SI{0.1}{\ohm}\cdot\SI{750}{\ampere}+\SI{27.50}{\volt\second}\frac{\SI{500}{\rounds\per\minute}}{\SI{60}{\second\per\minute}}\\
+&=\SI{304.2}{\volt}\\
+\text{Bruch:}&\quad M=0\rightarrow I_A=0\\
+U_A&=k\phi_{Rem} n\\
+n&=\frac{U_A}{k\phi_{Rem}}=\frac{\SI{304.2}{\volt}}{\SI{1.5}{\volt\second}}\cdot\SI{60}{\second\per\minute}=\SI{12.16e3}{\rounds\per\minute}
+\end{align}
+
+
 \clearpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -3995,7 +4173,7 @@ Hinweis: Laut Herrn Hofer ist bei Bsp. 2.7 im Übungsskriptum die Lösung falsch
 
 \section{}
 \begin{align}
-m_{R,soll}&=\Psi_M i_q +\underbrace{\mybr{l_d-l_q}}_{0} i_d i_q=\psi_M i_q\\
+m_{R,soll}&=\Psi_M i_q +\underbrace{\mybr{l_d-l_q}}_{0} i_d i_q=\Psi_M i_q\\
 i_q&=\frac{m_R,soll}{\Psi_M}=\frac{\num{0.8}}{1}=\num{0.8}\\
 \isab&=\isdq\e^{\j\gamma_m}=\j\num{0.8}\e^{\j\SI{40}{\degree}}=\num{0.8}\e^{\j\SI{130}{\degree}}
 \end{align}
@@ -4053,7 +4231,7 @@ I_3&=I_{Bez}\Re\mybr{\isab\e^{-\j\SI{240}{\degree}}}=\SI{8.485}{\ampere}\cdot\Re
 \section{}
 \subsection{}
 \begin{align}
-\usdq&=\usab\e^{-\j\gamma_m}=\num{0.1}\e{-\j\SI{40}{\degree}}=\num{0.07660}-\j\num{0.06428}\\
+\usdq&=\usab\e^{-\j\gamma_m}=\num{0.1}\e^{-\j\SI{40}{\degree}}=\num{0.07660}-\j\num{0.06428}\\
 \psdq&=\Psi_M+l_d i_d+\j l_q i_q\\
 \omega_m&=0\quad\omega_K=0\quad\frac{\d\Psi_M}{\d\tau}=0\\
 \usdq&=r_S\isdq+\frac{\d\psdq}{\d\tau}+\j\omega_K\psdq\\
@@ -4123,6 +4301,153 @@ I_{S,q}\mybr{t}&=I_{Bez}i_q\mybr{\frac{t}{T_{Bez}}}\\
 	\end{tikzpicture}
 \end{figure*}
 
+
+\clearpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\part{2016 APSM}
+\section{}
+\begin{align}
+	U_{Bez}&=\sqrt{2}U_{Nenn,Str}=\sqrt{2}\frac{U_N}{\sqrt{3}}=\sqrt{2}\frac{\SI{125}{\volt}}{\sqrt{3}}=\SI{102.1}{\volt}\\
+	I_{Bez}&=\sqrt{2}I_{Nenn,Str}=\sqrt{2}I_N=\sqrt{2}\cdot\SI{54}{\ampere}=\SI{76.37}{\ampere}\\
+	n_N&=\frac{f_{Nenn}\SI{60}{\second\per\minute}}{p}\\
+	f_{Nenn}&=\frac{n_N p}{\SI{60}{\second\per\minute}}\\
+	\Omega_{Bez}&=2\pi f_{Nenn}=2\pi\frac{n_N p}{\SI{60}{\second\per\minute}}=2\pi\frac{\SI{2400}{\rounds\per\minute}\cdot 3}{\SI{60}{\second\per\minute}}=\SI{754.0}{\per\second}\\
+	T_{Bez}&=\frac{1}{\Omega_{Bez}}=\frac{1}{\SI{754.0}{\per\second}}=\SI{1.326}{\milli\second}\\
+	M_{Bez}&=\frac{3 U_{Nenn,Str}I_{Nenn,Str}p}{\omega_{el,Bez}}=\frac{3 \frac{U_N}{\sqrt{3}}I_{N}p}{\Omega_{Bez}}=\frac{3\frac{\SI{125}{\volt}}{\sqrt{3}}\SI{54}{\ampere}\cdot 3}{\SI{754.0}{\per\second}}=\SI{46.52}{\newton\metre}\\
+	P_{Bez}&=S_N=3 U_{Nenn,Str} I_{Nenn,Str}=3\frac{\SI{125}{\volt}}{\sqrt{3}}\SI{54}{\ampere}=\SI{11.69}{\watt}\\
+	R_{Bez}&=\frac{U_{Bez}}{I_{Bez}}=\frac{\SI{102.1}{\volt}}{\SI{76.37}{\ampere}}=\SI{1.337}{\ohm}\\
+	L_{Bez}&=\frac{R_{Bez}}{\Omega_{Bez}}=\frac{\SI{1.337}{\ohm}}{\SI{754.0}{\per\second}}=\SI{1.773}{\milli\henry}
+\end{align}
+
+\section{}
+\begin{align}
+m_R&=\Psi_M i_q+\mybr{l_d-l_q}i_di_q\\
+l_d&=l_q+\frac{m_R-\Psi_M i_q}{i_d i_q}\\
+\psdq&=\Psi_M+l_d i_d+\j l_q i_q
+\end{align}
+Betrachtung im rotorfesten Koordinatensystem, daher gilt $\omega_K=\omega_m$.
+\begin{align}
+\u_S&=r_S\i_S+\frac{\d\PPsi_S}{\d\tau}+\j\omega_K\PPsi_S\\
+0&=r_S\mybr{i_d+\j i_q}+\frac{\d}{\d\tau}\mybr{l_d i_d + \Psi_M + \j l_q i_q}+\j \omega_m \mybr{l_d i_d + \Psi_M + \j l_q i_q}\\
+\frac{\d\Psi_M}{\d\tau}&=0\\
+0&=r_S i_d -\omega_m l_q i_q\\
+i_d&=\frac{\omega_m l_q i_q}{r_S}\\
+0&=r_S i_q+\omega_m l_d i_d + \omega_m\Psi_M \\
+0&= r_S i_q+\omega_m\mybr{l_q+\frac{m_R-\Psi_M i_q}{\frac{\omega_m l_q i_q}{r_S}i_q}}\frac{\omega_m l_q i_q}{r_S}+\omega_m \Psi_M\\
+0&= r_S i_q+l_q^2\frac{\omega_m^2 i_q}{r_S}+\frac{\omega_m m_R}{i_q} -\omega_m\Psi_M +\omega_m \Psi_M\\
+l_q&=\sqrt{-\frac{\frac{\omega_m m_R}{i_q}+r_S i_q}{\frac{\omega_m^2 i_q}{r_S}}}=\sqrt{-\frac{\frac{\num{0.2}\cdot\mybr{\num{-0.27}}}{\num{-0.418}}+\num{0.07}\cdot\mybr{\num{-0.418}}}{\frac{\num{0.2}^2\cdot\mybr{\num{-0.418}}}{\num{0.07}}}}=\num{0.6468}\\
+i_d&=\frac{\omega_m l_q i_q}{r_S}=\frac{\num{0.2}\cdot\num{0.6468}\cdot\mybr{\num{-0.418}}}{\num{0.07}}=\num{-0.7725}\\
+l_d&=l_q+\frac{m_R-\Psi_M i_q}{i_d i_q}=\num{0.6468}+\frac{\num{-0.27}-1\cdot\mybr{\num{-0.418}}}{\mybr{\num{-0.7725}}\cdot\mybr{\num{0.418}}}=\num{1.105}
+\end{align}
+
+\section{}
+\begin{align}
+\isab&=\isdq\e^{\j\gamma_m}=\mybr{\num{-0.7725}-\j\num{0.418}}\e^{\j\SI{25}{\degree}}=\num{-0.8768}-\j\num{0.05236}\\
+I_1&=I_{Bez}\Re\mybr{\isab\e^{\j\SI{0}{\degree}}}=\SI{76.37}{\ampere}\cdot\Re\mybr{\num{-0.8768}-\j\num{0.05236}}=\SI{-66.96}{\ampere}\\
+I_2&=I_{Bez}\Re\mybr{\isab\e^{-\j\SI{120}{\degree}}}=\SI{76.37}{\ampere}\cdot\Re\mybr{\mybr{\num{-0.8768}-\j\num{0.05236}}\e^{-\j\SI{120}{\degree}}}=\SI{30.02}{\ampere}\\	
+I_3&=I_{Bez}\Re\mybr{\isab\e^{-\j\SI{240}{\degree}}}=\SI{76.37}{\ampere}\cdot\Re\mybr{\mybr{\num{-0.8768}-\j\num{0.05236}}\e^{-\j\SI{240}{\degree}}}=\SI{36.94}{\ampere}
+\end{align}
+
+\section{}
+\begin{align}
+m_{R,soll}&=\Psi_M i_q +\underbrace{\mybr{l_d-l_q}}_{0} i_d i_q=\Psi_M i_q\\
+i_q&=\frac{m_R,soll}{\Psi_M}=\frac{\num{-0.3}}{1}=\num{-0.3}\\
+\isab&=\isdq\e^{\j\gamma_m}=-\j\num{0.3}\e^{\j\SI{25}{\degree}}=\num{0.3}\e^{-\j\SI{65}{\degree}}
+\end{align}
+\begin{figure*}[!ht]
+	\centering
+	\begin{tikzpicture}[>=triangle 45,thick,node distance=0.5cm]
+	
+	\path (0,0) coordinate (origin1);
+	\path (1*8,0) coordinate (alpha);
+	\path (0,0.4*8) coordinate (beta);
+	\path (-65:0.3*12) coordinate (isq);
+	\path (25:1*6) coordinate (PsiM);
+	\path (-90:0.3310*12) coordinate (iSBLDC);
+	\path (-65:2.5) coordinate (arc1);
+	\path (0:0.3*6) coordinate (arc2);
+	\draw (isq) ++(115:0.6) coordinate (arc3);
+	\draw (isq) ++(-0.3,0.1) coordinate (dot);
+	
+	\draw [->] (origin1) -- (alpha);
+	\draw [->] (origin1) -- (beta);
+	\draw [->] (origin1) -- node[above right]{$\j i_q$} (isq);
+	\draw [->] (origin1) -- node[above left]{$\PPsi_M$} (PsiM);
+	\draw [->] (origin1) -- node[below left]{$\i_{S,BLDC}$} (iSBLDC);
+	\draw (iSBLDC) -- (isq);
+	\draw (arc1) arc (-65:-90:2.5) node[above right=0.1cm]{$\SI{20}{\degree}$};
+	\draw (arc2) node[above left]{$\gamma_m$} arc (0:25:0.3*6);
+	\draw (arc3) arc (115:205:0.6);
+	\node at (dot) {$\cdot$};
+	
+	
+	\node [below of =alpha] {$\alpha$};
+	\node [right of =beta] {$\beta$};
+	
+	\end{tikzpicture}
+\end{figure*}
+Der nächste BLDC Stromraumzeiger hat das Argument von $\SI{-90}{\degree}$. Der Strom $\i_{S,\alpha\beta,BLDC}$ muss wenn man ihn auf die Richtung von $i_q$ projiziert, die gleiche Länge wie $i_q$ besitzen.
+\begin{align}
+i_{S,BLDC}&=\frac{i_q}{\cos\mybr{\SI{25}{\degree}}}=\frac{\num{0.3}}{\cos\mybr{\SI{25}{\degree}}}=\num{0.3310}\\
+\i_{S,\alpha\beta,BLDC}&=\num{0.3310}\e^{-\j\SI{90}{\degree}}\\
+\i_{S,dq,BLDC}&=\i_{S,\alpha\beta,BLDC}\e^{-\j\gamma_m}=\num{0.3310}\e^{-\j\SI{90}{\degree}}\e^{-\j\SI{25}{\degree}}=\num{-0.1399}-\j\num{0.3000}\\
+m_R&=\Psi_M i_q +\mybr{l_d-l_q} i_d i_q\\
+&=1\cdot\mybr{\num{-0.3000}}+\mybr{\num{1.2}-\num{0.6}} \cdot\mybr{\num{-0.1399}} \cdot \mybr{\num{-0.3000}}\\
+&=\num{-0.2748}
+\end{align}
+
+\section{}
+\subsection{}
+\begin{align}
+\usdq&=\num{0.3}\e^{\j\SI{90}{\degree}}=\j\num{0.3}\\
+\psdq&=\Psi_M+l_d i_d+\j l_q i_q\\
+\omega_m&=\num{0.2}\quad\omega_K=\num{0.2}\quad\frac{\d\Psi_M}{\d\tau}=0\\
+\usdq&=r_S\isdq+\frac{\d\psdq}{\d\tau}+\j\omega_K\psdq\\
+&=r_S\mybr{i_d+\j i_q}+l_d\frac{\d i_d}{\d\tau}+\j l_q\frac{\d i_q}{\d\tau}+\j\omega_m \mybr{\Psi_M+l_d i_d+\j l_q i_q}\\
+u_{S,d0}&=r_S i_d+l_d\frac{\d i_d}{\d\tau}-\omega_m l_q i_q\\
+u_{S,q0}&=r_S i_q+l_q\frac{\d i_q}{\d\tau}+\omega_m \Psi_M +\omega_m l_d i_d
+\end{align}
+
+\subsection{}
+\begin{align}
+u_{S,q0}&=r_S i_q+l_q\frac{\d i_q}{\d\tau}+\omega_m \Psi_M +\omega_m l_d i_d\\
+&\rotatebox[origin=c]{270}{\laplace}\nonumber\\
+\frac{u_{S,q0}}{s}&=r_S I_{S,q}+s l_q I_{S,q}-l_q i_{S,q0}+\omega_m \frac{\Psi_M}{s}+\omega_m l_d I_{S,d}\\
+I_{S,q}&=\frac{\frac{u_{S,q0}}{s}+l_q i_{S,q0}-\omega_m \frac{\Psi_M}{s}-\omega_m l_d I_{S,d}}{r_S+s l_q}\\
+u_{S,d0}&=r_S i_d+l_d\frac{\d i_d}{\d\tau}-\omega_m l_q i_q\\
+&\rotatebox[origin=c]{270}{\laplace}\nonumber\\
+\frac{u_{S,d0}}{s}&=r_S I_{S,d}+s l_d I_{S,d}-l_d i_{S,d0}-\omega_m l_q I_{S,q}\\
+\frac{u_{S,d0}}{s}&=r_S I_{S,d}+s l_d I_{S,d}-l_d i_{S,d0}-\omega_m l_q \mybr{\frac{\frac{u_{S,q0}}{s}+l_q i_{S,q0}-\omega_m \frac{\Psi_M}{s}-\omega_m l_d I_{S,d}}{r_S+s l_q}}\\
+I_{S,d}&=\frac{\mybr{r_S+s l_d}\mybr{\frac{u_{S,d0}}{s}+l_d i_{S,d0}+\frac{\omega_m l_q}{r_S+s l_d}\mybr{\frac{u_{S,q0}}{s}+l_q i_{S,q0}-\omega_m\frac{\Psi_M}{s}}}}{\mybr{r_S+s l_d}^2+\omega_m^2 l_d l_q}
+\end{align}
+\begin{align}
+0&=s^2 l_d^2+ s 2 r_S l_d + \mybr{r_S^2+\omega_m l_d l_q}\\
+s_{1,2}&=\frac{-2 r_S l_d \pm \sqrt{\mybr{2 r_S l_d}^2 - 4 l_d^2\mybr{r_S^2+\omega_m^2 l_d l_q}}}{2 l_d^2}\\
+&=\frac{-2\cdot\num{0.07}\cdot\num{1.2}\pm\sqrt{\mybr{2\cdot\num{0.07}\cdot\num{1.2}}^2-4\cdot\num{1.2}^2\cdot\mybr{\num{0.07}^2+\num{0.2}^2\cdot\num{1.2}\cdot\num{0.6}}}}{2\cdot\num{1.2}^2}\\
+&=\num{0.05833}\pm\j\num{0.1414}\\
+\omega_{Res}&=\num{0.1414}
+\end{align}
+
+\subsection{}
+\begin{align}
+\tau\rightarrow\infty\quad&\rightarrow\quad \frac{\d}{\d\tau}\rightarrow 0\\
+u_{S,d0}&=r_S i_d-\omega_m l_q i_q\\
+i_d&=\frac{\omega_m l_q i_q}{r_S}\\
+u_{S,q0}&=r_S i_q+\omega_m \Psi_M +\omega_m l_d \frac{\omega_m l_q i_q}{r_S}\\
+i_q&=\frac{u_{S,q0}-\omega_m \Psi_M}{r_S+\frac{\omega_m^2 l_d l_q}{r_S}}\\
+&=\frac{\num{0.3}-\num{0.2}\cdot 1}{\num{0.07}+\frac{\num{0.2}^2\cdot\num{1.2}\cdot\num{0.6}}{0.07}}\\
+&=\num{0.2077}\\
+i_d&=\frac{\omega_m l_q i_q}{r_S}\\
+&=\frac{\num{0.2}\cdot\num{0.6}\cdot\num{0.2077}}{0.07}\\
+&=\num{0.3561}\\
+\isdq&=\num{0.3561}+\j\num{0.2077}\\
+m_R&=\Psi_M i_q +\mybr{l_d - l_q} i_d i_q\\
+&=1\cdot\num{0.2077}+\mybr{\num{1.2}-\num{0.6}}\cdot\num{0.3561}\cdot\num{0.2077}\\
+&=\num{0.2521}
+\end{align}
+
 %\fi
+
 
 \end{document}
