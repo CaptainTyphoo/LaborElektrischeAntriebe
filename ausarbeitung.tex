@@ -28,7 +28,7 @@
 \fancyhf{} %alle Kopf- und Fußzeilenfelder bereinigen
 \fancyhead[L]{Labor Elektrische Antriebe\\UE 370.042} %Kopfzeile links
 \fancyhead[C]{Lösungen zu Test Beispielen} %zentrierte Kopfzeile
-\fancyhead[R]{v2.5.1\\www.fet.at} %Kopfzeile rechts
+\fancyhead[R]{v2.5.2\\www.fet.at} %Kopfzeile rechts
 \renewcommand{\headrulewidth}{0.4pt} %obere Trennlinie
 \fancyfoot[C]{\thepage} %Seitennummer
 \renewcommand{\footrulewidth}{0.4pt} %untere Trennlinie
@@ -1576,6 +1576,211 @@ b_C&=b_2-b_2'=\num{-0.1890}-\mybr{\num{-0.4860}}=\num{0.2970}\\
 C&=\frac{b_C}{\omega Z_{Bez}}=\frac{b_C S_N}{2\pi f_N 3 U_S^2}=\frac{0.2970\cdot\SI{1600}{\kilo\volt\ampere}}{2\pi\SI{50}{\hertz}\cdot 3\mybr{\SI{720}{\volt}}^2}=\SI{0.9726}{\milli\farad}
 \end{align}
 Hinweis: Prof. Schmidt kommt bei seiner Lösung ebenfalls auf $\SI{0.9726}{\milli\farad}$.
+
+
+\clearpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\part{2016 Nachtest Trafo}
+\section{}
+\begin{equation}
+\frac{N_1}{N_2}=\frac{\UPNS}{\USNS}=\frac{\SI{10}{\kilo\volt}}{\frac{\SI{420}{\volt}}{\sqrt{3}}}=\num{41.24}
+\end{equation}
+
+\section{}
+\begin{align}
+\IPNS&=\frac{S_N}{3\UPNS}=\frac{\SI{320}{\kilo\volt\ampere}}{3\cdot\SI{10}{\kilo\volt}}=\SI{10.67}{\ampere}\\
+\IPNA&=\sqrt{3}\IPNS=\sqrt{3}\cdot\SI{10.67}{\ampere}=\SI{18.48}{\ampere}\\
+\ISNS&=\frac{S_N}{3\USNS}=\frac{\SI{320}{\kilo\volt}}{3\frac{\SI{420}{\volt}}{\sqrt{3}}}=\SI{439.9}{\ampere}\\
+\ISNA&=\ISNS=\SI{439.9}{\ampere}
+\end{align}
+
+\section{}
+\begin{align}
+I_K&=I_K/I_N\cdot I_N=\num{6.5}\cdot\SI{180}{\ampere}=\SI{1170}{\ampere}\\
+&\text{Annahme: Dreiecksschaltung}\\
+Z_{K,Str}&=\frac{U_{N,Str}}{I_{K,Str}}=\frac{\SI{400}{\volt}}{\frac{\SI{1170}{\ampere}}{\sqrt{3}}}=\SI{0.5922}{\ohm}\\
+\Z_{K,Str}&=Z_{K,Str}\mybr{\cos\mybr{\varphi_K}+\j\sqrt{1-\cos^2\mybr{\varphi_K}}}\\
+&=\SI{0.5922}{\ohm}\mybr{\num{0.25}+\j\sqrt{1-\num{0.25}^2}}\\
+&=\SI{0.1481}{\ohm}+\j\SI{0.5734}{\ohm}\\
+\z_K&=\Z_{K,Str}\frac{S_N}{3\USNS^2}\\
+&=\mybr{\SI{0.1481}{\ohm}+\j\SI{0.5734}{\ohm}}\frac{\SI{320}{\kilo\volt}}{3\mybr{\frac{\SI{420}{\volt}}{\sqrt{3}}}^2}\\
+&=\num{0.2692}+\j\num{1.040}\\
+\z_L&=Z_L\mybr{\cos\mybr{\varphi_K}+\j\sqrt{1-\cos^2\mybr{\varphi_K}}}\frac{S_N}{3\UPNS^2}\\
+&=\SI{12}{\ohm}\mybr{\num{0.30}+\j\sqrt{1-\num{0.30}^2}}\frac{\SI{320}{\kilo\volt}}{3\mybr{\SI{10}{\kilo\volt}}^2}\\
+&=\num{0.003840}+\j\num{0.01221}
+\end{align}
+\begin{figure*}[!h]
+	\centering
+	\begin{circuitikz}
+		\begin{scope}[scale=0.8]
+			%\draw [help lines] (-1,-1) grid (7,4); %Zeichnet Raster und vereinfacht damit das Zeichnen
+			
+			%Schaltung
+			\draw (0,3) to[R, l=$\z_L$] (3,3)
+			to[R, l=$u_R+\j u_X$] (6,3)
+			to[R, l_=$\z_K$] (6,0)
+			-- (0,0);
+			
+			%Spannungspfeil
+			\draw (0,0) to [open, v^<=$\u_{Netz}$] (0,3);
+			\draw (3,3) to [open, v=$\u_1$] (3,0);
+			\draw (6.5,3) to [open, v^>=$\u_2$] (6.5,0);
+			
+		\end{scope}
+	\end{circuitikz}
+\end{figure*}
+
+\subsection{}
+\begin{align}
+\u_1&=u_{Netz}\frac{u_R+\j u_X+\z_K}{u_R+\j u_X+\z_K+\z_L}\\
+&=1\frac{\num{0.01}+\j\num{0.04}+\num{0.2692}+\j\num{1.040}}{\num{0.01}+\j\num{0.04}+\num{0.2692}+\j\num{1.040}+\num{0.003840}+\j\num{0.01221}}\\
+&=\num{0.9887}+\j\num{0.0005798}\\
+u_1&=\abs{\u_1}=\sqrt{\num{0.9887}^2+\num{0.0005798}^2}=\num{0.9887}\\
+\UPA&=u_1\UPNA=\num{0.9887}\cdot\SI{10}{\kilo\volt}=\SI{9887}{\volt}
+\end{align}
+
+\subsection{}
+\begin{align}
+\u_2&=u_{Netz}\frac{\z_K}{u_R+\j u_X+\z_K+\z_L}\\
+&=1\frac{\num{0.2692}+\j\num{1.040}}{\num{0.01}+\j\num{0.04}+\num{0.2692}+\j\num{1.040}+\num{0.003840}+\j\num{0.01221}}\\
+&=\num{0.9521}+\j\num{0.0002660}\\
+u_1&=\abs{\u_1}=\sqrt{\num{0.9521}^2+\num{0.0002660}^2}=\num{0.9521}\\
+\UPA&=u_1\UPNA=\num{0.9521}\cdot\SI{420}{\volt}=\SI{399.9}{\volt}
+\end{align}
+
+\subsection{}
+\begin{align}
+\i&=\frac{u_{Netz}}{u_R+\j u_X+\z_K+\z_L}\\
+&=\frac{1}{\num{0.01}+\j\num{0.04}+\num{0.2692}+\j\num{1.040}+\num{0.003840}+\j\num{0.01221}}\\
+&=\num{0.2223}-\j\num{0.8580}\\
+i&=\abs{\i}=\sqrt{\num{0.2223}^2+\num{0.8580}^2}=\num{0.8863}\\
+\ISA&=i\ISNA=\num{0.8863}\cdot\SI{439.9}{\ampere}=\SI{389.9}{\ampere}
+\end{align}
+
+\section{}
+\begin{align}
+Z_{N,Str}&=\frac{U_{N,Str}}{I_{N,Str}}=\frac{\SI{400}{\volt}}{\frac{\SI{180}{\ampere}}{\sqrt{3}}}=\SI{3.849}{\ohm}\\
+\Z_{N,Str}&=Z_{N,Str}\mybr{\cos\mybr{\varphi_N}+\j\sqrt{1-\cos^2\mybr{\varphi_N}}}\\
+&=\SI{3.849}{\ohm}\mybr{\num{0.85}+\j\sqrt{1-\num{0.85}^2}}\\
+&=\SI{3.272}{\ohm}+\j\SI{2.028}{\ohm}\\
+\z_N&=\Z_{N,Str}\frac{S_N}{3\USNS^2}\\
+&=\mybr{\SI{3.272}{\ohm}+\j\SI{2.028}{\ohm}}\frac{\SI{320}{\kilo\volt}}{3\mybr{\frac{\SI{420}{\volt}}{\sqrt{3}}}^2}\\
+&=\num{5.936}+\j\num{3.679}
+\end{align}
+
+\subsection{}
+\begin{align}
+\u_1&=u_{Netz}\frac{u_R+\j u_X+\z_N}{u_R+\j u_X+\z_N+\z_L}\\
+&=1\frac{\num{0.01}+\j\num{0.04}+\num{5.936}+\j\num{3.679}}{\num{0.01}+\j\num{0.04}+\num{5.936}+\j\num{3.679}+\num{0.003840}+\j\num{0.01221}}\\
+&=\num{0.9886}-\j\num{0.001182}\\
+u_1&=\abs{\u_1}=\sqrt{\num{0.9886}^2+\num{0.001182}^2}=\num{0.9886}\\
+\UPA&=u_1\UPNA=\num{0.9886}\cdot\SI{10}{\kilo\volt}=\SI{9886}{\volt}
+\end{align}
+
+\subsection{}
+\begin{align}
+\u_2&=u_{Netz}\frac{\z_N}{u_R+\j u_X+\z_N+\z_L}\\
+&=1\frac{\num{5.936}+\j\num{3.679}}{\num{0.01}+\j\num{0.04}+\num{5.936}+\j\num{3.679}+\num{0.003840}+\j\num{0.01221}}\\
+&=\num{0.9944}-\j\num{0.005251}\\
+u_2&=\abs{\u_2}=\sqrt{\num{0.9944}^2+\num{0.005251}^2}=\num{0.9944}\\
+\USA&=u_1\USNA=\num{0.9944}\cdot\SI{420}{\volt}=\SI{417.6}{\volt}
+\end{align}
+
+\subsection{}
+\begin{align}
+\i&=\frac{u_{Netz}}{u_R+\j u_X+\z_N+\z_L}\\
+&=\frac{1}{\num{0.01}+\j\num{0.04}+\num{5.936}+\j\num{3.679}+\num{0.003840}+\j\num{0.01221}}\\
+&=\num{0.1206}-\j\num{0.07565}\\
+i&=\abs{\i}=\sqrt{\num{0.1206}^2+\num{0.07565}^2}=\num{0.1424}\\
+\ISA&=i\ISNA=\num{0.1424}\cdot\SI{439.9}{\ampere}=\SI{62.64}{\ampere}
+\end{align}
+
+\section{}
+\begin{align}
+\frac{N_1}{\frac{N_2}{2}}&=\frac{\UPNS}{\frac{\USNA}{3}}\\
+\frac{N_1}{N_2}&=\frac{3\UPNS}{2\USNA}=\frac{3\cdot\frac{\SI{30}{\kilo\volt}}{\sqrt{3}}}{2\cdot\SI{420}{\volt}}=\num{61.86}
+\end{align}
+
+\section{}
+\begin{align}
+\IPNS&=\frac{S_N}{3\UPNS}=\frac{\SI{640}{\kilo\volt\ampere}}{3\frac{\SI{30}{\kilo\volt}}{\sqrt{3}}}=\SI{12.32}{\ampere}\\
+\IPNA&=\sqrt{3}\IPNS=\sqrt{3}\cdot\SI{12.32}{\ampere}=\SI{21.34}{\ampere}\\
+\ISNS&=\frac{S_N}{3\USNS}=\frac{\SI{640}{\kilo\volt}}{3\frac{\SI{420}{\volt}}{\sqrt{3}}}=\SI{507.9}{\ampere}\\
+\ISNA&=\ISNS=\SI{507.9}{\ampere}
+\end{align}
+
+\section{}
+\begin{align}
+\z_K&=\Z_{K,Str}\frac{S_N}{3\USNS^2}\\
+&=\mybr{\SI{0.1481}{\ohm}+\j\SI{0.5734}{\ohm}}\frac{\SI{640}{\kilo\volt}}{3\mybr{\frac{\SI{420}{\volt}}{\sqrt{3}}}^2}\\
+&=\num{0.5373}+\j\num{2.080}\\
+\z_L&=Z_L\mybr{\cos\mybr{\varphi_K}+\j\sqrt{1-\cos^2\mybr{\varphi_K}}}\frac{S_N}{3\UPNS^2}\\
+&=\SI{12}{\ohm}\mybr{\num{0.30}+\j\sqrt{1-\num{0.30}^2}}\frac{\SI{640}{\kilo\volt}}{3\mybr{\frac{\SI{30}{\kilo\volt}}{\sqrt{3}}}^2}\\
+&=\num{0.002560}+\j\num{0.008140}
+\end{align}
+
+\subsection{}
+\begin{align}
+\u_1&=u_{Netz}\frac{u_R+\j u_X+\z_K}{u_R+\j u_X+\z_K+\z_L}\\
+&=1\frac{\num{0.01}+\j\num{0.04}+\num{0.5373}+\j\num{2.080}}{\num{0.01}+\j\num{0.04}+\num{0.5373}+\j\num{2.080}+\num{0.002560}+\j\num{0.008140}}\\
+&=\num{0.9961}+\j\num{0.0002012}\\
+u_1&=\abs{\u_1}=\sqrt{\num{0.9961}^2+\num{0.0002012}^2}=\num{0.9960}\\
+\UPA&=u_1\UPNA=\num{0.9960}\cdot\SI{30}{\kilo\volt}=\SI{29.88}{\kilo\volt}
+\end{align}
+
+\subsection{}
+\begin{align}
+\u_2&=u_{Netz}\frac{\z_K}{u_R+\j u_X+\z_K+\z_L}\\
+&=1\frac{\num{0.5373}+\j\num{2.080}}{\num{0.01}+\j\num{0.04}+\num{0.5373}+\j\num{2.080}+\num{0.002560}+\j\num{0.008140}}\\
+&=\num{0.9774}+\j\num{0.00005365}\\
+u_2&=\abs{\u_2}=\sqrt{\num{0.9774}^2+\num{0.00005365}^2}=\num{0.9774}\\
+\USA&=u_2\USNA=\num{0.9774}\cdot\SI{420}{\volt}=\SI{410.5}{\volt}
+\end{align}
+
+\subsection{}
+\begin{align}
+\i&=\frac{u_{Netz}}{u_R+\j u_X+\z_K+\z_L}\\
+&=\frac{1}{\num{0.01}+\j\num{0.04}+\num{0.5373}+\j\num{2.080}+\num{0.002560}+\j\num{0.008140}}\\
+&=\num{0.1138}-\j\num{0.4405}\\
+i&=\abs{\i}=\sqrt{\num{0.1138}^2+\num{0.4405}^2}=\num{0.4550}\\
+\ISA&=i\ISNA=\num{0.4550}\cdot\SI{507.9}{\ampere}=\SI{231.1}{\ampere}
+\end{align}
+
+\section{}
+\begin{align}
+\z_N&=\Z_{N,Str}\frac{S_N}{3\USNS^2}\\
+&=\mybr{\SI{3.272}{\ohm}+\j\SI{2.028}{\ohm}}\frac{\SI{640}{\kilo\volt}}{3\mybr{\frac{\SI{420}{\volt}}{\sqrt{3}}}^2}\\
+&=\num{11.87}+\j\num{7.358}
+\end{align}
+
+\subsection{}
+\begin{align}
+\u_1&=u_{Netz}\frac{u_R+\j u_X+\z_N}{u_R+\j u_X+\z_N+\z_L}\\
+&=1\frac{\num{0.01}+\j\num{0.04}+\num{11.87}+\j\num{7.358}}{\num{0.01}+\j\num{0.04}+\num{11.87}+\j\num{7.358}+\num{0.002560}+\j\num{0.008140}}\\
+&=\num{0.9995}-\j\num{0.0003967}\\
+u_1&=\abs{\u_1}=\sqrt{\num{0.9995}^2+\num{0.0003967}^2}=\num{0.9995}\\
+\UPA&=u_1\UPNA=\num{0.9995}\cdot\SI{30}{\kilo\volt}=\SI{29.99}{\kilo\volt}
+\end{align}
+
+\subsection{}
+\begin{align}
+\u_2&=u_{Netz}\frac{\z_N}{u_R+\j u_X+\z_N+\z_L}\\
+&=1\frac{\num{11.87}+\j\num{7.358}}{\num{0.01}+\j\num{0.04}+\num{11.87}+\j\num{7.358}+\num{0.002560}+\j\num{0.008140}}\\
+&=\num{0.9974}-\j\num{0.002443}\\
+u_2&=\abs{\u_2}=\sqrt{\num{0.9974}^2+\num{0.002443}^2}=\num{0.9974}\\
+\USA&=u_2\USNA=\num{0.9974}\cdot\SI{420}{\volt}=\SI{418.9}{\volt}
+\end{align}
+
+\subsection{}
+\begin{align}
+\i&=\frac{u_{Netz}}{u_R+\j u_X+\z_N+\z_L}\\
+&=\frac{1}{\num{0.01}+\j\num{0.04}+\num{11.87}+\j\num{7.358}+\num{0.002560}+\j\num{0.008140}}\\
+&=\num{0.06061}-\j\num{0.03778}\\
+i&=\abs{\i}=\sqrt{\num{0.06061}^2+\num{0.03778}^2}=\num{0.07142}\\
+\ISA&=i\ISNA=\num{0.07142}\cdot\SI{507.9}{\ampere}=\SI{36.27}{\ampere}
+\end{align}
+
 
 \clearpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -4448,6 +4653,7 @@ m_R&=\Psi_M i_q +\mybr{l_d - l_q} i_d i_q\\
 \end{align}
 
 %\fi
+
 
 
 \end{document}
