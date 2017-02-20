@@ -28,7 +28,7 @@
 \fancyhf{} %alle Kopf- und Fußzeilenfelder bereinigen
 \fancyhead[L]{Labor Elektrische Antriebe\\UE 370.042} %Kopfzeile links
 \fancyhead[C]{Lösungen zu Test Beispielen} %zentrierte Kopfzeile
-\fancyhead[R]{v2.5.2\\www.fet.at} %Kopfzeile rechts
+\fancyhead[R]{v2.6\\www.fet.at} %Kopfzeile rechts
 \renewcommand{\headrulewidth}{0.4pt} %obere Trennlinie
 \fancyfoot[C]{\thepage} %Seitennummer
 \renewcommand{\footrulewidth}{0.4pt} %untere Trennlinie
@@ -1790,7 +1790,7 @@ i&=\abs{\i}=\sqrt{\num{0.06061}^2+\num{0.03778}^2}=\num{0.07142}\\
 \subsection{}
 \begin{align}
 U_{Bez}&=\sqrt{2}U_{N,Str}=\sqrt{2}\frac{\SI{400}{\volt}}{\sqrt{3}}=\SI{326.6}{\volt}\\
-I_{Bez}&=\sqrt{2}I_{N_Str}=\sqrt{2}\SI{25}\ampere=\SI{35.36}{\ampere}\\
+I_{Bez}&=\sqrt{2}I_{N_Str}=\sqrt{2}\cdot\SI{25}\ampere=\SI{35.36}{\ampere}\\
 \omega_{Bez}&=2\pi f_N=2 \pi \SI{75}{\hertz}=\SI{471.2}{\per\second}\\
 \Psi_{Bez}&=\frac{U_{Bez}}{\omega_{Bez}}=\frac{\SI{326.6}{\volt}}{\SI{471.2}{\per\second}}=\SI{0.6931}{\volt\second}\\
 t_{Bez}&=\frac{1}{\omega_{Bez}}=\frac{1}{\SI{471.2}{\per\second}}=\SI{0.002122}{\second}\\
@@ -1920,6 +1920,139 @@ m=-\Im\mybr{\i_{S,\alpha\beta}^*\PPsi_{S,\alpha\beta}}=-\Im\mybr{\mybr{\num{-0.3
 \begin{equation}
 m=-\Im\mybr{\i_{S,\alpha\beta}^*\PPsi_{S,\alpha\beta}}=-\Im\mybr{\mybr{\num{-0.274}-\j\num{0.525}}\mybr{\num{0.4041}+\j\num{1.050}}}=\num{0.4999}
 \end{equation}
+
+
+\clearpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\part{2016 Nachtest ASM}
+\section{}
+\subsection{}
+\begin{align}
+	I_0&=\frac{U_{N,Str}}{\sqrt{R_S^2+X_S^2}}=\frac{\frac{\SI{400}{\volt}}{\sqrt{3}}}{\sqrt{\mybr{\SI{1.078}{\ohm}}^2+\mybr{\SI{53.886}{\ohm}}^2}}=\SI{4.285}{\ampere}\\
+	P&=R_S I_0^2=U_{N,Str}I_0\cos\mybr{\varphi_0}\\
+	\cos\mybr{\varphi_0}&=\frac{R_S I_0}{U_{N,Str}}=\frac{\SI{1.078}{\ohm}\cdot \SI{4.285}{\ampere}}{\frac{\SI{400}{\volt}}{\sqrt{3}}}=\num{0.02000}
+\end{align}
+
+\subsection{}
+\begin{align}
+	U_{Bez}&=\sqrt{2}U_{N,Str}=\sqrt{2}\frac{\SI{400}{\volt}}{\sqrt{3}}=\SI{326.6}{\volt}\\
+	I_{Bez}&=\sqrt{2}I_{N_Str}=\sqrt{2}\cdot\SI{15}\ampere=\SI{21.21}{\ampere}\\
+	\omega_{Bez}&=2\pi f_N=2 \pi \SI{75}{\hertz}=\SI{471.2}{\per\second}\\
+	\Psi_{Bez}&=\frac{U_{Bez}}{\omega_{Bez}}=\frac{\SI{326.6}{\volt}}{\SI{471.2}{\per\second}}=\SI{0.6931}{\volt\second}\\
+	t_{Bez}&=\frac{1}{\omega_{Bez}}=\frac{1}{\SI{471.2}{\per\second}}=\SI{0.002122}{\second}\\
+	Z_{Bez}&=\frac{U_{Bez}}{I_{Bez}}=\frac{\SI{326.6}{\volt}}{\SI{21.21}{\ampere}}=\SI{15.40}{\ohm}\\
+	P_{Bez}&=3U_{N,Str}I_{N,Str}=3\cdot\frac{\SI{400}{\volt}}{\sqrt{3}}\cdot\SI{15}{\ampere}=\SI{10.39}{\kilo\watt}\\
+	M_{Bez}&=\frac{P_{Bez}p}{\omega_{Bez}}=\frac{\SI{10.32}{\kilo\watt}\cdot 3}{\SI{471.2}{\per\second}}=\SI{65.70}{\newton\metre}\\
+	r_S&=\frac{R_S}{Z_{Bez}}=\frac{\SI{1.078}{\ohm}}{\SI{15.40}{\ohm}}=\num{0.07000}\\
+	l_S&=\frac{X_S}{Z_{Bez}}=\frac{\SI{53.886}{\ohm}}{\SI{15.40}{\ohm}}=\num{3.499}\\
+	l_R&=\mybr{1-\sigma}l_S=\mybr{1-\num{0.08}}\cdot\num{3.499}=\num{3.219}\\
+	l_\sigma&=\sigma l_S=\num{0.08}\cdot\num{3.499}=\num{0.2799}
+\end{align}
+
+\section{}
+\subsection{}
+\begin{align}
+	\i_{S,\alpha\beta}&=\frac{2}{3I_{Bez}}\mybr{I_1+I_2\e^{\j\SI{120}{\degree}}+I_3\e^{\j\SI{240}{\degree}}}\\
+	&=\frac{2}{3\cdot\SI{21.21}{\ampere}}\mybr{\SI{3.03}{\ampere}+\SI{3.03}{\ampere}\e^{\j\SI{120}{\degree}}+\SI{6.06}{\ampere}\e^{\j\SI{240}{\degree}}}\\
+	&=\num{-0.04762}-\j\num{0.08248}\\
+	\PPsi_S&=l_S\i_S+\mybr{1-\sigma}l_S\i_R\\
+	\i_R&=0\quad \text{wegen Leerlauf}\\
+	\PPsi_{S,\alpha\beta}&=l_S\i_{S,\alpha\beta}=\num{3.5}\cdot\mybr{\num{-0.04762}-\j\num{0.08248}}\\
+	&=\num{-0.1667}-\j\num{0.2887}
+\end{align}
+
+\subsection{}
+\begin{align}
+	\u_S&=r_S\i_S+\frac{\d\Psi_S}{\d\tau}+\j\omega_K\Psi_S\\
+	\PPsi_S&=l_S\i_S+\mybr{1-\sigma}l_S\i_R\\
+	\i_R&=0\quad \text{wegen Leerlauf}\\
+	\PPsi_S&=l_s\i_S=l_s i_S\e^{\j\omega\tau+\varphi_i}\\
+	\omega_K&=0\quad\text{statorfestes Koordinatensystem}\\
+	\u_S&=r_S\i_S+\frac{\d}{\d\tau}\mybr{l_s i_S\e^{\j\omega\tau+\varphi_i}}\\
+	&=r_S\i_S+\j\omega l_S \i_S\\
+	&=\num{0.07}\cdot\mybr{\num{-0.04762}-\j\num{0.08248}}+\j\cdot 1\cdot\num{3.5}\cdot\mybr{\num{-0.04762}-\j\num{0.08248}}\\
+	&=\num{0.2853}-\j\num{0.1724}\\
+	u_1&=\Re\mybr{\u_S\e^{\j\SI{0}{\degree}}}=\Re\mybr{\mybr{\num{0.2853}-\j\num{0.1724}}\e^{\j\SI{0}{\degree}}}=\num{0.2853}\\
+	u_2&=\Re\mybr{\u_S\e^{-\j\SI{120}{\degree}}}=\Re\mybr{\mybr{\num{0.2853}-\j\num{0.1724}}\e^{-\j\SI{120}{\degree}}}=\num{-0.2920}\\
+	u_1&=\Re\mybr{\u_S\e^{-\j\SI{240}{\degree}}}=\Re\mybr{\mybr{\num{0.2853}-\j\num{0.1724}}\e^{-\j\SI{240}{\degree}}}=\num{0.006653}\\
+	U_1&=u_1U_{Bez}=\num{0.2853}\cdot\SI{326.6}{\volt}=\SI{93.18}{\volt}\\
+	U_2&=u_2U_{Bez}=\num{-0.2920}\cdot\SI{326.6}{\volt}=\SI{-95.37}{\volt}\\
+	U_3&=u_3U_{Bez}=\num{0.006653}\cdot\SI{326.6}{\volt}=\SI{2.173}{\volt}
+\end{align}
+
+\section{}
+\begin{align}
+	\PPsi_{R,xy}&=l_S\mybr{1-\sigma}\mybr{\i_{S,xy}+\i_{R,xy}}
+\end{align}
+Im xy-Koordinatensystem liegt in $\PPsi_{R,xy}$ in der x-Achse und ist somit rein reell. Daraus folgt, dass 
+\begin{equation}
+	\Im\mybr{\PPsi_{R,xy}}=0\quad \text{bzw.}\quad \Im\mybr{\i_{S,xy}}=-\Im\mybr{\i_{R,xy}}.
+\end{equation}
+Aus
+\begin{equation}
+	\u_R=0=r_R\i_{R,xy}+0+\j\mybr{\omega_K-\omega_m}\PPsi_{R,xy}\\
+\end{equation}
+folgt
+\begin{equation}
+	\Re\mybr{\i_{R,xy}}=0.
+\end{equation}
+\begin{align}
+	m_R&=\Im\mybr{\i_R^*\cdot\PPsi_R}\\
+	\num{0.95}&=\Im\mybr{-\j\Im\mybr{\i_{R,xy}}\PPsi_{R,xy}}\\
+	&=\Im\mybr{-\j\Im\mybr{\i_{R,xy}}}\\
+	&=-\Im\mybr{\i_{R,xy}}\\
+	\Im\mybr{\i_{R,xy}}&=\num{-0.95}\\
+	\Im\mybr{\i_{S,xy}}&=-\Im\mybr{\i_{R,xy}}=\num{0.95}\\
+	\Re\mybr{\PPsi_{R,xy}}&=l_S\mybr{1-\sigma}\Re\mybr{\i_{S,xy}}\\
+	\Re\mybr{\i_{S,xy}}&=\frac{\Re\mybr{\PPsi_{R,xy}}}{l_S\mybr{1-\sigma}}\\
+	&=\frac{1}{\num{3.5}\mybr{1-\num{0.08}}}\\
+	&=\num{0.3106}\\
+	\i_{S,xy}&=\num{0.3106}+\j\num{0.95}\\
+	\i_{S,\alpha\beta}&=\i_{S,xy}\e^{\j\gamma}\\
+	&=\mybr{\num{0.3106}+\j\num{0.95}}\e^{-\j\SI{60}{\degree}}\\
+	&=\num{0.9780}+\j\num{0.2060}
+\end{align}
+
+
+\section{}
+\begin{align}
+	\PPsi_{S,\alpha\beta}&=\PPsi_{R,\alpha\beta}+\sigma l_S\i_{S,\alpha\beta}\\
+	&=1\e^{-\j\SI{60}{\degree}}+\num{0.08}\cdot\num{3.5}\mybr{\num{0.9780}+\j\num{0.2060}}\\
+	&=\num{0.7738}-\j\num{0.8083}
+\end{align}
+
+\begin{figure*}[!hp]
+	\centering
+	\begin{tikzpicture}[>=triangle 45,thick,node distance=0.5cm]
+	
+	\path (0,0) coordinate (origin1);
+	\path (1*8,0) coordinate (alpha);
+	\path (0,0.6*8) coordinate (beta);
+	\path (0.9780*6,0.2060*6) coordinate (is);
+	\path (0.5*6,-0.866*6) coordinate (PsiR);
+	\path (0.7738*6,-0.8083*6) coordinate (PsiS);
+	\path (0.8227*6,0.475*6) coordinate (m1);
+	\path (m1) ++(0.5*6,-0.866*6) coordinate (m2);
+	
+	\fill[gray!30,nearly transparent] (origin1) -- (m1) -- (m2) -- (PsiR) -- cycle;
+	
+	\draw [->] (origin1) -- (alpha);
+	\draw [->] (origin1) -- (beta);
+	\draw [->] (origin1) -- node[above]{$\i_S$} (is);
+	\draw [->] (origin1) -- node[below left]{$\PPsi_R$} (PsiR);
+	\draw [->] (origin1) -- node[above right]{$\PPsi_S$} (PsiS);
+	\draw [->] (PsiR) -- node[below]{$\PPsi_\sigma$} (PsiS);
+	\draw [-] (origin1) -- (m1);
+	\draw [-] (m1) -- (m2);
+	\draw [-] (PsiR) -- node[above=1cm] {$m$} (m2);
+	
+	\node [below of =alpha] {$\alpha$};
+	\node [right of =beta] {$\beta$};
+	
+	\end{tikzpicture}
+\end{figure*}
+
 
 \clearpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -4653,7 +4786,6 @@ m_R&=\Psi_M i_q +\mybr{l_d - l_q} i_d i_q\\
 \end{align}
 
 %\fi
-
 
 
 \end{document}
