@@ -28,7 +28,7 @@
 \fancyhf{} %alle Kopf- und Fußzeilenfelder bereinigen
 \fancyhead[L]{Labor Elektrische Antriebe\\UE 370.042} %Kopfzeile links
 \fancyhead[C]{Lösungen zu Test Beispielen} %zentrierte Kopfzeile
-\fancyhead[R]{v2.6\\www.fet.at} %Kopfzeile rechts
+\fancyhead[R]{v2.7\\www.fet.at} %Kopfzeile rechts
 \renewcommand{\headrulewidth}{0.4pt} %obere Trennlinie
 \fancyfoot[C]{\thepage} %Seitennummer
 \renewcommand{\footrulewidth}{0.4pt} %untere Trennlinie
@@ -1705,9 +1705,9 @@ i&=\abs{\i}=\sqrt{\num{0.1206}^2+\num{0.07565}^2}=\num{0.1424}\\
 \section{}
 \begin{align}
 \IPNS&=\frac{S_N}{3\UPNS}=\frac{\SI{640}{\kilo\volt\ampere}}{3\frac{\SI{30}{\kilo\volt}}{\sqrt{3}}}=\SI{12.32}{\ampere}\\
-\IPNA&=\sqrt{3}\IPNS=\sqrt{3}\cdot\SI{12.32}{\ampere}=\SI{21.34}{\ampere}\\
-\ISNS&=\frac{S_N}{3\USNS}=\frac{\SI{640}{\kilo\volt}}{3\frac{\SI{420}{\volt}}{\sqrt{3}}}=\SI{507.9}{\ampere}\\
-\ISNA&=\ISNS=\SI{507.9}{\ampere}
+\IPNA&=\IPNS=\SI{12.32}{\ampere}\\
+\ISNS&=\frac{S_N}{3\USNS}=\frac{\SI{640}{\kilo\volt}}{3\frac{\SI{420}{\volt}}{\sqrt{3}}}=\SI{879.8}{\ampere}\\
+\ISNA&=\ISNS=\SI{879.8}{\ampere}
 \end{align}
 
 \section{}
@@ -1744,7 +1744,7 @@ u_2&=\abs{\u_2}=\sqrt{\num{0.9774}^2+\num{0.00005365}^2}=\num{0.9774}\\
 &=\frac{1}{\num{0.01}+\j\num{0.04}+\num{0.5373}+\j\num{2.080}+\num{0.002560}+\j\num{0.008140}}\\
 &=\num{0.1138}-\j\num{0.4405}\\
 i&=\abs{\i}=\sqrt{\num{0.1138}^2+\num{0.4405}^2}=\num{0.4550}\\
-\ISA&=i\ISNA=\num{0.4550}\cdot\SI{507.9}{\ampere}=\SI{231.1}{\ampere}
+\ISA&=i\ISNA=\num{0.4550}\cdot\SI{879.8}{\ampere}=\SI{400.3}{\ampere}
 \end{align}
 
 \section{}
@@ -1778,7 +1778,7 @@ u_2&=\abs{\u_2}=\sqrt{\num{0.9974}^2+\num{0.002443}^2}=\num{0.9974}\\
 &=\frac{1}{\num{0.01}+\j\num{0.04}+\num{11.87}+\j\num{7.358}+\num{0.002560}+\j\num{0.008140}}\\
 &=\num{0.06061}-\j\num{0.03778}\\
 i&=\abs{\i}=\sqrt{\num{0.06061}^2+\num{0.03778}^2}=\num{0.07142}\\
-\ISA&=i\ISNA=\num{0.07142}\cdot\SI{507.9}{\ampere}=\SI{36.27}{\ampere}
+\ISA&=i\ISNA=\num{0.07142}\cdot\SI{879.8}{\ampere}=\SI{62.84}{\ampere}
 \end{align}
 
 
@@ -3733,6 +3733,169 @@ n&=\frac{U_A}{k\phi_{Rem}}=\frac{\SI{304.2}{\volt}}{\SI{1.5}{\volt\second}}\cdot
 \clearpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\part{2016 Nachtest GSM}
+\section{}
+\begin{figure*}[!htbp]
+	\centering
+	\begin{tikzpicture}
+	\begin{axis}[
+	xlabel=$I_A$ in \si{\ampere},
+	ylabel=$U$ in \si{\volt},
+	grid,
+	xmin=0,
+	ymin=0,
+	xmax=120,
+	ymax=550,
+	width=\textwidth,
+	legend pos=north east]
+	\addplot[smooth,tension=0.7,blue] plot coordinates {
+		(0 , 500)
+		(25 , 450)
+		(60 , 375)
+		(80 , 320)
+		(100 , 260)
+		(110 , 175)
+		(100 , 110)
+		(75 , 50)
+		(60 , 25)
+		(45 , 0)
+	};
+	\addlegendentry{$U_A$}
+	\addplot[domain=0:115, red] {1.591*x};
+	\addlegendentry{a) $U_R$}
+	\node [red] at (axis cs: 50,125) {a) stabil} ;
+	\node [red] at (axis cs: 60,50) {a) instabil} ;
+	\addplot[domain=20:115, green] {10000/x};
+	\addlegendentry{c) $U_A$}
+	\draw[color=black] (axis cs:22.1,456) circle (2pt)  node[above right] {stabil};
+	\draw[color=black] (axis cs:97.7,102.8) circle (2pt)  node[below=0.3cm] {instabil};
+	\end{axis}
+	\end{tikzpicture}
+\end{figure*}
+
+\subsection{}
+\begin{align}
+u_L&=L\frac{\d i_A}{\d t}=U_i-U_R\\
+\frac{\partial u_L}{\partial i_A}&<0\\
+\frac{\partial U_i}{\partial i_A}&<\frac{\partial U_R}{\partial i_A}=R\\
+R&=\frac{U_A}{I_A}=\frac{\SI{175}{\volt}}{\SI{110}{\ampere}}=\SI{1.591}{\ohm}
+\end{align}
+Der Betrieb ist für Widerstände $R>\SI{1.591}{\ohm}$ stabil.
+
+\subsection{}
+\begin{align}
+U_A&=R_i I_A+k_1\Phi\mybr{I_E}n\\
+U_A&=k_1\Phi\mybr{I_E}n\\
+k_1\Phi\mybr{I_E}&=\SI{2}{\volt\second}+\SI{10.58}{\volt\second}\cdot\arctan\mybr{\SI{2}{\radian\per\ampere}I_E}=\frac{U_A}{n}\\
+I_E&=\frac{\tan\mybr{\frac{\frac{U_A}{n}-\SI{2}{\volt\second}}{\SI{10.58}{\volt\second}}}}{\SI{2}{\radian\per\ampere}}\\
+&=\frac{\tan\mybr{\frac{\frac{\SI{500}{\volt}\cdot\SI{60}{\second\per\minute}}{\SI{2000}{\rounds\per\minute}}-\SI{2}{\volt\second}}{\SI{10.58}{\volt\second}}}}{\SI{2}{\radian\per\ampere}}\\
+&=\SI{1.404}{\ampere}\\
+R_E&=\frac{U_A}{I_E}=\frac{\SI{500}{\volt}}{\SI{1.404}{\ampere}}=\SI{356.1}{\ohm}
+\end{align}
+
+\subsection{}
+\begin{align}
+P&=U_A I_A\\
+U_A&=\frac{P}{I_A}=\frac{\SI{10}{\kilo\watt}}{I_A}
+\end{align}
+Aus Diagramm: $I_A=\SI{22.1}{\ampere}$, $U_A=\SI{456}{\ampere}$
+\begin{align}
+R_B&=\frac{U_A}{I_A}=\frac{\SI{456}{\volt}}{\SI{22.1}{\ampere}}=\SI{20.63}{\ohm}\\
+U_A&=R_A I_A+k_1\Phi\mybr{I_E}n\\
+k_1\Phi\mybr{I_E}&=\SI{2}{\volt\second}+\SI{10.58}{\volt\second}\cdot\arctan\mybr{\SI{2}{\radian\per\ampere}I_E}=\frac{U_A-R_A I_A}{n}\\
+I_E&=\frac{\tan\mybr{\frac{\frac{U_A-R_A I_A}{n}-\SI{2}{\volt\second}}{\SI{10.58}{\volt\second}}}}{\SI{2}{\radian\per\ampere}}\\
+&=\frac{\tan\mybr{\frac{\frac{\mybr{\SI{456}{\volt}-\SI{1}{\ohm}\cdot\SI{22.1}{\ampere}}\cdot\SI{60}{\second\per\minute}}{\SI{2000}{\rounds\per\minute}}-\SI{2}{\volt\second}}{\SI{10.58}{\volt\second}}}}{\SI{2}{\radian\per\ampere}}\\
+&=\SI{0.8544}{\ampere}\\
+\eta&=\frac{P-R_A I_A^2-R_E I_E^2}{P}\\
+&=\frac{\SI{10}{\kilo\watt}-\SI{1}{\ohm}\cdot\mybr{\SI{22.1}{\ampere}}^2-\SI{250}{\ohm}\cdot\mybr{\SI{0.8544}{\ampere}}^2}{\SI{10}{\kilo\watt}}\\
+&=\num{0.9329}
+\end{align}
+
+\section{}
+\subsection{}
+\begin{align}
+P_{el,N}&=U_{A,N}I_{A,N}\\
+I_{A,N}&=\frac{P_{el,N}}{U_{A,N}}=\frac{\SI{360}{\kilo\watt}}{\SI{400}{\volt}}=\SI{900}{\ampere}\\
+U_{A,N}&=R_A I_{A,N}+U_i\mybr{I_A}\frac{n_N}{n_L}\\
+R_A&=\frac{U_{A,N}-U_i\mybr{I_A}\frac{n_N}{n_L}}{I_{A,N}}\\
+&=\frac{\SI{400}{\volt}-\SI{55}{\volt}-\SI{375}{\volt}\cdot\arctan\mybr{\SI{0.004}{\radian\per\ampere}\cdot\SI{900}{\ampere}}\frac{\SI{1000}{\rounds\per\minute}}{\SI{1500}{\rounds\per\minute}}}{\SI{900}{\ampere}}\\
+&=\SI{0.02226}{\ohm}\\
+\eta&=\frac{P_{el,N}-R_A I_{A,N}^2}{P_{el,N}}\\
+&=\frac{\SI{360}{\kilo\watt}-\SI{0.02226}{\ohm}\cdot\mybr{\SI{900}{\ampere}}^2}{\SI{360}{\watt}}\\
+&=\num{0.9499}
+\end{align}
+
+\subsection{}
+\begin{equation}
+M=\frac{U_i\mybr{I_A} I_A}{2\pi}=\frac{\SI{55}{\volt}-\SI{375}{\volt}\cdot\arctan\mybr{\SI{0.004}{\radian\per\ampere}\cdot I_A}\frac{I_A \cdot\SI{60}{\second\per\minute}}{\SI{1500}{\rounds\per\minute}}}{2\pi}
+\end{equation}
+\begin{figure*}[!htbp]
+	\centering
+	\begin{tikzpicture}
+	\begin{axis}[
+	xlabel=$I_A$ in \si{\ampere},
+	ylabel=$M$ in \si{\newton\meter},
+	grid,
+	xmin=0,
+	ymin=0]
+	\addplot[domain=0:1050, blue] {((55+375*atan(0.004*x)*pi/180)*x*60/1500)/(2*pi)};
+	\draw[color=black] (axis cs:996,3500) circle (2pt);
+	\end{axis}
+	\end{tikzpicture}
+\end{figure*}
+
+aus Diagramm: $I_A=\SI{996}{\ampere}$
+\begin{align}
+U_A&=R_A I_A + U_i\mybr{I_A}\frac{n}{n_L}\\
+&=\SI{0.02226}{\ohm}\cdot\SI{996}{\ampere}+\mybr{\SI{55}{\volt}+\SI{375}{\volt}\cdot\arctan\mybr{\SI{0.004}{\radian\per\ampere}\cdot\SI{996}{\ampere}}}\frac{\SI{600}{\rounds\per\minute}}{\SI{900}{\rounds\per\minute}}\\
+&=\SI{390.1}{\volt}
+\end{align}
+
+\subsection{}
+\begin{align}
+J_{ges}&=J+m r^2=\SI{200}{\kilogram\meter\squared}+\SI{400}{\kilogram}\cdot\mybr{\SI{0.5}{\meter}}^2\\
+&=\SI{300}{\kilogram\meter\squared}\\
+M&=\frac{U_i\mybr{I_A}\frac{1}{n_L}I_A}{2\pi}\\
+&=\frac{\mybr{\SI{55}{\volt}+\SI{375}{\volt}\cdot\arctan\mybr{\SI{0.004}{\radian\per\ampere}\cdot\SI{800}{\ampere}}}\frac{\SI{800}{\ampere}\cdot\SI{60}{\second\per\minute}}{\SI{1500}{\rounds\per\minute}}}{2\pi}\\
+&=\SI{2702}{\newton\meter}\\
+J_{ges}\frac{\d\omega}{\d t}&=M\\
+\Delta t&=\frac{J_{ges}\Delta\omega}{M}\\
+&=\frac{\SI{300}{\kilogram\meter\squared}\frac{2\pi\SI{500}{\rounds\per\minute}}{\SI{60}{\second\per\minute}}}{\SI{2702}{\newton\meter}}\\
+&=\SI{5.813}{\second}
+\end{align}
+
+\subsection{}
+\begin{align}
+R_B I_A&=R_A I_A + U_i\mybr{I_A}\frac{n}{n_L}\\
+R_B&=R_A+\frac{U_i\mybr{I_A}\frac{n}{n_L}}{I_A}\\
+&=\SI{0.02226}{\ohm}+\frac{\mybr{\SI{55}{\volt}+\SI{375}{\volt}\cdot\arctan\mybr{\SI{0.004}{\radian\per\ampere}\cdot\SI{1000}{\ampere}}}\frac{\SI{500}{\rounds\per\minute}}{\SI{1500}{\rounds\per\minute}}}{\SI{1000}{\ampere}}\\
+&=\SI{0.2063}{\ohm}\\
+n&=\frac{\mybr{R_B-R_A}I_A}{\frac{U_i\mybr{I_A}}{n_L}}\\
+&=\frac{\mybr{\SI{0.2063}{\ohm}-\SI{0.02226}{\ohm}}\SI{500}{\ampere}}{\frac{\mybr{\SI{55}{\volt}+\SI{375}{\volt}\cdot\arctan\mybr{\SI{0.004}{\radian\per\ampere}\cdot\SI{500}{\ampere}}}}{\SI{1500}{\rounds\per\minute}}}\\
+&=\SI{293.6}{\rounds\per\minute}
+\end{align}
+
+\subsection{}
+\begin{align}
+R_E&=\frac{U_E}{I_E}\\
+&=\frac{\SI{200}{\volt}}{\SI{7}{\ampere}}\\
+&=\SI{28.57}{\ohm}\\
+\Phi_{V,E}&\sim N^2 I_A\\
+\frac{\Phi_{V,E,RS}}{\Phi_{V,E,FE}}&=\frac{N_{RS}^2 I_{A,RS}}{N_{FE}^2 I_{A,FE}}\overset{!}{=}1\\
+N_{FE}&=\sqrt{N_{RS}^2\frac{I_{A,RS}}{I_{A,FE}}}\\
+&=\sqrt{7^2\frac{\SI{900}{\ampere}}{\SI{7}{\ampere}}}\\
+&=\num{79.37}\\
+R_E&=\frac{N l}{\gamma A}\\
+&=\frac{N l}{\gamma \frac{d^2 \pi}{4}}\\
+d&=\sqrt{\frac{4 N l }{\gamma R_E \pi}}\\
+&=\sqrt{\frac{4\cdot\num{79.37}\cdot\SI{2.5}{\meter}}{\SI{58e6}{\siemens\per\meter}\cdot\SI{28.57}{\ohm}\cdot\pi}}\\
+&=\SI{0.3905}{\milli\meter}
+\end{align}
+
+
+\clearpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \part{2007 PSM}
 \section{}
 \begin{align}
@@ -4786,6 +4949,8 @@ m_R&=\Psi_M i_q +\mybr{l_d - l_q} i_d i_q\\
 \end{align}
 
 %\fi
+
+
 
 
 \end{document}
