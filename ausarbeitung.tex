@@ -28,7 +28,7 @@
 \fancyhf{} %alle Kopf- und Fußzeilenfelder bereinigen
 \fancyhead[L]{Labor Elektrische Antriebe\\UE 370.042} %Kopfzeile links
 \fancyhead[C]{Lösungen zu Test Beispielen} %zentrierte Kopfzeile
-\fancyhead[R]{v2.7\\www.fet.at} %Kopfzeile rechts
+\fancyhead[R]{v2.8\\www.fet.at} %Kopfzeile rechts
 \renewcommand{\headrulewidth}{0.4pt} %obere Trennlinie
 \fancyfoot[C]{\thepage} %Seitennummer
 \renewcommand{\footrulewidth}{0.4pt} %untere Trennlinie
@@ -3818,16 +3818,16 @@ P_{el,N}&=U_{A,N}I_{A,N}\\
 I_{A,N}&=\frac{P_{el,N}}{U_{A,N}}=\frac{\SI{360}{\kilo\watt}}{\SI{400}{\volt}}=\SI{900}{\ampere}\\
 U_{A,N}&=R_A I_{A,N}+U_i\mybr{I_A}\frac{n_N}{n_L}\\
 R_A&=\frac{U_{A,N}-U_i\mybr{I_A}\frac{n_N}{n_L}}{I_{A,N}}\\
-&=\frac{\SI{400}{\volt}-\SI{55}{\volt}-\SI{375}{\volt}\cdot\arctan\mybr{\SI{0.004}{\radian\per\ampere}\cdot\SI{900}{\ampere}}\frac{\SI{1000}{\rounds\per\minute}}{\SI{1500}{\rounds\per\minute}}}{\SI{900}{\ampere}}\\
-&=\SI{0.02226}{\ohm}\\
+&=\frac{\SI{400}{\volt}-\mybr{\SI{55}{\volt}+\SI{375}{\volt}\cdot\arctan\mybr{\SI{0.004}{\radian\per\ampere}\cdot\SI{900}{\ampere}}}\frac{\SI{1000}{\rounds\per\minute}}{\SI{1500}{\rounds\per\minute}}}{\SI{900}{\ampere}}\\
+&=\SI{0.04263}{\ohm}\\
 \eta&=\frac{P_{el,N}-R_A I_{A,N}^2}{P_{el,N}}\\
-&=\frac{\SI{360}{\kilo\watt}-\SI{0.02226}{\ohm}\cdot\mybr{\SI{900}{\ampere}}^2}{\SI{360}{\watt}}\\
-&=\num{0.9499}
+&=\frac{\SI{360}{\kilo\watt}-\SI{0.04263}{\ohm}\cdot\mybr{\SI{900}{\ampere}}^2}{\SI{360}{\watt}}\\
+&=\num{0.9041}
 \end{align}
 
 \subsection{}
 \begin{equation}
-M=\frac{U_i\mybr{I_A} I_A}{2\pi}=\frac{\SI{55}{\volt}-\SI{375}{\volt}\cdot\arctan\mybr{\SI{0.004}{\radian\per\ampere}\cdot I_A}\frac{I_A \cdot\SI{60}{\second\per\minute}}{\SI{1500}{\rounds\per\minute}}}{2\pi}
+M=\frac{U_i\mybr{I_A} I_A}{2\pi}=\frac{\mybr{\SI{55}{\volt}+\SI{375}{\volt}\cdot\arctan\mybr{\SI{0.004}{\radian\per\ampere}\cdot I_A}}\frac{I_A \cdot\SI{60}{\second\per\minute}}{\SI{1500}{\rounds\per\minute}}}{2\pi}
 \end{equation}
 \begin{figure*}[!htbp]
 	\centering
@@ -3847,8 +3847,8 @@ M=\frac{U_i\mybr{I_A} I_A}{2\pi}=\frac{\SI{55}{\volt}-\SI{375}{\volt}\cdot\arcta
 aus Diagramm: $I_A=\SI{996}{\ampere}$
 \begin{align}
 U_A&=R_A I_A + U_i\mybr{I_A}\frac{n}{n_L}\\
-&=\SI{0.02226}{\ohm}\cdot\SI{996}{\ampere}+\mybr{\SI{55}{\volt}+\SI{375}{\volt}\cdot\arctan\mybr{\SI{0.004}{\radian\per\ampere}\cdot\SI{996}{\ampere}}}\frac{\SI{600}{\rounds\per\minute}}{\SI{900}{\rounds\per\minute}}\\
-&=\SI{390.1}{\volt}
+&=\SI{0.04263}{\ohm}\cdot\SI{996}{\ampere}+\mybr{\SI{55}{\volt}+\SI{375}{\volt}\cdot\arctan\mybr{\SI{0.004}{\radian\per\ampere}\cdot\SI{996}{\ampere}}}\frac{\SI{600}{\rounds\per\minute}}{\SI{1500}{\rounds\per\minute}}\\
+&=\SI{263.2}{\volt}
 \end{align}
 
 \subsection{}
@@ -3866,12 +3866,12 @@ J_{ges}\frac{\d\omega}{\d t}&=M\\
 
 \subsection{}
 \begin{align}
-R_B I_A&=R_A I_A + U_i\mybr{I_A}\frac{n}{n_L}\\
-R_B&=R_A+\frac{U_i\mybr{I_A}\frac{n}{n_L}}{I_A}\\
-&=\SI{0.02226}{\ohm}+\frac{\mybr{\SI{55}{\volt}+\SI{375}{\volt}\cdot\arctan\mybr{\SI{0.004}{\radian\per\ampere}\cdot\SI{1000}{\ampere}}}\frac{\SI{500}{\rounds\per\minute}}{\SI{1500}{\rounds\per\minute}}}{\SI{1000}{\ampere}}\\
-&=\SI{0.2063}{\ohm}\\
-n&=\frac{\mybr{R_B-R_A}I_A}{\frac{U_i\mybr{I_A}}{n_L}}\\
-&=\frac{\mybr{\SI{0.2063}{\ohm}-\SI{0.02226}{\ohm}}\SI{500}{\ampere}}{\frac{\mybr{\SI{55}{\volt}+\SI{375}{\volt}\cdot\arctan\mybr{\SI{0.004}{\radian\per\ampere}\cdot\SI{500}{\ampere}}}}{\SI{1500}{\rounds\per\minute}}}\\
+R_B I_A&=-R_A I_A + U_i\mybr{I_A}\frac{n}{n_L}\\
+R_B&=-R_A+\frac{U_i\mybr{I_A}\frac{n}{n_L}}{I_A}\\
+&=-\SI{0.04263}{\ohm}+\frac{\mybr{\SI{55}{\volt}+\SI{375}{\volt}\cdot\arctan\mybr{\SI{0.004}{\radian\per\ampere}\cdot\SI{1000}{\ampere}}}\frac{\SI{500}{\rounds\per\minute}}{\SI{1500}{\rounds\per\minute}}}{\SI{1000}{\ampere}}\\
+&=\SI{0.1414}{\ohm}\\
+n&=\frac{\mybr{R_B+R_A}I_A}{\frac{U_i\mybr{I_A}}{n_L}}\\
+&=\frac{\mybr{\SI{0.1414}{\ohm}+\SI{0.04263}{\ohm}}\SI{500}{\ampere}}{\frac{\SI{55}{\volt}+\SI{375}{\volt}\cdot\arctan\mybr{\SI{0.004}{\radian\per\ampere}\cdot\SI{500}{\ampere}}}{\SI{1500}{\rounds\per\minute}}}\\
 &=\SI{293.6}{\rounds\per\minute}
 \end{align}
 
